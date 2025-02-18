@@ -1,5 +1,7 @@
 ---
-
+import "../styles/global.css";
+import Footer from "../components/Footer.astro";
+import Navigation from "../components/Navigation.astro";
 ---
 
 <html lang="en">
@@ -11,12 +13,12 @@
         <title>Blog</title>
     </head>
     <body>
-        <a href="/brylie.online">Home</a>
-        <a href="/brylie.online/about/">About</a>
-        <a href="/brylie.online/blog/">Blog</a>
+        <Navigation />
         <h1>Blog</h1>
         <ul>
             <li><a href="/brylie.online/posts/post-1/">Post 1</a></li>
         </ul>
+
+        <Footer />
     </body>
 </html>

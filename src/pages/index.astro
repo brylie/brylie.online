@@ -1,5 +1,7 @@
 ---
-
+import Footer from "../components/Footer.astro";
+import Navigation from "../components/Navigation.astro";
+import "../styles/global.css";
 ---
 
 <html lang="en">
@@ -11,9 +13,10 @@
 		<title>Astro</title>
 	</head>
 	<body>
-		<a href="/brylie.online">Home</a>
-		<a href="/brylie.online/about/">About</a>
-		<a href="/brylie.online/blog/">Blog</a>
-		<h1>Hello world</h1>
+		<Navigation />
+
+		<h1>Welcome!</h1>
+
+		<Footer />
 	</body>
 </html>
