@@ -1,5 +1,16 @@
 ---
-
+const pageTitle = "About Brylie";
+const identity = {
+    firstName: "Brylie Christopher",
+    lastName: "Oxley",
+    country: "Finland",
+    occupation: "Software Developer",
+    interests: ["writing", "music"],
+    skills: ["HTML", "CSS", "JavaScript", "Python"],
+};
+const happy = true;
+const finished = false;
+const goal = 3;
 ---
 
 <html lang="en">
@@ -8,18 +19,48 @@
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="viewport" content="width=device-width" />
         <meta name="generator" content={Astro.generator} />
-        <title>About Brylie</title>
+        <title>{pageTitle}</title>
     </head>
     <body>
         <a href="/brylie.online">Home</a>
         <a href="/brylie.online/about/">About</a>
 
-        <h1>About Me</h1>
-        <h2>... and my new Astro site!</h2>
-        <h1>About Brylie</h1>
+        <h1>{pageTitle}</h1>
         <p>
             Brylie Christopher Oxley is a software developer, writer, and
             musician.
         </p>
+        <p>Here are a few facts about me:</p>
+        <ul>
+            <li>My name is {identity.firstName}.</li>
+            <li>
+                I live in {identity.country} and I work as a {
+                    identity.occupation
+                }.
+            </li>
+            {
+                identity.interests.length >= 2 && (
+                    <li>
+                        Two of my interests are: {identity.interests[0]} and{" "}
+                        {identity.interests[1]}
+                    </li>
+                )
+            }
+        </ul>
+        <p>My skills are:</p>
+        <ul>
+            {identity.skills.map((skill) => <li>{skill}</li>)}
+        </ul>
+        {happy && <p>I am happy to be learning Astro!</p>}
+
+        {finished && <p>I finished this tutorial!</p>}
+
+        {
+            goal === 3 ? (
+                <p>My goal is to finish in 3 days.</p>
+            ) : (
+                <p>My goal is not 3 days.</p>
+            )
+        }
     </body>
 </html>
