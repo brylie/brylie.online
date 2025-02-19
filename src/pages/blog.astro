@@ -1,12 +1,20 @@
 ---
-import "../styles/global.css";
-import Footer from "../components/Footer.astro";
-import Header from "../components/Header.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import BlogPageListItem from "../components/BlogPageListItem.astro";
+const allPosts = Object.values(
+    import.meta.glob("./posts/*.md", { eager: true }),
+);
 ---
 
 <BaseLayout pageTitle="Blog">
     <ul>
-        <li><a href="/brylie.online/posts/post-1/">Post 1</a></li>
+        {
+            allPosts.map((post: any) => (
+                <BlogPageListItem
+                    url={post.url}
+                    title={post.frontmatter.title}
+                />
+            ))
+        }
     </ul>
 </BaseLayout>
