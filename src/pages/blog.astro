@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import BlogPageListItem from "../components/BlogPageListItem.astro";
+import BlogPostListItem from "../components/BlogPostListItem.astro";
 const allPosts = Object.values(
     import.meta.glob("./posts/*.md", { eager: true }),
 );
@@ -10,7 +10,7 @@ const allPosts = Object.values(
     <ul>
         {
             allPosts.map((post: any) => (
-                <BlogPageListItem
+                <BlogPostListItem
                     url={post.url}
                     title={post.frontmatter.title}
                 />
