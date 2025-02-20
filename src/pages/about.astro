@@ -2,63 +2,156 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const pageTitle = "About Brylie";
+
+// Professional identity information
 const identity = {
     firstName: "Brylie Christopher",
     lastName: "Oxley",
     country: "Finland",
     occupation: "Software Developer",
-    interests: ["writing", "music"],
-    skills: ["HTML", "CSS", "JavaScript", "Python"],
+    interests: [
+        "software development",
+        "music production",
+        "writing",
+        "education",
+    ],
+    technicalSkills: [
+        "JavaScript",
+        "Python",
+        "Astro",
+        "Vue.js",
+        "Node.js",
+        "HTML/CSS",
+        "Git",
+        "Docker",
+    ],
+    musicSkills: [
+        "Digital Audio Workstations",
+        "Audio Production",
+        "Sound Design",
+        "Music Theory",
+    ],
+    languages: ["English", "Finnish"],
 };
-const happy = true;
-const finished = true;
-const goal = 3;
 
+// Styling variables
 const skillColor = "navy";
 const fontWeight = "bold";
 const textCase = "uppercase";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-    <p>
-        Brylie Christopher Oxley is a software developer, writer, and musician.
-    </p>
-    <p>Here are a few facts about me:</p>
-    <ul>
-        <li>My name is {identity.firstName}.</li>
-        <li>
-            I live in {identity.country} and I work as a {identity.occupation}.
-        </li>
-        {
-            identity.interests.length >= 2 && (
+    <article class="about-content">
+        <section class="introduction">
+            <p>
+                As a software developer, musician, and educator, I work at the
+                intersection of technology and creativity. Through
+                brylie.online, I explore how these fields can enrich each other
+                and create opportunities for learning and innovation.
+            </p>
+
+            <p>
+                Based in {identity.country}, I bring together my passion for
+                open-source software development, music production, and
+                education to build tools and resources that help others learn
+                and create. My work focuses on making technical concepts
+                accessible while encouraging creative exploration.
+            </p>
+        </section>
+
+        <section class="expertise">
+            <h2>Technical Expertise</h2>
+            <p>
+                My software development journey spans multiple technologies and
+                domains. I specialize in creating robust, user-friendly
+                applications with a focus on clean code and thorough
+                documentation.
+            </p>
+            <ul>
+                {
+                    identity.technicalSkills.map((skill) => (
+                        <li class="skill">{skill}</li>
+                    ))
+                }
+            </ul>
+
+            <h2>Musical Background</h2>
+            <p>
+                Music production and sound design are integral parts of my
+                creative practice. I explore how technology can enhance musical
+                expression and create new possibilities for sonic exploration.
+            </p>
+            <ul>
+                {
+                    identity.musicSkills.map((skill) => (
+                        <li class="skill">{skill}</li>
+                    ))
+                }
+            </ul>
+        </section>
+
+        <section class="vision">
+            <h2>Vision & Approach</h2>
+            <p>
+                I believe in the power of open knowledge and collaborative
+                learning. Through brylie.online, I aim to:
+            </p>
+            <ul>
+                <li>Share practical insights from real-world projects</li>
                 <li>
-                    Two of my interests are: {identity.interests[0]} and{" "}
-                    {identity.interests[1]}
+                    Bridge the gap between technical and creative disciplines
                 </li>
-            )
-        }
-    </ul>
-    <p>My skills are:</p>
-    <ul>
-        {identity.skills.map((skill) => <li class="skill">{skill}</li>)}
-    </ul>
-    {happy && <p>I am happy to be learning Astro!</p>}
+                <li>Build a community of learners and creators</li>
+                <li>Contribute to open-source education and tools</li>
+            </ul>
+        </section>
 
-    {finished && <p>I finished this tutorial!</p>}
-
-    {
-        goal === 3 ? (
-            <p>My goal is to finish in 3 days.</p>
-        ) : (
-            <p>My goal is not 3 days.</p>
-        )
-    }
+        <section class="connect">
+            <h2>Let's Connect</h2>
+            <p>
+                I'm always interested in collaborating on projects that combine
+                technology, music, and education. Whether you're interested in
+                contributing to existing projects or starting something new, I'd
+                love to hear from you.
+            </p>
+            <p>
+                You can explore my work through the various sections of this
+                site, including software projects, music productions, and
+                educational resources.
+            </p>
+        </section>
+    </article>
 
     <style define:vars={{ skillColor, fontWeight, textCase }}>
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        section {
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            margin: 1.5rem 0 1rem;
+            color: var(--skillColor);
+        }
+
         .skill {
             color: var(--skillColor);
             font-weight: var(--fontWeight);
             text-transform: var(--textCase);
+            margin: 0.5rem 0;
+        }
+
+        ul {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+        }
+
+        p {
+            margin: 1rem 0;
+            line-height: 1.6;
         }
     </style>
 </BaseLayout>
