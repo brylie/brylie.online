@@ -1,7 +1,6 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
 const { frontmatter } = Astro.props;
-const basePath = "/brylie.online";
 ---
 
 <BaseLayout pageTitle={frontmatter.title}>
@@ -16,7 +15,7 @@ const basePath = "/brylie.online";
         {
             frontmatter.tags.map((tag: string) => (
                 <p class="tag">
-                    <a href={`${basePath}/tags/${tag}`}>{tag}</a>
+                    <a href={`tags/${tag}`}>{tag}</a>
                 </p>
             ))
         }
