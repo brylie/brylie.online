@@ -67,6 +67,17 @@ export const projects: Project[] = [
         status: "completed",
         dateAdded: "2025-02-20",
         tags: ["Ambient", "Electronic", "Orchestral"]
+    },
+    // SoundCloud album: https://soundcloud.com/brylie/sets/murmurations
+    {
+        title: "Murmurations",
+        description: "A collection of ambient music pieces exploring the intersection of electronic and traditional musical elements.",
+        url: "https://soundcloud.com/brylie/sets/murmurations",
+        category: "music",
+        featured: true,
+        status: "completed",
+        dateAdded: "2024-07-31",
+        tags: ["Ambient", "Electronic", "Orchestral"]
     }
 ];
 
