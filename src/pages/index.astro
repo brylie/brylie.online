@@ -69,11 +69,11 @@ const categoryConfig = {
 											{project.category}
 										</span>
 										<time
-											datetime={project.dateAdded}
+											datetime={project.datePublished}
 											class="text-sm text-gray-500"
 										>
 											{new Date(
-												project.dateAdded,
+												project.datePublished,
 											).toLocaleDateString("en-US", {
 												month: "short",
 												year: "numeric",
