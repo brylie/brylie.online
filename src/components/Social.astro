@@ -23,7 +23,9 @@ const socialPlatforms = {
   },
 };
 ---
-
-<a href={socialPlatforms[platform].url}>
+<a
+  href={socialPlatforms[platform].url}
+  class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium border bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors"
+>
   {socialPlatforms[platform].title}
 </a>&nbsp;
