@@ -2,21 +2,21 @@
 const { platform, username } = Astro.props;
 
 const socialPlatforms = {
-    github: {
-        url: `https://github.com/${username}`,
-        title: "GitHub",
-    },
-    linkedin: {
-        url: `https://linkedin.com/in/${username}`,
-        title: "LinkedIn",
-    },
-    youtube: {
-        url: `https://youtube.com/@${username}`,
-        title: "YouTube",
-    },
+  github: {
+    url: `https://github.com/${username}`,
+    title: "GitHub",
+  },
+  linkedin: {
+    url: `https://linkedin.com/in/${username}`,
+    title: "LinkedIn",
+  },
+  youtube: {
+    url: `https://youtube.com/@${username}`,
+    title: "YouTube",
+  },
 };
 ---
 
 <a href=`${socialPlatforms[platform].url}`>
-    {socialPlatforms[platform].title}
+  {socialPlatforms[platform].title}
 </a>&nbsp;

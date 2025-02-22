@@ -10,54 +10,54 @@ const featuredProjects = getFeaturedProjects();
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-	<main class="max-w-4xl mx-auto px-4">
-		<!-- Introduction Section -->
-		<section class="mb-16">
-			<p class="text-xl leading-relaxed text-gray-800 font-light">
-				Welcome to the personal website of Brylie Christopher Oxley – a
-				passionate software developer, writer, and musician. Here you'll
-				find insights into innovative projects, creative coding
-				explorations, and the journey of blending technology with art.
-			</p>
-		</section>
+  <main class="max-w-4xl mx-auto px-4">
+    <!-- Introduction Section -->
+    <section class="mb-16">
+      <p class="text-xl leading-relaxed text-gray-800 font-light">
+        Welcome to the personal website of Brylie Christopher Oxley – a
+        passionate software developer, writer, and musician. Here you'll find
+        insights into innovative projects, creative coding explorations, and the
+        journey of blending technology with art.
+      </p>
+    </section>
 
-		<!-- Featured Projects Section -->
-		<section class="mb-16" aria-labelledby="featured-projects-heading">
-			<h2
-				id="featured-projects-heading"
-				class="text-3xl font-semibold mb-8 text-gray-900 border-b pb-4"
-			>
-				Featured Projects
-			</h2>
+    <!-- Featured Projects Section -->
+    <section class="mb-16" aria-labelledby="featured-projects-heading">
+      <h2
+        id="featured-projects-heading"
+        class="text-3xl font-semibold mb-8 text-gray-900 border-b pb-4"
+      >
+        Featured Projects
+      </h2>
 
-			<div class="grid gap-8 md:grid-cols-2 lg:grid-cols-2">
-				{
-					featuredProjects.map((project) => (
-						<ProjectSummary project={project} />
-					))
-				}
-			</div>
-		</section>
-	</main>
+      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-2">
+        {
+          featuredProjects.map((project) => (
+            <ProjectSummary project={project} />
+          ))
+        }
+      </div>
+    </section>
+  </main>
 
-	<style>
-		/* Enhance focus styles for keyboard navigation */
-		a:focus-visible {
-			outline: 2px solid currentColor;
-			outline-offset: 2px;
-		}
+  <style>
+    /* Enhance focus styles for keyboard navigation */
+    a:focus-visible {
+      outline: 2px solid currentColor;
+      outline-offset: 2px;
+    }
 
-		/* Ensure consistent card heights */
-		article {
-			display: flex;
-			flex-direction: column;
-			height: 100%;
-		}
+    /* Ensure consistent card heights */
+    article {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
 
-		/* Improve text readability */
-		p {
-			font-size: 1.125rem;
-			line-height: 1.75;
-		}
-	</style>
+    /* Improve text readability */
+    p {
+      font-size: 1.125rem;
+      line-height: 1.75;
+    }
+  </style>
 </BaseLayout>
