@@ -1,8 +1,8 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import { getAllProjects } from "../data/projectFunctions";
-import { ProjectCategory } from "../data/projects";
-import type { Project } from "../data/projects";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getAllProjects, generateSlug } from "../../data/projectFunctions";
+import { ProjectCategory } from "../../data/projects";
+import type { Project } from "../../data/projects";
 
 const pageTitle = "Portfolio";
 const allProjects = getAllProjects();
@@ -114,7 +114,7 @@ const categoryConfig = {
                                             class="text-xl font-semibold text-gray-900 mb-2 leading-tight"
                                         >
                                             <a
-                                                href={project.url}
+                                                href={`/projects/${generateSlug(project.title)}`}
                                                 class="hover:text-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded"
                                             >
                                                 {project.title}

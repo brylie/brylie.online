@@ -1,6 +1,36 @@
 import type { Project } from './projects';
 import { ProjectCategory, ProjectStatus } from './projects';
 
+// Validation function that checks for duplicate titles
+function validateUniqueTitles(projects: Project[]): void {
+    const titleMap = new Map<string, string[]>();
+
+    projects.forEach(project => {
+        const projectIdentifier = `"${project.title}" (${project.category})`;
+
+        if (!titleMap.has(project.title)) {
+            titleMap.set(project.title, [projectIdentifier]);
+        } else {
+            titleMap.get(project.title)?.push(projectIdentifier);
+        }
+    });
+
+    const duplicates = Array.from(titleMap.entries())
+        .filter(([_, projects]) => projects.length > 1);
+
+    if (duplicates.length > 0) {
+        const errorMessages = duplicates.map(([title, projects]) => {
+            return `Title "${title}" is used by multiple projects:\n  ${projects.join('\n  ')}`;
+        });
+
+        throw new Error(
+            'Duplicate titles found:\n\n' +
+            errorMessages.join('\n\n') +
+            '\n\nEach project must have a unique title.'
+        );
+    }
+}
+
 export const projects: Project[] = [
     {
         title: "Piano Fitness",
@@ -54,3 +84,6 @@ export const projects: Project[] = [
         tags: ["Ambient", "Electronic", "Orchestral"]
     }
 ];
+
+// Validate titles when the module loads
+validateUniqueTitles(projects);
