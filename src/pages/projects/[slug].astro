@@ -1,0 +1,77 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getAllProjects, generateSlug } from "../../data/projectFunctions";
+import type { Project } from "../../data/projects";
+
+export function getStaticPaths() {
+  const allProjects = getAllProjects();
+  return allProjects.map((project) => ({
+    params: { slug: generateSlug(project.title) },
+  }));
+}
+
+const { slug } = Astro.params;
+const allProjects = getAllProjects();
+const project = allProjects.find((p) => generateSlug(p.title) === slug);
+
+if (!project) {
+  throw new Error(`Project with slug "${slug}" not found`);
+}
+
+const pageTitle = project.title;
+---
+
+<BaseLayout pageTitle={pageTitle}>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <article class="prose lg:prose-xl">
+      <header class="mb-8">
+        <p class="text-gray-600">{project.description}</p>
+        <div class="flex items-center justify-between mt-4">
+          <span class="text-sm text-gray-500">
+            Published on {
+              new Date(project.datePublished).toLocaleDateString("en-US", {
+                month: "long",
+                day: "numeric",
+                year: "numeric",
+              })
+            }
+          </span>
+          <span class="text-sm text-gray-500">
+            Category: {project.category}
+          </span>
+        </div>
+      </header>
+
+      <section class="mb-8">
+        <h2 class="text-2xl font-semibold mb-4">Project Details</h2>
+        <p>{project.longDescription}</p>
+      </section>
+
+      {
+        project.tags && (
+          <section class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Tags</h2>
+            <div class="flex flex-wrap gap-2">
+              {project.tags.map((tag) => (
+                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </section>
+        )
+      }
+
+      {
+        project.url && (
+          <section class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Project URL</h2>
+            <a href={project.url} class="text-blue-600 hover:underline">
+              {project.url}
+            </a>
+          </section>
+        )
+      }
+    </article>
+  </main>
+</BaseLayout>

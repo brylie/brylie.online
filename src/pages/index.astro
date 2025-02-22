@@ -1,138 +1,63 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { getFeaturedProjects, type Project } from "../data/projects";
+import { getFeaturedProjects } from "../data/projectFunctions";
+import ProjectSummary from "../components/ProjectSummary.astro";
 
 const pageTitle = "Welcome!";
 
 // Get only the featured projects, already sorted by date
 const featuredProjects = getFeaturedProjects();
-
-// Category configuration remains the same
-const categoryConfig = {
-	software: {
-		color: "bg-blue-50 text-blue-900 border-blue-200",
-		icon: "💻",
-		ariaLabel: "Software Development Project",
-	},
-	music: {
-		color: "bg-purple-50 text-purple-900 border-purple-200",
-		icon: "🎵",
-		ariaLabel: "Music Production Project",
-	},
-	education: {
-		color: "bg-green-50 text-green-900 border-green-200",
-		icon: "📚",
-		ariaLabel: "Educational Project",
-	},
-};
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-	<main class="max-w-4xl mx-auto px-4">
-		<!-- Introduction Section -->
-		<section class="mb-16">
-			<p class="text-xl leading-relaxed text-gray-800 font-light">
-				Welcome to the personal website of Brylie Christopher Oxley – a
-				passionate software developer, writer, and musician. Here you'll
-				find insights into innovative projects, creative coding
-				explorations, and the journey of blending technology with art.
-			</p>
-		</section>
+  <main class="max-w-4xl mx-auto px-4">
+    <!-- Introduction Section -->
+    <section class="mb-16">
+      <p class="text-xl leading-relaxed text-gray-800 font-light">
+        Welcome to the personal website of Brylie Christopher Oxley – a
+        passionate software developer, writer, and musician. Here you'll find
+        insights into innovative projects, creative coding explorations, and the
+        journey of blending technology with art.
+      </p>
+    </section>
 
-		<!-- Featured Projects Section -->
-		<section class="mb-16" aria-labelledby="featured-projects-heading">
-			<h2
-				id="featured-projects-heading"
-				class="text-3xl font-semibold mb-8 text-gray-900 border-b pb-4"
-			>
-				Featured Projects
-			</h2>
+    <!-- Featured Projects Section -->
+    <section class="mb-16" aria-labelledby="featured-projects-heading">
+      <h2
+        id="featured-projects-heading"
+        class="text-3xl font-semibold mb-8 text-gray-900 border-b pb-4"
+      >
+        Featured Projects
+      </h2>
 
-			<div class="grid gap-8 md:grid-cols-2 lg:grid-cols-2">
-				{
-					featuredProjects.map((project) => {
-						const category = categoryConfig[project.category];
-						return (
-							<article
-								class="border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-all duration-300 ease-in-out bg-white"
-								aria-labelledby={`project-${project.title.toLowerCase().replace(/\s+/g, "-")}`}
-							>
-								<header class="mb-4">
-									<div class="flex items-center justify-between mb-3">
-										<span
-											class={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium border ${category.color}`}
-											aria-label={category.ariaLabel}
-										>
-											<span aria-hidden="true">
-												{category.icon}
-											</span>
-											{project.category}
-										</span>
-										<time
-											datetime={project.datePublished}
-											class="text-sm text-gray-500"
-										>
-											{new Date(
-												project.datePublished,
-											).toLocaleDateString("en-US", {
-												month: "short",
-												year: "numeric",
-											})}
-										</time>
-									</div>
+      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-2">
+        {
+          featuredProjects.map((project) => (
+            <ProjectSummary project={project} />
+          ))
+        }
+      </div>
+    </section>
+  </main>
 
-									<h3
-										id={`project-${project.title.toLowerCase().replace(/\s+/g, "-")}`}
-										class="text-xl font-semibold text-gray-900 mb-2 leading-tight"
-									>
-										<a
-											href={project.url}
-											class="hover:text-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded"
-										>
-											{project.title}
-										</a>
-									</h3>
-								</header>
+  <style>
+    /* Enhance focus styles for keyboard navigation */
+    a:focus-visible {
+      outline: 2px solid currentColor;
+      outline-offset: 2px;
+    }
 
-								<p class="text-gray-600 mb-6 leading-relaxed">
-									{project.description}
-								</p>
+    /* Ensure consistent card heights */
+    article {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
 
-								{project.tags && (
-									<footer class="flex flex-wrap gap-2">
-										{project.tags.map((tag) => (
-											<span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors">
-												{tag}
-											</span>
-										))}
-									</footer>
-								)}
-							</article>
-						);
-					})
-				}
-			</div>
-		</section>
-	</main>
-
-	<style>
-		/* Enhance focus styles for keyboard navigation */
-		a:focus-visible {
-			outline: 2px solid currentColor;
-			outline-offset: 2px;
-		}
-
-		/* Ensure consistent card heights */
-		article {
-			display: flex;
-			flex-direction: column;
-			height: 100%;
-		}
-
-		/* Improve text readability */
-		p {
-			font-size: 1.125rem;
-			line-height: 1.75;
-		}
-	</style>
+    /* Improve text readability */
+    p {
+      font-size: 1.125rem;
+      line-height: 1.75;
+    }
+  </style>
 </BaseLayout>

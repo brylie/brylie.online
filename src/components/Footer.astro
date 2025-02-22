@@ -1,11 +1,12 @@
 ---
 import Social from "./Social.astro";
 import License from "./License.astro";
+import { SocialPlatform } from "../data/socialPlatforms";
 ---
 
-<footer>
-    <p>I'm also on the following platforms.</p>
-    <Social platform="github" username="brylie" />
-    <Social platform="youtube" username="brylie" />
-    <License />
+<footer class="p-4 bg-gray-600 text-white rounded-lg">
+  <h2 class="text-2xl font-bold mb-4">Let's connect on:</h2>
+  <Social platform={SocialPlatform.GitHub} username="brylie" />
+  <Social platform={SocialPlatform.YouTube} username="brylie" />
+  <License />
 </footer>
