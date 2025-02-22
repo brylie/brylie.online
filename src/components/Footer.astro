@@ -4,9 +4,13 @@ import License from "./License.astro";
 import { SocialPlatform } from "../data/socialPlatforms";
 ---
 
-<footer class="p-4 bg-gray-600 text-white rounded-lg">
-  <h2 class="text-2xl font-bold mb-4">Let's connect on:</h2>
-  <Social platform={SocialPlatform.GitHub} username="brylie" />
-  <Social platform={SocialPlatform.YouTube} username="brylie" />
+<footer>
+  <div class="p-4 bg-teal-900 text-white rounded-lg">
+    <h2 class="text-2xl font-bold mb-4">Let's connect on:</h2>
+    <Social platform={SocialPlatform.Bluesky} username="brylie.bsky.social" />
+    <Social platform={SocialPlatform.GitHub} username="brylie" />
+    <Social platform={SocialPlatform.LinkedIn} username="brylie" />
+    <Social platform={SocialPlatform.YouTube} username="brylie" />
+  </div>
   <License />
 </footer>
