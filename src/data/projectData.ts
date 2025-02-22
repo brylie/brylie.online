@@ -89,6 +89,45 @@ export const projects: Project[] = [
     datePublished: "2024-07-31",
     tags: ["Ambient", "Electronic", "Orchestral"],
   },
+  {
+    title: "Flutter Friends",
+    description:
+      "A community-driven initiative to create educational resources for Flutter developers.",
+    url: "https://flutterfriends.dev/",
+    githubUrl: "https://github.com/FlutterFriends",
+    category: ProjectCategory.Education,
+    featured: true,
+    status: ProjectStatus.InProgress,
+    datePublished: "2023-11-13",
+    tags: ["Flutter", "Dart", "Education"],
+    technologies: ["Dart", "Flutter", "GitHub Pages"],
+  },
+  {
+    title: "WesternFriend.org",
+    description:
+      "A website for Western Friend (westernfriend.org), a Quaker publication that provides resources and support for Quaker communities and individuals seeking to live out their faith in the world. Western Friend is part of the Religious Society of Friends.",
+    url: "https://westernfriend.org/",
+    category: ProjectCategory.Software,
+    featured: true,
+    status: ProjectStatus.InProgress,
+    datePublished: "2023-11-13",
+    tags: ["Quaker", "Religious Society of Friends", "Publication"],
+    technologies: ["Python", "Django", "WagtailCMS", "JavaScript", "CSS"],
+    githubUrl: "https://github.com/WesternFriend/westernfriend.org",
+  },
+  {
+    title: "GeriLife",
+    description:
+      "Promoting wellness and independence for older adults by helping coordinate care and support.",
+    url: "https://github.com/GeriLife",
+    githubUrl: "https://github.com/GeriLife",
+    category: ProjectCategory.Software,
+    featured: false,
+    status: ProjectStatus.Completed,
+    datePublished: "2023-11-13",
+    tags: ["Health", "Wellness", "Aging"],
+    technologies: ["JavaScript", "Meteor.js", "Vue.js", "CSS"],
+  },
 ];
 
 // Validate titles when the module loads

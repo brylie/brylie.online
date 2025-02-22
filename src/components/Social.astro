@@ -9,6 +9,10 @@ interface Props {
 const { platform, username } = Astro.props as Props;
 
 const socialPlatforms = {
+  bluesky: {
+    url: `https://bsky.app/profile/${username}`,
+    title: "Bluesky",
+  },
   github: {
     url: `https://github.com/${username}`,
     title: "GitHub",
@@ -23,6 +27,7 @@ const socialPlatforms = {
   },
 };
 ---
+
 <a
   href={socialPlatforms[platform].url}
   class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium border bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors"
