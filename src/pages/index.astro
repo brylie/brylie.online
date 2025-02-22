@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getFeaturedProjects } from "../data/projectFunctions";
+import { ProjectCategory } from "../data/projects";
 
 const pageTitle = "Welcome!";
 
@@ -9,17 +10,17 @@ const featuredProjects = getFeaturedProjects();
 
 // Category configuration remains the same
 const categoryConfig = {
-	software: {
+	[ProjectCategory.Software]: {
 		color: "bg-blue-50 text-blue-900 border-blue-200",
 		icon: "💻",
 		ariaLabel: "Software Development Project",
 	},
-	music: {
+	[ProjectCategory.Music]: {
 		color: "bg-purple-50 text-purple-900 border-purple-200",
 		icon: "🎵",
 		ariaLabel: "Music Production Project",
 	},
-	education: {
+	[ProjectCategory.Education]: {
 		color: "bg-green-50 text-green-900 border-green-200",
 		icon: "📚",
 		ariaLabel: "Educational Project",

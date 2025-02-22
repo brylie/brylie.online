@@ -1,3 +1,15 @@
+export enum ProjectCategory {
+    Software = 'software',
+    Music = 'music',
+    Education = 'education'
+}
+
+export enum ProjectStatus {
+    InProgress = 'in-progress',
+    Completed = 'completed',
+    Planned = 'planned'
+}
+
 export interface Project {
     // Basic information every project should have
     title: string;
@@ -5,9 +17,9 @@ export interface Project {
     url: string;
 
     // Project categorization and metadata
-    category: 'software' | 'music' | 'education';
+    category: ProjectCategory;
     featured: boolean;  // Indicates if this should appear on the home page
-    status: 'in-progress' | 'completed' | 'planned';
+    status: ProjectStatus;
     datePublished: string;
     lastUpdated?: string;
 
