@@ -1,12 +1,12 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { getFeaturedProjects } from "../data/projectFunctions";
+import { getFeaturedProjects } from "../lib/projectFunctions";
 import ProjectSummary from "../components/ProjectSummary.astro";
 
 const pageTitle = "Welcome!";
 
 // Get only the featured projects, already sorted by date
-const featuredProjects = getFeaturedProjects();
+const featuredProjects = await getFeaturedProjects();
 ---
 
 <BaseLayout pageTitle={pageTitle}>

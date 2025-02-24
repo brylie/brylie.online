@@ -1,5 +1,5 @@
-import type { Project } from "./projects";
-import { ProjectCategory, ProjectStatus } from "./projects";
+import type { Project } from "../types/projects";
+import { ProjectCategory, ProjectStatus } from "../types/projects";
 
 // Validation function that checks for duplicate titles
 function validateUniqueTitles(projects: Project[]): void {

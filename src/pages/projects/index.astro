@@ -1,21 +1,22 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { getAllProjects, generateSlug } from "../../data/projectFunctions";
-import { ProjectCategory } from "../../data/projects";
-import type { Project } from "../../data/projects";
+import { getAllProjects } from "../../lib/projectFunctions";
+import { ProjectCategory } from "../../types/projects";
+import type { Project } from "../../types/projects";
 import ProjectSummary from "../../components/ProjectSummary.astro";
 import { categoryConfig } from "../../data/projectsConfig";
 
 const pageTitle = "Portfolio";
-const allProjects = getAllProjects();
+const allProjects = await getAllProjects();
 
 // Group projects by category
 const groupedProjects = allProjects.reduce<Record<ProjectCategory, Project[]>>(
   (projectsByCategory, project) => {
-    if (!projectsByCategory[project.category]) {
-      projectsByCategory[project.category] = [];
+    const category = project.data.category as ProjectCategory;
+    if (!projectsByCategory[category]) {
+      projectsByCategory[category] = [];
     }
-    projectsByCategory[project.category].push(project);
+    projectsByCategory[category].push(project);
     return projectsByCategory;
   },
   {} as Record<ProjectCategory, Project[]>,

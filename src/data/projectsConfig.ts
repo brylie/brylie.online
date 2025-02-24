@@ -1,4 +1,4 @@
-import { ProjectCategory } from "./projects";
+import { ProjectCategory } from "../types/projects";
 
 export const categoryConfig = {
   [ProjectCategory.Software]: {
