@@ -1,9 +1,10 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getAllProjects, generateSlug } from "../../data/projectFunctions";
-import { ProjectCategory, categoryConfig } from "../../data/projects";
+import { ProjectCategory } from "../../data/projects";
 import type { Project } from "../../data/projects";
 import ProjectSummary from "../../components/ProjectSummary.astro";
+import { categoryConfig } from "../../data/projectsConfig";
 
 const pageTitle = "Portfolio";
 const allProjects = getAllProjects();
