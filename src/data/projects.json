@@ -79,27 +79,6 @@
         "slug": "murmurations"
     },
     {
-        "title": "Flutter Friends",
-        "description": "A community-driven initiative to create educational resources for Flutter developers.",
-        "url": "https://flutterfriends.dev/",
-        "githubUrl": "https://github.com/FlutterFriends",
-        "category": "education",
-        "featured": true,
-        "status": "in-progress",
-        "datePublished": "2023-11-13",
-        "tags": [
-            "Flutter",
-            "Dart",
-            "Education"
-        ],
-        "technologies": [
-            "Dart",
-            "Flutter",
-            "GitHub Pages"
-        ],
-        "slug": "flutter-friends"
-    },
-    {
         "title": "WesternFriend.org",
         "description": "A website for Western Friend (westernfriend.org), a Quaker publication that provides resources and support for Quaker communities and individuals seeking to live out their faith in the world. Western Friend is part of the Religious Society of Friends.",
         "url": "https://westernfriend.org/",
