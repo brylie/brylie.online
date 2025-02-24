@@ -4,7 +4,7 @@ import { getAllProjects } from "../../lib/projectFunctions";
 import { ProjectCategory } from "../../types/projects";
 import type { Project } from "../../types/projects";
 import ProjectSummary from "../../components/ProjectSummary.astro";
-import { categoryConfig } from "../../data/projectsConfig";
+import { categoryConfig } from "../../lib/projectsConfig";
 
 const pageTitle = "Portfolio";
 const allProjects = await getAllProjects();
