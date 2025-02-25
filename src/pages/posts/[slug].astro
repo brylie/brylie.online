@@ -1,0 +1,39 @@
+---
+import Prose from "../../components/Prose.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection, getEntry, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection("blog");
+  return allPosts.map((post) => ({
+    params: { slug: post.data.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const post = await getEntry("blog", slug);
+
+if (!post) {
+  throw new Error(`Post not found: ${slug}`);
+}
+
+const { Content } = await render(post);
+---
+
+<BaseLayout pageTitle={post.data.title}>
+  <article>
+    <p><strong>Published on:</strong> {post.data.datePublished}</p>
+    <p><strong>Author:</strong> {post.data.author}</p>
+    <p>{post.data.description}</p>
+    {
+      post.data.image && (
+        <div>
+          <img src={post.data.image.url} alt={post.data.image.alt} />
+        </div>
+      )
+    }
+    <Prose>
+      <Content />
+    </Prose>
+  </article>
+</BaseLayout>
