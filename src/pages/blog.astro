@@ -1,16 +1,20 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import BlogPostListItem from "../components/BlogPostListItem.astro";
-const allPosts = Object.values(
-  import.meta.glob("./posts/*.md", { eager: true }),
-);
+import { getCollection } from "astro:content";
+
+const allPosts = await getCollection("blog");
 ---
 
 <BaseLayout pageTitle="Blog">
   <ul>
     {
-      allPosts.map((post: any) => (
-        <BlogPostListItem url={post.url} title={post.frontmatter.title} />
+      allPosts.map((post) => (
+        <BlogPostListItem
+          url={`/posts/${post.data.slug}`}
+          title={post.data.title}
+          datePublished={post.data.formattedDate}
+        />
       ))
     }
   </ul>

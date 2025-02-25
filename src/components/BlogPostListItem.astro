@@ -1,5 +1,50 @@
 ---
-const { title, url } = Astro.props;
+import { Icon } from "astro-icon/components";
+const { title, url, datePublished } = Astro.props;
 ---
 
-<li><a href={url}>{title}</a></li>
+<li class="blog-post-list-item">
+  <a href={url} class="blog-post-link">
+    <Icon name="ic:outline-article" class="icon" size="42" />
+    <div class="blog-post-content">
+      <h2>{title}</h2>
+      <p>Published on: {datePublished}</p>
+    </div>
+  </a>
+</li>
+
+<style>
+  .blog-post-list-item {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin: 1em 0;
+    padding: 1em;
+    transition: background-color 0.3s;
+  }
+
+  .blog-post-list-item:hover {
+    background-color: #f9f9f9;
+  }
+
+  .blog-post-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .icon {
+    margin-right: 1em;
+    color: #00539f;
+  }
+
+  .blog-post-content h2 {
+    margin: 0;
+    font-size: 1.25em;
+  }
+
+  .blog-post-content p {
+    margin: 0.5em 0 0;
+    color: #757575;
+  }
+</style>
