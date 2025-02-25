@@ -2,16 +2,29 @@
 import Social from "./Social.astro";
 import License from "./License.astro";
 import { SocialPlatform } from "../data/socialPlatforms";
+import { Icon } from "astro-icon/components";
 ---
 
-<footer>
+<footer class="text-center">
   <div class="p-4 bg-teal-900 text-white rounded-lg">
     <h2 class="text-2xl font-bold mb-4">Let's connect on:</h2>
-    <Social platform={SocialPlatform.Bluesky} username="brylie.bsky.social" />
-    <Social platform={SocialPlatform.Dev} username="brylie" />
-    <Social platform={SocialPlatform.GitHub} username="brylie" />
-    <Social platform={SocialPlatform.LinkedIn} username="brylie" />
-    <Social platform={SocialPlatform.YouTube} username="brylie" />
+    <div class="flex justify-center gap-4 flex-wrap">
+      <Social platform={SocialPlatform.Bluesky} username="brylie.bsky.social" />
+      <Social platform={SocialPlatform.Dev} username="brylie" />
+      <Social platform={SocialPlatform.GitHub} username="brylie" />
+      <Social platform={SocialPlatform.LinkedIn} username="brylie" />
+      <Social platform={SocialPlatform.YouTube} username="brylie" />
+    </div>
+  </div>
+  <div class="p-4 bg-teal-800 text-white rounded-lg mt-4">
+    <a
+      href="/rss.xml"
+      target="_blank"
+      class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium border bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors"
+    >
+      <Icon name="ic:round-rss-feed" />
+      RSS Feed
+    </a>
   </div>
   <License />
 </footer>

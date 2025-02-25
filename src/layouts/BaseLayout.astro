@@ -14,6 +14,14 @@ const { pageTitle } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{pageTitle}</title>
 
+    <!-- RSS Feed Discovery -->
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="RSS Feed"
+      href="/rss.xml"
+    />
+
     <ClientRouter />
   </head>
   <body>
