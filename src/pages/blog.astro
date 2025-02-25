@@ -13,7 +13,7 @@ const allPosts = await getCollection("blog");
         <BlogPostListItem
           url={`/posts/${post.data.slug}`}
           title={post.data.title}
-          datePublished={post.data.datePublished}
+          datePublished={post.data.formattedDate}
         />
       ))
     }

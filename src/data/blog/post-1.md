@@ -2,7 +2,7 @@
 layout: ../../layouts/MarkdownPostLayout.astro
 title: "My First Blog Post"
 slug: "my-first-blog-post"
-pubDate: 2025-02-18
+datePublished: 2025-02-18
 description: "This is the first post of my new Astro blog."
 author: "Brylie Christopher Oxley"
 image:

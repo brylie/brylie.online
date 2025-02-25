@@ -39,22 +39,34 @@ const projects = defineCollection({
 
 const blog = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/data/blog" }),
-  schema: z.object({
-    title: z.string(),
-    slug: z.string(),
-    datePublished: z.coerce.date().optional(),
-    dateModified: z.coerce.date().optional(),
-    description: z.string(),
-    author: z.string(),
-    image: z
-      .object({
-        url: z.string().url(),
-        alt: z.string(),
-      })
-      .optional(),
-    tags: z.array(z.string()),
-    headline: z.string().optional(),
-  }),
+  schema: z
+    .object({
+      title: z.string(),
+      slug: z.string(),
+      datePublished: z.coerce.date(),
+      dateModified: z.coerce.date().optional(),
+      description: z.string(),
+      author: z.string(),
+      image: z
+        .object({
+          url: z.string().url(),
+          alt: z.string(),
+        })
+        .optional(),
+      tags: z.array(z.string()),
+      headline: z.string().optional(),
+    })
+    .transform((post) => ({
+      ...post,
+      formattedDate: new Date(post.datePublished).toLocaleDateString(
+        undefined,
+        {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+        },
+      ),
+    })),
 });
 
 export const collections = {

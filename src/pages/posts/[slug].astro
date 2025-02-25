@@ -22,7 +22,7 @@ const { Content } = await render(post);
 
 <BaseLayout pageTitle={post.data.title}>
   <article>
-    <p><strong>Published on:</strong> {post.data.datePublished}</p>
+    <p><strong>Published on:</strong> {post.data.formattedDate}</p>
     <p><strong>Author:</strong> {post.data.author}</p>
     <p>{post.data.description}</p>
     {
