@@ -2,6 +2,7 @@
 import Social from "./Social.astro";
 import License from "./License.astro";
 import { SocialPlatform } from "../data/socialPlatforms";
+import { Icon } from "astro-icon/components";
 ---
 
 <footer>
@@ -12,6 +13,16 @@ import { SocialPlatform } from "../data/socialPlatforms";
     <Social platform={SocialPlatform.GitHub} username="brylie" />
     <Social platform={SocialPlatform.LinkedIn} username="brylie" />
     <Social platform={SocialPlatform.YouTube} username="brylie" />
+  </div>
+  <div class="p-4 bg-teal-800 text-white rounded-lg mt-4 text-center">
+    <a
+      href="/rss.xml"
+      target="_blank"
+      class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium border bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors"
+    >
+      <Icon name="ic:round-rss-feed" />
+      RSS Feed
+    </a>
   </div>
   <License />
 </footer>
