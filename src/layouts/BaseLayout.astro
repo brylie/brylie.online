@@ -18,8 +18,8 @@ const { pageTitle } = Astro.props;
     <link
       rel="alternate"
       type="application/rss+xml"
-      title="RSS Feed"
-      href="/rss.xml"
+      title="Brylie.online RSS Feed"
+      href={new URL("rss.xml", Astro.site)}
     />
 
     <ClientRouter />
