@@ -4,6 +4,8 @@ import BlogPostListItem from "../components/BlogPostListItem.astro";
 import { getCollection } from "astro:content";
 
 const allPosts = await getCollection("blog");
+// Sort posts reverse chronologically
+allPosts.sort((a, b) => new Date(b.data.datePublished).getTime() - new Date(a.data.datePublished).getTime());
 ---
 
 <BaseLayout pageTitle="Blog">
