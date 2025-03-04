@@ -5,7 +5,7 @@ slug: "2025-parallel-major-chords"
 datePublished: 2025-03-04
 description: "Explore the concept of parallel majors and how they can add new colors to your musical compositions."
 author: "Brylie Christopher Oxley"
-tags: ["music-theory", "composition", "parallel-majors", "chord-progressions"]
+tags: ["music theory", "composition", "parallel majors", "chord progressions"]
 ---
 
 Have you ever wondered how some of your favorite songs create such emotionally rich and unexpected chord progressions? Many composers and songwriters use a powerful technique that involves borrowing chords from different scales or modes. Today, we'll explore a specific approach called "parallel majors" that can immediately add new colors to your compositions.
