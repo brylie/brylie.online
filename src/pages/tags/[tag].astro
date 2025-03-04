@@ -4,7 +4,7 @@ import BlogPostListItem from "../../components/BlogPostListItem.astro";
 
 export async function getStaticPaths() {
   const allPosts = Object.values(
-    import.meta.glob("../posts/*.md", { eager: true }),
+    import.meta.glob("../../data/blog/*.md", { eager: true }),
   );
 
   const uniqueTags = [
