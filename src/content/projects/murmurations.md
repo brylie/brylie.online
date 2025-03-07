@@ -7,9 +7,12 @@ featured: true
 status: "completed"
 datePublished: "2024-07-31"
 tags:
-  - "Ambient"
-  - "Electronic"
-  - "Orchestral"
+  - "ambient"
+  - "electronic"
+  - "orchestral"
+technologies:
+  - "Bitwig Studio"
+  - "Kontakt"
 slug: "murmurations"
 ---
 

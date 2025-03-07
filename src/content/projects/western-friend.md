@@ -9,7 +9,7 @@ datePublished: "2023-11-13"
 tags:
   - "Quaker"
   - "Religious Society of Friends"
-  - "Publication"
+  - "publication"
 technologies:
   - "Python"
   - "Django"

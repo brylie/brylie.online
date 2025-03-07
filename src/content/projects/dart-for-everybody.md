@@ -9,8 +9,8 @@ status: "completed"
 datePublished: "2023-11-13"
 tags:
   - "Dart"
-  - "Textbook"
-  - "Education"
+  - "textbook"
+  - "education"
 technologies:
   - "JavaScript"
   - "Markdown"

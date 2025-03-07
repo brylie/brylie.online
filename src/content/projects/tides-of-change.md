@@ -8,9 +8,9 @@ featured: true
 status: "completed"
 datePublished: "2024-11-17"
 tags:
-  - "Ambient"
-  - "Electronic"
-  - "Orchestral"
+  - "ambient"
+  - "electronic"
+  - "orchestral"
 slug: "tides-of-change"
 ---
 

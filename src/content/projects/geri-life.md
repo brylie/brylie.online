@@ -8,14 +8,17 @@ featured: true
 status: "completed"
 datePublished: "2025-03-07"
 tags:
-  - "Health"
-  - "Wellness"
-  - "Aging"
+  - "health"
+  - "wellness"
+  - "aging"
+  - "open source"
 technologies:
   - "JavaScript"
   - "Meteor.js"
   - "Vue.js"
   - "CSS"
+  - "MongoDB"
+  - "Plotly.js"
 slug: "geri-life"
 ---
 

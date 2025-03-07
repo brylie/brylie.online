@@ -9,8 +9,8 @@ status: "in-progress"
 datePublished: "2024-02-20"
 lastUpdated: "2024-02-20"
 tags:
-  - "Music Theory"
-  - "Piano"
+  - "music theory"
+  - "piano"
 technologies:
   - "Godot"
   - "GDScript"
