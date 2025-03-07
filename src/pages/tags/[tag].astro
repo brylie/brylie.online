@@ -1,41 +1,100 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import BlogPostListItem from "../../components/BlogPostListItem.astro";
+import ProjectSummary from "../../components/ProjectSummary.astro";
 import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
   const allPosts = await getCollection("blog");
-  
-  // Get all unique tags
-  const uniqueTags = [...new Set(allPosts.flatMap(post => post.data.tags))];
-  
+  const allProjects = await getCollection("projects");
+
+  // Get all tags from both blog posts and projects
+  const postTags = [...new Set(allPosts.flatMap((post) => post.data.tags))];
+  const projectTags = [
+    ...new Set(allProjects.flatMap((project) => project.data.tags || [])),
+  ];
+
+  // Combine all unique tags
+  const uniqueTags = [...new Set([...postTags, ...projectTags])];
+
   return uniqueTags.map((tag) => {
+    // Filter posts and projects that contain this tag
     const filteredPosts = allPosts.filter((post) =>
-      post.data.tags.includes(tag)
+      post.data.tags.includes(tag),
     );
-    
+
+    const filteredProjects = allProjects.filter((project) =>
+      project.data.tags?.includes(tag),
+    );
+
     return {
       params: { tag },
-      props: { posts: filteredPosts },
+      props: {
+        posts: filteredPosts,
+        projects: filteredProjects,
+        tag,
+      },
     };
   });
 }
 
 const { tag } = Astro.params;
-const { posts } = Astro.props;
+const { posts, projects } = Astro.props;
+
+// Page title includes the tag name
+const pageTitle = `Content tagged with "${tag}"`;
+
+// Check if we have posts or projects with this tag
+const hasPosts = posts.length > 0;
+const hasProjects = projects.length > 0;
 ---
 
-<BaseLayout pageTitle={tag}>
-  <p>Posts tagged with {tag}</p>
-  <ul>
-    {
-      posts.map((post) => (
-        <BlogPostListItem 
-          url={`/posts/${post.data.slug}`}
-          title={post.data.title}
-          datePublished={post.data.formattedDate} 
-        />
-      ))
-    }
-  </ul>
+<BaseLayout pageTitle={pageTitle}>
+  <div class="max-w-6xl mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-8">Content tagged with "{tag}"</h1>
+
+    <div class="lg:flex lg:gap-8">
+      {/* Blog Posts Section */}
+      <div class={`mb-8 lg:mb-0 ${hasProjects ? "lg:w-1/2" : "w-full"}`}>
+        <h2 class="text-2xl font-semibold mb-4 pb-2 border-b">Blog Posts</h2>
+        {
+          hasPosts ? (
+            <ul class="space-y-4">
+              {posts.map((post) => (
+                <BlogPostListItem
+                  url={`/posts/${post.data.slug}`}
+                  title={post.data.title}
+                  datePublished={post.data.formattedDate}
+                />
+              ))}
+            </ul>
+          ) : (
+            <p class="text-gray-600 italic">No blog posts with this tag</p>
+          )
+        }
+      </div>
+
+      {/* Projects Section */}
+      <div class={`${hasPosts ? "lg:w-1/2" : "w-full"}`}>
+        <h2 class="text-2xl font-semibold mb-4 pb-2 border-b">Projects</h2>
+        {
+          hasProjects ? (
+            <div class="grid gap-6 md:grid-cols-1 lg:grid-cols-1">
+              {projects.map((project) => (
+                <ProjectSummary project={project} />
+              ))}
+            </div>
+          ) : (
+            <p class="text-gray-600 italic">No projects with this tag</p>
+          )
+        }
+      </div>
+    </div>
+
+    <div class="mt-8 pt-4 border-t">
+      <a href="/tags" class="text-blue-600 hover:underline">
+        ← Back to all tags
+      </a>
+    </div>
+  </div>
 </BaseLayout>

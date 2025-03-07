@@ -56,9 +56,12 @@ const { Content } = await render(project);
             <h2 class="text-2xl font-semibold mb-4">Tags</h2>
             <div class="flex flex-wrap gap-2">
               {project.data.tags.map((tag) => (
-                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors">
+                <a
+                  href={`/tags/${tag}`}
+                  class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors"
+                >
                   {tag}
-                </span>
+                </a>
               ))}
             </div>
           </section>
