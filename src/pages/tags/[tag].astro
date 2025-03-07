@@ -14,8 +14,10 @@ export async function getStaticPaths() {
     ...new Set(allProjects.flatMap((project) => project.data.tags || [])),
   ];
 
-  // Combine all unique tags
-  const uniqueTags = [...new Set([...postTags, ...projectTags])];
+  // Combine all unique tags and sort case-insensitive
+  const uniqueTags = [...new Set([...postTags, ...projectTags])].sort((a, b) =>
+    a.toLowerCase().localeCompare(b.toLowerCase()),
+  );
 
   return uniqueTags.map((tag) => {
     // Filter posts and projects that contain this tag
