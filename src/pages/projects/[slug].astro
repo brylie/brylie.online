@@ -2,6 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getAllProjects } from "../../lib/projectFunctions";
 import type { Project } from "../../types/projects";
+import { render } from "astro:content";
 
 export async function getStaticPaths() {
   const allProjects = await getAllProjects();
@@ -13,6 +14,9 @@ export async function getStaticPaths() {
 
 const { project } = Astro.props;
 const pageTitle = project.data.title;
+
+// Get the compiled markdown content
+const { Content } = await render(project);
 ---
 
 <BaseLayout pageTitle={pageTitle}>
@@ -39,6 +43,11 @@ const pageTitle = project.data.title;
       <section class="mb-8">
         <h2 class="text-2xl font-semibold mb-4">Project Details</h2>
         <p>{project.data.longDescription || project.data.description}</p>
+      </section>
+
+      {/* Display the markdown content */}
+      <section class="project-narrative mb-8">
+        <Content />
       </section>
 
       {
@@ -69,3 +78,18 @@ const pageTitle = project.data.title;
     </article>
   </main>
 </BaseLayout>
+
+<style>
+  .project-narrative :global(h1) {
+    display: none; /* Hide the first h1 since we already show the title */
+  }
+
+  .project-narrative :global(ul) {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+  }
+
+  .project-narrative :global(p) {
+    margin-bottom: 1rem;
+  }
+</style>
