@@ -12,21 +12,30 @@ const projectTags = [
   ...new Set(allProjects.map((project) => project.data.tags || []).flat()),
 ];
 
-// Combine all tags and remove duplicates, then sort case-insensitive
-const allTags = [...new Set([...postTags, ...projectTags])].sort((a, b) =>
-  a.toLowerCase().localeCompare(b.toLowerCase()),
-);
+// Get all technologies from projects
+const projectTechnologies = [
+  ...new Set(
+    allProjects.map((project) => project.data.technologies || []).flat(),
+  ),
+];
 
-const pageTitle = "Tag Index";
+// Combine all tags and technologies, removing duplicates, then sort case-insensitive
+const allTags = [
+  ...new Set([...postTags, ...projectTags, ...projectTechnologies]),
+].sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
+
+const pageTitle = "Tags & Technologies";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
   <div class="max-w-4xl mx-auto px-4 py-8">
-    <h1 class="text-3xl font-bold mb-6">Browse Content by Tags</h1>
+    <h1 class="text-3xl font-bold mb-6">
+      Browse Content by Tags & Technologies
+    </h1>
 
     <p class="mb-6 text-lg text-gray-700">
-      Click on a tag to see all blog posts and projects associated with that
-      topic.
+      Click on a tag to see all blog posts and projects related to that topic or
+      technology.
     </p>
 
     <div class="tags flex flex-wrap gap-2">
@@ -34,7 +43,7 @@ const pageTitle = "Tag Index";
         allTags.map((tag) => (
           <a
             href={`/tags/${tag}`}
-            class="tag px-4 py-2 bg-blue-300 hover:bg-blue-500 hover:text-gray-100 rounded-full transition-colors"
+            class="tag px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-full transition-colors"
           >
             {tag}
           </a>

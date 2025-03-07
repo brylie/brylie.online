@@ -50,8 +50,28 @@ const { Content } = await render(project);
         <Content />
       </section>
 
+      {/* Technologies Section */}
       {
-        project.data.tags && (
+        project.data.technologies && project.data.technologies.length > 0 && (
+          <section class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Technologies</h2>
+            <div class="flex flex-wrap gap-2">
+              {project.data.technologies.map((tech) => (
+                <a
+                  href={`/tags/${tech}`}
+                  class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium hover:bg-blue-200 transition-colors"
+                >
+                  {tech}
+                </a>
+              ))}
+            </div>
+          </section>
+        )
+      }
+
+      {/* Tags Section */}
+      {
+        project.data.tags && project.data.tags.length > 0 && (
           <section class="mb-8">
             <h2 class="text-2xl font-semibold mb-4">Tags</h2>
             <div class="flex flex-wrap gap-2">
