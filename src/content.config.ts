@@ -1,5 +1,5 @@
 import { defineCollection, z } from "astro:content";
-import { file, glob } from "astro/loaders";
+import { glob } from "astro/loaders";
 
 // Define the ProjectCategory enum as a Zod enum
 const ProjectCategory = z.enum(["software", "music", "education"]);
@@ -9,7 +9,8 @@ const ProjectStatus = z.enum(["in-progress", "completed", "planned"]);
 
 // Define the Project schema using Zod
 const projects = defineCollection({
-  loader: file("src/data/projects.json"),
+  // Change from file loader to glob loader
+  loader: glob({ pattern: "**/*.md", base: "./src/content/projects" }),
   schema: z.object({
     // Basic information every project should have
     title: z.string(),

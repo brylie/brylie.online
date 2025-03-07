@@ -2,6 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getAllProjects } from "../../lib/projectFunctions";
 import type { Project } from "../../types/projects";
+import { render } from "astro:content";
 
 export async function getStaticPaths() {
   const allProjects = await getAllProjects();
@@ -13,6 +14,9 @@ export async function getStaticPaths() {
 
 const { project } = Astro.props;
 const pageTitle = project.data.title;
+
+// Get the compiled markdown content
+const { Content } = await render(project);
 ---
 
 <BaseLayout pageTitle={pageTitle}>
@@ -41,15 +45,43 @@ const pageTitle = project.data.title;
         <p>{project.data.longDescription || project.data.description}</p>
       </section>
 
+      {/* Display the markdown content */}
+      <section class="project-narrative mb-8">
+        <Content />
+      </section>
+
+      {/* Technologies Section */}
       {
-        project.data.tags && (
+        project.data.technologies && project.data.technologies.length > 0 && (
+          <section class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Technologies</h2>
+            <div class="flex flex-wrap gap-2">
+              {project.data.technologies.map((tech) => (
+                <a
+                  href={`/tags/${tech}`}
+                  class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium hover:bg-blue-200 transition-colors"
+                >
+                  {tech}
+                </a>
+              ))}
+            </div>
+          </section>
+        )
+      }
+
+      {/* Tags Section */}
+      {
+        project.data.tags && project.data.tags.length > 0 && (
           <section class="mb-8">
             <h2 class="text-2xl font-semibold mb-4">Tags</h2>
             <div class="flex flex-wrap gap-2">
               {project.data.tags.map((tag) => (
-                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors">
+                <a
+                  href={`/tags/${tag}`}
+                  class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors"
+                >
                   {tag}
-                </span>
+                </a>
               ))}
             </div>
           </section>
@@ -69,3 +101,18 @@ const pageTitle = project.data.title;
     </article>
   </main>
 </BaseLayout>
+
+<style>
+  .project-narrative :global(h1) {
+    display: none; /* Hide the first h1 since we already show the title */
+  }
+
+  .project-narrative :global(ul) {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+  }
+
+  .project-narrative :global(p) {
+    margin-bottom: 1rem;
+  }
+</style>
