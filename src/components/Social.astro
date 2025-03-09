@@ -1,48 +1,53 @@
 ---
 import { Icon } from "astro-icon/components";
 import type { SocialPlatform } from "../data/socialPlatforms";
-import { dev } from "astro";
 
 interface Props {
   platform: SocialPlatform;
   username: string;
 }
-
 const { platform, username } = Astro.props as Props;
-
 const socialPlatforms = {
   bluesky: {
     url: `https://bsky.app/profile/${username}`,
     title: "Bluesky",
     icon: "logos:bluesky",
+    color: "bg-sky-100 hover:bg-sky-200 text-sky-800",
   },
   dev: {
     url: `https://dev.to/${username}`,
     title: "DEV",
     icon: "skill-icons:devto-dark",
+    color: "bg-gray-100 hover:bg-gray-200 text-gray-800",
   },
   github: {
     url: `https://github.com/${username}`,
     title: "GitHub",
     icon: "logos:github-octocat",
+    color: "bg-gray-100 hover:bg-gray-200 text-gray-800",
   },
   linkedin: {
     url: `https://linkedin.com/in/${username}`,
     title: "LinkedIn",
     icon: "logos:linkedin-icon",
+    color: "bg-blue-100 hover:bg-blue-200 text-blue-800",
   },
   youtube: {
     url: `https://youtube.com/@${username}`,
     title: "YouTube",
     icon: "logos:youtube-icon",
+    color: "bg-red-100 hover:bg-red-200 text-red-800",
   },
 };
 ---
 
 <a
   href={socialPlatforms[platform].url}
-  class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium border bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors"
+  class={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium border border-transparent ${socialPlatforms[platform].color} transition-all hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2`}
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label={`Follow me on ${socialPlatforms[platform].title}`}
 >
-  <Icon name={socialPlatforms[platform].icon} />
-  {socialPlatforms[platform].title}
+  <Icon name={socialPlatforms[platform].icon} class="w-5 h-5" />
+  <span>{socialPlatforms[platform].title}</span>
 </a>

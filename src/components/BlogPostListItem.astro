@@ -1,50 +1,42 @@
 ---
 import { Icon } from "astro-icon/components";
-const { title, url, datePublished } = Astro.props;
+const { title, url, datePublished, description } = Astro.props;
 ---
 
-<li class="blog-post-list-item">
-  <a href={url} class="blog-post-link">
-    <Icon name="ic:outline-article" class="icon" size="42" />
-    <div class="blog-post-content">
-      <h2>{title}</h2>
-      <p>Published on: {datePublished}</p>
+<article class="group">
+  <a href={url} class="flex items-start gap-4 hover:no-underline">
+    <div
+      class="hidden sm:flex flex-shrink-0 w-10 h-10 bg-teal-100 dark:bg-teal-900/50 text-teal-600 dark:text-teal-400 rounded-lg items-center justify-center group-hover:bg-teal-200 dark:group-hover:bg-teal-900 transition-colors"
+    >
+      <Icon name="ic:file-document-outline" class="w-5 h-5" />
+    </div>
+    <div class="flex-grow">
+      <h3
+        class="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors"
+      >
+        {title}
+      </h3>
+      <div
+        class="flex items-center text-sm text-gray-500 dark:text-gray-400 mt-1"
+      >
+        <Icon name="mdi:calendar" class="w-4 h-4 mr-1.5" />
+        <time datetime={datePublished}>{datePublished}</time>
+      </div>
+      {
+        description && (
+          <p class="mt-2 text-gray-600 dark:text-gray-300 line-clamp-2">
+            {description}
+          </p>
+        )
+      }
+    </div>
+    <div
+      class="ml-2 self-center opacity-0 group-hover:opacity-100 transition-opacity"
+    >
+      <Icon
+        name="ic:chevron-right"
+        class="w-5 h-5 text-teal-500 dark:text-teal-400"
+      />
     </div>
   </a>
-</li>
-
-<style>
-  .blog-post-list-item {
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    margin: 1em 0;
-    padding: 1em;
-    transition: background-color 0.3s;
-  }
-
-  .blog-post-list-item:hover {
-    background-color: #f9f9f9;
-  }
-
-  .blog-post-link {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: inherit;
-  }
-
-  .icon {
-    margin-right: 1em;
-    color: #00539f;
-  }
-
-  .blog-post-content h2 {
-    margin: 0;
-    font-size: 1.25em;
-  }
-
-  .blog-post-content p {
-    margin: 0.5em 0 0;
-    color: #757575;
-  }
-</style>
+</article>

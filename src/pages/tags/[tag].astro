@@ -3,6 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import BlogPostListItem from "../../components/BlogPostListItem.astro";
 import ProjectSummary from "../../components/ProjectSummary.astro";
 import { getCollection } from "astro:content";
+import { Icon } from "astro-icon/components";
 
 export async function getStaticPaths() {
   const allPosts = await getCollection("blog");
@@ -30,16 +31,26 @@ export async function getStaticPaths() {
 
   return uniqueTags.map((tag) => {
     // Filter posts that contain this tag
-    const filteredPosts = allPosts.filter((post) =>
-      post.data.tags.includes(tag),
-    );
+    const filteredPosts = allPosts
+      .filter((post) => post.data.tags.includes(tag))
+      .sort(
+        (a, b) =>
+          new Date(b.data.pubDate).valueOf() -
+          new Date(a.data.pubDate).valueOf(),
+      );
 
     // Filter projects that contain this tag in either tags or technologies
-    const filteredProjects = allProjects.filter(
-      (project) =>
-        project.data.tags?.includes(tag) ||
-        project.data.technologies?.includes(tag),
-    );
+    const filteredProjects = allProjects
+      .filter(
+        (project) =>
+          project.data.tags?.includes(tag) ||
+          project.data.technologies?.includes(tag),
+      )
+      .sort(
+        (a, b) =>
+          new Date(b.data.datePublished).valueOf() -
+          new Date(a.data.datePublished).valueOf(),
+      );
 
     return {
       params: { tag },
@@ -54,9 +65,6 @@ export async function getStaticPaths() {
 
 const { tag } = Astro.params;
 const { posts, projects } = Astro.props;
-
-// Page title includes the tag name
-const pageTitle = `Content tagged with "${tag}"`;
 
 // Check if we have posts or projects with this tag
 const hasPosts = posts.length > 0;
@@ -84,55 +92,154 @@ if (hasPosts && hasProjects) {
     tagDescription = `"${tag}" is a tag used in projects.`;
   }
 }
+
+const pageTitle = `${tag}`;
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-  <div class="max-w-6xl mx-auto px-4 py-8">
-    <h1 class="text-3xl font-bold mb-4">Content tagged with "{tag}"</h1>
+  <div class="max-w-4xl mx-auto">
+    <!-- Tag Header Section -->
+    <div
+      class="bg-gradient-to-r from-teal-50 to-blue-50 dark:from-gray-800 dark:to-gray-900 rounded-xl p-6 mb-8"
+    >
+      <div class="flex items-center gap-3 mb-4">
+        <span
+          class="bg-teal-100 dark:bg-teal-900/70 text-teal-800 dark:text-teal-200 px-4 py-1.5 rounded-full text-sm font-medium"
+        >
+          #{tag}
+        </span>
 
-    {tagDescription && <p class="text-gray-600 mb-8">{tagDescription}</p>}
-
-    <div class="lg:flex lg:gap-8">
-      {/* Blog Posts Section */}
-      <div class={`mb-8 lg:mb-0 ${hasProjects ? "lg:w-1/2" : "w-full"}`}>
-        <h2 class="text-2xl font-semibold mb-4 pb-2 border-b">Blog Posts</h2>
         {
-          hasPosts ? (
-            <ul class="space-y-4">
-              {posts.map((post) => (
-                <BlogPostListItem
-                  url={`/posts/${post.data.slug}`}
-                  title={post.data.title}
-                  datePublished={post.data.formattedDate}
-                />
-              ))}
-            </ul>
-          ) : (
-            <p class="text-gray-600 italic">No blog posts with this tag</p>
+          isTechnology && (
+            <span class="bg-blue-100 dark:bg-blue-900/70 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1">
+              <Icon name="ic:code-tags" class="w-3.5 h-3.5" /> Technology
+            </span>
           )
         }
       </div>
 
+      <p class="text-gray-700 dark:text-gray-300">{tagDescription}</p>
+
+      <div class="flex flex-wrap gap-4 mt-6">
+        <div
+          class="bg-white/70 dark:bg-gray-800/70 py-2 px-4 rounded-lg flex items-center gap-2"
+        >
+          <Icon
+            name="ic:file-document"
+            class="w-5 h-5 text-teal-600 dark:text-teal-400"
+          />
+          <span>
+            <span class="font-bold text-gray-800 dark:text-gray-200"
+              >{posts.length}</span
+            >
+            <span class="text-gray-600 dark:text-gray-400"
+              >{posts.length === 1 ? "Post" : "Posts"}</span
+            >
+          </span>
+        </div>
+
+        <div
+          class="bg-white/70 dark:bg-gray-800/70 py-2 px-4 rounded-lg flex items-center gap-2"
+        >
+          <Icon
+            name="ic:folder-open"
+            class="w-5 h-5 text-teal-600 dark:text-teal-400"
+          />
+          <span>
+            <span class="font-bold text-gray-800 dark:text-gray-200"
+              >{projects.length}</span
+            >
+            <span class="text-gray-600 dark:text-gray-400"
+              >{projects.length === 1 ? "Project" : "Projects"}</span
+            >
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content Sections -->
+    <div class="space-y-12">
+      {/* Blog Posts Section */}
+      {
+        hasPosts && (
+          <section aria-labelledby="blog-posts-heading">
+            <div class="flex items-center justify-between mb-6">
+              <h2
+                id="blog-posts-heading"
+                class="text-2xl font-bold text-gray-900 dark:text-white"
+              >
+                Blog Posts
+              </h2>
+              <a
+                href="/blog/"
+                class="text-teal-600 hover:text-teal-800 dark:text-teal-400 dark:hover:text-teal-300 text-sm font-medium flex items-center gap-1"
+              >
+                All Posts <Icon name="mdi:arrow-right" class="w-4 h-4" />
+              </a>
+            </div>
+
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+              {posts.map((post, index) => (
+                <div
+                  class={`p-5 ${index !== posts.length - 1 ? "border-b border-gray-100 dark:border-gray-700" : ""}`}
+                >
+                  <BlogPostListItem
+                    url={`/posts/${post.slug}`}
+                    title={post.data.title}
+                    datePublished={new Date(
+                      post.data.pubDate,
+                    ).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "short",
+                      day: "numeric",
+                    })}
+                    description={post.data.description}
+                  />
+                </div>
+              ))}
+            </div>
+          </section>
+        )
+      }
+
       {/* Projects Section */}
-      <div class={`${hasPosts ? "lg:w-1/2" : "w-full"}`}>
-        <h2 class="text-2xl font-semibold mb-4 pb-2 border-b">Projects</h2>
-        {
-          hasProjects ? (
-            <div class="grid gap-6 md:grid-cols-1 lg:grid-cols-1">
+      {
+        hasProjects && (
+          <section aria-labelledby="projects-heading">
+            <div class="flex items-center justify-between mb-6">
+              <h2
+                id="projects-heading"
+                class="text-2xl font-bold text-gray-900 dark:text-white"
+              >
+                Projects
+              </h2>
+              <a
+                href="/projects/"
+                class="text-teal-600 hover:text-teal-800 dark:text-teal-400 dark:hover:text-teal-300 text-sm font-medium flex items-center gap-1"
+              >
+                All Projects <Icon name="mdi:arrow-right" class="w-4 h-4" />
+              </a>
+            </div>
+
+            <div class="grid gap-6 md:grid-cols-2">
               {projects.map((project) => (
                 <ProjectSummary project={project} />
               ))}
             </div>
-          ) : (
-            <p class="text-gray-600 italic">No projects with this tag</p>
-          )
-        }
-      </div>
+          </section>
+        )
+      }
     </div>
 
-    <div class="mt-8 pt-4 border-t">
-      <a href="/tags" class="text-blue-600 hover:underline">
-        ← Back to all tags
+    <div
+      class="mt-12 pt-4 border-t border-gray-200 dark:border-gray-700 flex items-center"
+    >
+      <a
+        href="/tags"
+        class="inline-flex items-center gap-2 text-teal-600 hover:text-teal-800 dark:text-teal-400 dark:hover:text-teal-300 font-medium transition-colors"
+      >
+        <Icon name="ic:arrow-left" class="w-4 h-4" />
+        Back to all tags
       </a>
     </div>
   </div>

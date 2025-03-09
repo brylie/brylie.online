@@ -3,7 +3,19 @@ import Hamburger from "./Hamburger.astro";
 import Navigation from "./Navigation.astro";
 ---
 
-<header>
-  <Hamburger />
-  <Navigation />
+<header
+  class="sticky top-0 z-50 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm shadow-sm py-3 px-4 mb-8"
+>
+  <div class="max-w-6xl mx-auto flex items-center justify-between">
+    <a
+      href="/"
+      class="text-xl font-bold text-teal-700 dark:text-teal-400 transition-colors hover:text-teal-900 dark:hover:text-teal-300"
+    >
+      Brylie
+    </a>
+    <div class="flex items-center">
+      <Navigation />
+      <Hamburger />
+    </div>
+  </div>
 </header>

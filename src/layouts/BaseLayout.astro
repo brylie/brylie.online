@@ -12,8 +12,18 @@ const { pageTitle } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <title>{pageTitle}</title>
-
+    <meta
+      name="description"
+      content="Brylie's personal website featuring projects, blog posts, and professional information"
+    />
+    <title>{pageTitle ? `${pageTitle} | Brylie` : "Brylie"}</title>
+    <!-- Preconnect to Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
     <!-- RSS Feed Discovery -->
     <link
       rel="alternate"
@@ -21,13 +31,20 @@ const { pageTitle } = Astro.props;
       title="Brylie.online RSS Feed"
       href={new URL("rss.xml", Astro.site)}
     />
-
     <ClientRouter />
   </head>
-  <body>
+  <body class="min-h-screen flex flex-col">
     <Header />
-    <h1>{pageTitle}</h1>
-    <slot />
+    <main class="flex-grow w-full max-w-4xl mx-auto px-4 md:px-6 py-4 md:py-8">
+      {
+        pageTitle && (
+          <h1 class="text-3xl md:text-4xl font-extrabold mb-6 text-gray-900 dark:text-white">
+            {pageTitle}
+          </h1>
+        )
+      }
+      <slot />
+    </main>
     <Footer />
     <script>
       import "../scripts/menu.js";

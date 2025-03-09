@@ -1,11 +1,64 @@
 ---
-
+const pathname = new URL(Astro.request.url).pathname;
+const currentPath = pathname.slice(1); // Remove the leading slash
 ---
 
-<div class="nav-links">
-  <a href={`/`}>Home</a>
-  <a href={`/about/`}>About</a>
-  <a href={`/blog/`}>Blog</a>
-  <a href={`/tags/`}>Tags</a>
-  <a href={`/projects/`}>Projects</a>
+<nav class="hidden md:block">
+  <ul class="flex space-x-1">
+    <li>
+      <a
+        href="/"
+        class={`px-3 py-2 rounded-lg text-gray-700 dark:text-gray-200 hover:bg-teal-100 dark:hover:bg-teal-900/40 font-medium ${currentPath === "" ? "bg-teal-100 dark:bg-teal-900/40 text-teal-800 dark:text-teal-300" : ""}`}
+        aria-current={currentPath === "" ? "page" : undefined}
+      >
+        Home
+      </a>
+    </li>
+    <li>
+      <a
+        href="/about/"
+        class={`px-3 py-2 rounded-lg text-gray-700 dark:text-gray-200 hover:bg-teal-100 dark:hover:bg-teal-900/40 font-medium ${currentPath === "about/" ? "bg-teal-100 dark:bg-teal-900/40 text-teal-800 dark:text-teal-300" : ""}`}
+        aria-current={currentPath === "about/" ? "page" : undefined}
+      >
+        About
+      </a>
+    </li>
+    <li>
+      <a
+        href="/blog/"
+        class={`px-3 py-2 rounded-lg text-gray-700 dark:text-gray-200 hover:bg-teal-100 dark:hover:bg-teal-900/40 font-medium ${currentPath === "blog/" ? "bg-teal-100 dark:bg-teal-900/40 text-teal-800 dark:text-teal-300" : ""}`}
+        aria-current={currentPath === "blog/" ? "page" : undefined}
+      >
+        Blog
+      </a>
+    </li>
+    <li>
+      <a
+        href="/projects/"
+        class={`px-3 py-2 rounded-lg text-gray-700 dark:text-gray-200 hover:bg-teal-100 dark:hover:bg-teal-900/40 font-medium ${currentPath === "projects/" ? "bg-teal-100 dark:bg-teal-900/40 text-teal-800 dark:text-teal-300" : ""}`}
+        aria-current={currentPath === "projects/" ? "page" : undefined}
+      >
+        Projects
+      </a>
+    </li>
+    <li>
+      <a
+        href="/tags/"
+        class={`px-3 py-2 rounded-lg text-gray-700 dark:text-gray-200 hover:bg-teal-100 dark:hover:bg-teal-900/40 font-medium ${currentPath === "tags/" ? "bg-teal-100 dark:bg-teal-900/40 text-teal-800 dark:text-teal-300" : ""}`}
+        aria-current={currentPath === "tags/" ? "page" : undefined}
+      >
+        Tags
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<div class="nav-links" id="nav-links">
+  <a href="/" class={currentPath === "" ? "active" : ""}>Home</a>
+  <a href="/about/" class={currentPath === "about/" ? "active" : ""}>About</a>
+  <a href="/blog/" class={currentPath === "blog/" ? "active" : ""}>Blog</a>
+  <a href="/projects/" class={currentPath === "projects/" ? "active" : ""}
+    >Projects</a
+  >
+  <a href="/tags/" class={currentPath === "tags/" ? "active" : ""}>Tags</a>
 </div>
