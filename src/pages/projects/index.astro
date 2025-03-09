@@ -5,6 +5,7 @@ import { ProjectCategory } from "../../types/projects";
 import type { Project } from "../../types/projects";
 import ProjectSummary from "../../components/ProjectSummary.astro";
 import { categoryConfig } from "../../lib/projectsConfig";
+import { Icon } from "astro-icon/components";
 
 const pageTitle = "Portfolio";
 const allProjects = await getAllProjects();
@@ -24,66 +25,65 @@ const groupedProjects = allProjects.reduce<Record<ProjectCategory, Project[]>>(
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-  <main class="max-w-4xl mx-auto px-4">
+  <div class="max-w-4xl mx-auto">
+    <!-- Introduction -->
     <section class="mb-16">
-      <p class="text-xl leading-relaxed text-gray-800 font-light">
-        Welcome to my project portfolio, where I share my work across three
-        distinct domains: software development, music creation, and educational
-        content. While these areas sometimes intersect in projects like Piano
-        Fitness, which bridges software development and music education, each
-        domain represents its own complete body of work. Here you'll find
-        everything from ambient electronic albums and traditional piano
-        compositions to educational programming resources and innovative
-        software tools. Each project tells its own story of creative
-        exploration, technical innovation, or educational impact.
-      </p>
+      <div
+        class="bg-gradient-to-br from-teal-50 to-blue-50 dark:from-gray-800 dark:to-gray-900 rounded-xl p-6 shadow-sm"
+      >
+        <h1
+          class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6"
+        >
+          My Portfolio
+        </h1>
+        <p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+          Welcome to my project portfolio, where I share my work across three
+          distinct domains: software development, music creation, and
+          educational content. While these areas sometimes intersect in projects
+          like Piano Fitness, which bridges software development and music
+          education, each domain represents its own complete body of work. Here
+          you'll find everything from ambient electronic albums and traditional
+          piano compositions to educational programming resources and innovative
+          software tools. Each project tells its own story of creative
+          exploration, technical innovation, or educational impact.
+        </p>
+      </div>
     </section>
 
-    {
-      Object.entries(groupedProjects).map(([category, projects]) => {
-        const categoryDetails = categoryConfig[category as ProjectCategory];
-        return (
-          <section
-            class="mb-16"
-            aria-labelledby={`${category}-projects-heading`}
-          >
-            <h2
-              id={`${category}-projects-heading`}
-              class="text-3xl font-semibold mb-8 text-gray-900 border-b pb-4"
-            >
-              <span aria-hidden="true">{categoryDetails.icon}</span>{" "}
-              {category.charAt(0).toUpperCase() + category.slice(1)} Projects
-            </h2>
+    <!-- Project Categories -->
+    <div class="space-y-16">
+      {
+        Object.entries(groupedProjects).map(([category, projects]) => {
+          const categoryDetails = categoryConfig[category as ProjectCategory];
+          return (
+            <section aria-labelledby={`${category}-projects-heading`}>
+              <div class="flex items-center gap-3 mb-8 pb-4 border-b border-gray-200 dark:border-gray-700">
+                <Icon
+                  name={
+                    categoryDetails.icon.startsWith("mdi:")
+                      ? categoryDetails.icon
+                      : `mdi:${categoryDetails.icon}`
+                  }
+                  class="w-8 h-8 text-teal-600 dark:text-teal-400"
+                />
+                <h2
+                  id={`${category}-projects-heading`}
+                  class="text-2xl font-bold text-gray-900 dark:text-white"
+                >
+                  {category.charAt(0).toUpperCase() + category.slice(1)}{" "}
+                  Projects
+                </h2>
+              </div>
 
-            <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-2">
-              {projects.map((project: Project) => (
-                <ProjectSummary project={project} />
-              ))}
-            </div>
-          </section>
-        );
-      })
-    }
-  </main>
-
-  <style>
-    /* Enhance focus styles for keyboard navigation */
-    a:focus-visible {
-      outline: 2px solid currentColor;
-      outline-offset: 2px;
-    }
-
-    /* Ensure consistent card heights */
-    article {
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-    }
-
-    /* Improve text readability */
-    p {
-      font-size: 1.125rem;
-      line-height: 1.75;
-    }
-  </style>
+              <div class="grid gap-8 md:grid-cols-2">
+                {projects.map((project: Project) => (
+                  <ProjectSummary project={project} />
+                ))}
+              </div>
+            </section>
+          );
+        })
+      }
+    </div>
+  </div>
 </BaseLayout>

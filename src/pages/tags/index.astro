@@ -26,7 +26,7 @@ const allTags = [
 ];
 
 // Calculate tag frequency for variable size display
-const tagFrequency = {};
+const tagFrequency: { [key: string]: number } = {};
 allTags.forEach((tag) => {
   tagFrequency[tag] = 0;
 
@@ -52,7 +52,7 @@ const sortedTags = allTags.sort((a, b) => {
   return tagFrequency[b] - tagFrequency[a];
 });
 
-const pageTitle = "Explore Tags & Technologies";
+const pageTitle = "Tags & Technologies";
 
 // Get tag count by category
 const postTagCount = postTags.length;
@@ -60,7 +60,7 @@ const projectTagCount = projectTags.length;
 const techCount = projectTechnologies.length;
 
 // Function to determine tag size based on frequency
-function getTagSize(tag) {
+function getTagSize(tag: string) {
   const frequency = tagFrequency[tag];
   if (frequency >= 5) return "text-xl font-bold";
   if (frequency >= 3) return "text-lg font-semibold";
@@ -69,7 +69,7 @@ function getTagSize(tag) {
 }
 
 // Function to determine tag color based on type
-function getTagColor(tag) {
+function getTagColor(tag: string) {
   const isTech = projectTechnologies.includes(tag);
   const isProjectTag = projectTags.includes(tag);
   const isPostTag = postTags.includes(tag);
@@ -88,138 +88,93 @@ function getTagColor(tag) {
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-  <div class="max-w-4xl mx-auto px-4">
-    <header class="mb-12 text-center">
-      <h1
-        class="text-3xl md:text-4xl font-extrabold mb-4 text-gray-900 dark:text-white"
+  <div class="max-w-4xl mx-auto">
+    <!-- Introduction -->
+    <section class="mb-12">
+      <div
+        class="bg-gradient-to-br from-teal-50 to-blue-50 dark:from-gray-800 dark:to-gray-900 rounded-xl p-6 shadow-sm"
       >
-        Skills, Tags & Technologies
-      </h1>
-
-      <p
-        class="text-lg text-gray-700 dark:text-gray-300 max-w-2xl mx-auto mb-6"
-      >
-        Discover content by topics and explore my technical skills and areas of
-        expertise. Click on a tag to see related blog posts and projects.
-      </p>
-
-      <div class="flex flex-wrap gap-4 justify-center">
-        <div
-          class="flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700"
+        <h1
+          class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6"
         >
-          <Icon
-            name="mdi:folder-open-outline"
-            class="w-4 h-4 text-green-600 dark:text-green-400"
-          />
-          <span class="text-sm">
-            <span class="font-semibold">{postTagCount + projectTagCount}</span> Tags
-          </span>
-        </div>
+          Explore Content by Tags
+        </h1>
+        <div class="grid gap-6 md:grid-cols-3">
+          <div class="bg-white/50 dark:bg-white/5 rounded-lg p-4">
+            <div class="flex items-center gap-2 mb-2">
+              <Icon
+                name="mdi:file-document-outline"
+                class="w-5 h-5 text-gray-600 dark:text-gray-400"
+              />
+              <h2 class="font-semibold text-gray-900 dark:text-white">
+                Blog Posts
+              </h2>
+            </div>
+            <p class="text-sm text-gray-600 dark:text-gray-400">
+              {postTagCount} unique tags
+            </p>
+          </div>
 
-        <div
-          class="flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700"
-        >
-          <Icon
-            name="mdi:code-tags"
-            class="w-4 h-4 text-blue-600 dark:text-blue-400"
-          />
-          <span class="text-sm">
-            <span class="font-semibold">{techCount}</span> Technologies
-          </span>
+          <div class="bg-white/50 dark:bg-white/5 rounded-lg p-4">
+            <div class="flex items-center gap-2 mb-2">
+              <Icon
+                name="mdi:briefcase-outline"
+                class="w-5 h-5 text-gray-600 dark:text-gray-400"
+              />
+              <h2 class="font-semibold text-gray-900 dark:text-white">
+                Projects
+              </h2>
+            </div>
+            <p class="text-sm text-gray-600 dark:text-gray-400">
+              {projectTagCount} unique tags
+            </p>
+          </div>
+
+          <div class="bg-white/50 dark:bg-white/5 rounded-lg p-4">
+            <div class="flex items-center gap-2 mb-2">
+              <Icon
+                name="mdi:code-tags"
+                class="w-5 h-5 text-gray-600 dark:text-gray-400"
+              />
+              <h2 class="font-semibold text-gray-900 dark:text-white">
+                Technologies
+              </h2>
+            </div>
+            <p class="text-sm text-gray-600 dark:text-gray-400">
+              {techCount} technologies
+            </p>
+          </div>
         </div>
       </div>
-    </header>
+    </section>
 
     <!-- Tag Cloud -->
-    <div
-      class="bg-white dark:bg-gray-800 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 p-8"
+    <section
+      class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6 shadow-sm"
     >
-      <h2 class="sr-only">Tag Cloud</h2>
+      <div class="flex items-center gap-3 mb-6">
+        <Icon
+          name="mdi:tag-multiple"
+          class="w-6 h-6 text-teal-600 dark:text-teal-400"
+        />
+        <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
+          All Tags
+        </h2>
+      </div>
 
-      <div class="flex flex-wrap justify-center gap-3 md:gap-4 text-center">
+      <div class="flex flex-wrap gap-3">
         {
           sortedTags.map((tag) => (
             <a
               href={`/tags/${tag}`}
-              class={`px-3 py-1.5 rounded-full transition-all duration-300 hover:shadow-sm transform hover:scale-105 ${getTagColor(tag)} ${getTagSize(tag)}`}
-              style={`opacity: ${0.7 + (tagFrequency[tag] * 0.1 > 1 ? 1 : 0.7 + tagFrequency[tag] * 0.1)};`}
-              aria-label={`View content tagged with ${tag}`}
+              class={`${getTagSize(tag)} ${getTagColor(tag)} px-3 py-1.5 rounded-full transition-colors`}
             >
-              {tag}
+              #{tag}
+              <span class="ml-1 text-sm opacity-70">({tagFrequency[tag]})</span>
             </a>
           ))
         }
       </div>
-    </div>
-
-    <!-- Legend -->
-    <div class="mt-8 bg-gray-50 dark:bg-gray-900/50 rounded-lg p-4">
-      <h2 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
-        Tag Categories:
-      </h2>
-      <div class="flex flex-wrap gap-3 text-xs">
-        <div class="flex items-center gap-1.5">
-          <span class="w-3 h-3 rounded-full bg-purple-400 dark:bg-purple-600"
-          ></span>
-          <span>Multi-purpose Technologies</span>
-        </div>
-        <div class="flex items-center gap-1.5">
-          <span class="w-3 h-3 rounded-full bg-blue-400 dark:bg-blue-600"
-          ></span>
-          <span>Technologies</span>
-        </div>
-        <div class="flex items-center gap-1.5">
-          <span class="w-3 h-3 rounded-full bg-teal-400 dark:bg-teal-600"
-          ></span>
-          <span>Common Tags</span>
-        </div>
-        <div class="flex items-center gap-1.5">
-          <span class="w-3 h-3 rounded-full bg-green-400 dark:bg-green-600"
-          ></span>
-          <span>Project Tags</span>
-        </div>
-        <div class="flex items-center gap-1.5">
-          <span class="w-3 h-3 rounded-full bg-amber-400 dark:bg-amber-600"
-          ></span>
-          <span>Blog Tags</span>
-        </div>
-      </div>
-    </div>
+    </section>
   </div>
-
-  <style>
-    /* Add subtle animation to tags on hover */
-    a:hover {
-      transform: translateY(-2px);
-    }
-
-    /* Stagger animation for tags on page load */
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(8px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    a {
-      animation: fadeIn 0.5s ease-out forwards;
-      animation-delay: calc(var(--order, 0) * 50ms);
-    }
-  </style>
-
-  <script>
-    // Add animation delay to tags based on their position
-    document.addEventListener("DOMContentLoaded", () => {
-      const tags = document.querySelectorAll(
-        ".flex.flex-wrap.justify-center a",
-      );
-      tags.forEach((tag, index) => {
-        tag.style.setProperty("--order", index % 20);
-      });
-    });
-  </script>
 </BaseLayout>

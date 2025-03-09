@@ -4,17 +4,33 @@
 
 <button
   id="menu-button"
-  class="md:hidden flex flex-col justify-center items-center w-10 h-10 space-y-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 rounded-md"
+  class="md:hidden flex flex-col justify-center items-center w-10 h-10 space-y-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-500 rounded-lg transition-colors"
   aria-label="Toggle menu"
   aria-expanded="false"
   aria-controls="nav-links"
 >
   <span
-    class="block w-6 h-0.5 bg-gray-600 dark:bg-gray-300 transition-transform origin-center"
-  ></span>
-  <span class="block w-6 h-0.5 bg-gray-600 dark:bg-gray-300 transition-opacity"
+    class="block w-5 h-0.5 bg-gray-600 dark:bg-gray-300 transition-all duration-300 transform origin-center"
   ></span>
   <span
-    class="block w-6 h-0.5 bg-gray-600 dark:bg-gray-300 transition-transform origin-center"
+    class="block w-5 h-0.5 bg-gray-600 dark:bg-gray-300 transition-all duration-300"
+  ></span>
+  <span
+    class="block w-5 h-0.5 bg-gray-600 dark:bg-gray-300 transition-all duration-300 transform origin-center"
   ></span>
 </button>
+
+<style>
+  #menu-button[aria-expanded="true"] span:first-child {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  #menu-button[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+
+  #menu-button[aria-expanded="true"] span:last-child {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+</style>

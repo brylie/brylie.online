@@ -6,6 +6,7 @@ import { Icon } from "astro-icon/components";
 interface Props {
   project: Project;
 }
+
 const { project } = Astro.props;
 const formattedDate = new Date(project.data.datePublished).toLocaleDateString(
   "en-US",
@@ -17,40 +18,40 @@ const formattedDate = new Date(project.data.datePublished).toLocaleDateString(
 ---
 
 <article
-  class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm overflow-hidden hover:shadow-md transition-all duration-300 h-full flex flex-col"
+  class="group relative bg-white dark:bg-gray-800/80 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1 h-full flex flex-col backdrop-blur-sm"
 >
   <div class="p-6 flex flex-col h-full">
     <div class="flex-grow">
       <header class="mb-4">
-        <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">
-          <a
-            href={`/projects/${project.data.slug}`}
-            class="hover:text-teal-600 dark:hover:text-teal-400 transition-colors duration-200"
-          >
+        <h3
+          class="text-xl font-bold mb-2 text-gray-900 dark:text-white group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors duration-300"
+        >
+          <a href={`/projects/${project.data.slug}`} class="block">
             {project.data.title}
           </a>
         </h3>
+
         <div
-          class="flex flex-wrap text-sm text-gray-600 dark:text-gray-300 mb-3 gap-4"
+          class="flex flex-wrap text-sm text-gray-600 dark:text-gray-400 mb-3 gap-4"
         >
-          <span class="inline-flex items-center gap-1">
+          <span class="inline-flex items-center gap-1.5">
             <Icon
               name="mdi:folder-outline"
-              class="w-4 h-4 text-gray-500 dark:text-gray-400"
+              class="w-4 h-4 transition-colors group-hover:text-teal-500 dark:group-hover:text-teal-400"
             />
             {formatProjectCategory(project.data.category)}
           </span>
-          <span class="inline-flex items-center gap-1">
+          <span class="inline-flex items-center gap-1.5">
             <Icon
-              name="ic:sync"
-              class="w-4 h-4 text-gray-500 dark:text-gray-400"
+              name="mdi:clock-outline"
+              class="w-4 h-4 transition-colors group-hover:text-teal-500 dark:group-hover:text-teal-400"
             />
             {formatProjectStatus(project.data.status)}
           </span>
-          <span class="inline-flex items-center gap-1">
+          <span class="inline-flex items-center gap-1.5">
             <Icon
               name="mdi:calendar"
-              class="w-4 h-4 text-gray-500 dark:text-gray-400"
+              class="w-4 h-4 transition-colors group-hover:text-teal-500 dark:group-hover:text-teal-400"
             />
             {formattedDate}
           </span>
@@ -65,9 +66,9 @@ const formattedDate = new Date(project.data.datePublished).toLocaleDateString(
             {project.data.tags.map((tag) => (
               <a
                 href={`/tags/${tag}`}
-                class="px-2.5 py-1 text-xs bg-teal-50 text-teal-700 dark:bg-teal-900/30 dark:text-teal-300 rounded-full hover:bg-teal-100 dark:hover:bg-teal-800/40 transition-colors"
+                class="px-2.5 py-1 text-xs bg-teal-50 text-teal-800 dark:bg-teal-900/30 dark:text-teal-300 rounded-full hover:bg-teal-100 dark:hover:bg-teal-800/40 transition-all duration-300 hover:scale-105"
               >
-                {tag}
+                #{tag}
               </a>
             ))}
           </div>
@@ -79,32 +80,46 @@ const formattedDate = new Date(project.data.datePublished).toLocaleDateString(
     >
       <a
         href={`/projects/${project.data.slug}`}
-        class="text-teal-600 dark:text-teal-400 hover:text-teal-800 dark:hover:text-teal-300 font-medium text-sm inline-flex items-center gap-1 transition-colors"
+        class="group/link text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 font-medium text-sm inline-flex items-center gap-1.5 transition-all duration-300 hover:-translate-y-0.5"
         aria-label={`View details about ${project.data.title}`}
       >
-        <Icon name="mdi:arrow-top-right" class="w-4 h-4" /> View Details
+        <Icon
+          name="mdi:arrow-top-right"
+          class="w-4 h-4 transition-transform duration-300 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"
+        />
+        View Details
       </a>
-
-      <a
-        href={project.data.url}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="text-teal-600 dark:text-teal-400 hover:text-teal-800 dark:hover:text-teal-300 font-medium text-sm inline-flex items-center gap-1 transition-colors"
-        aria-label={`Visit ${project.data.title} website`}
-      >
-        <Icon name="ic:web" class="w-4 h-4" /> Visit Project
-      </a>
-
+      {
+        project.data.url && (
+          <a
+            href={project.data.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group/link text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 font-medium text-sm inline-flex items-center gap-1.5 transition-all duration-300 hover:-translate-y-0.5"
+            aria-label={`Visit ${project.data.title} website`}
+          >
+            <Icon
+              name="mdi:web"
+              class="w-4 h-4 transition-transform duration-300 group-hover/link:scale-110"
+            />
+            Visit Project
+          </a>
+        )
+      }
       {
         project.data.githubUrl && (
           <a
             href={project.data.githubUrl}
             target="_blank"
             rel="noopener noreferrer"
-            class="text-teal-600 dark:text-teal-400 hover:text-teal-800 dark:hover:text-teal-300 font-medium text-sm inline-flex items-center gap-1 transition-colors"
+            class="group/link text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 font-medium text-sm inline-flex items-center gap-1.5 transition-all duration-300 hover:-translate-y-0.5"
             aria-label={`View ${project.data.title} source code on GitHub`}
           >
-            <Icon name="mdi:github" class="w-4 h-4" /> GitHub
+            <Icon
+              name="mdi:github"
+              class="w-4 h-4 transition-transform duration-300 group-hover/link:scale-110"
+            />
+            GitHub
           </a>
         )
       }
