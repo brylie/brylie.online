@@ -18,6 +18,39 @@ const { pageTitle } = Astro.props;
     />
     <meta name="theme-color" content="#111827" />
     <title>{pageTitle ? `${pageTitle} | Brylie` : "Brylie"}</title>
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Person",
+            "@id": "https://brylie.online/#person",
+            "name": "Brylie Christopher Oxley",
+            "givenName": "Brylie",
+            "familyName": "Oxley",
+            "additionalName": "Christopher",
+            "url": "https://brylie.online",
+            "sameAs": [
+              "https://github.com/brylie",
+              "https://www.linkedin.com/in/brylie",
+              "https://dev.to/brylie",
+              "https://www.youtube.com/@brylie"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://brylie.online/#website",
+            "url": "https://brylie.online",
+            "name": "Brylie Christopher Oxley",
+            "description": "Personal website featuring projects, blog posts, and professional information",
+            "publisher": {
+              "@id": "https://brylie.online/#person"
+            }
+          }
+        ]
+      }
+    </script>
     <!-- Preconnect to Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
