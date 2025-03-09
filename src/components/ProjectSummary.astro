@@ -2,6 +2,11 @@
 import { formatProjectCategory, formatProjectStatus } from "../types/projects";
 import type { Project } from "../types/projects";
 import { Icon } from "astro-icon/components";
+import {
+  getTagClasses,
+  getTechnologyClasses,
+  getCommonTagClasses,
+} from "../lib/tagColors";
 
 interface Props {
   project: Project;
@@ -15,6 +20,13 @@ const formattedDate = new Date(project.data.datePublished).toLocaleDateString(
     month: "long",
   },
 );
+
+const tagClasses = `${getCommonTagClasses()} ${getTagClasses()}`;
+const technologyClasses = `${getCommonTagClasses()} ${getTechnologyClasses()}`;
+
+const hasTags = project.data.tags && project.data.tags.length > 0;
+const hasTechnologies =
+  project.data.technologies && project.data.technologies.length > 0;
 ---
 
 <article
@@ -61,16 +73,27 @@ const formattedDate = new Date(project.data.datePublished).toLocaleDateString(
         {project.data.description}
       </p>
       {
-        project.data.tags && project.data.tags.length > 0 && (
-          <div class="flex flex-wrap gap-2 mb-4">
-            {project.data.tags.map((tag) => (
-              <a
-                href={`/tags/${tag}`}
-                class="px-2.5 py-1 text-xs bg-teal-50 text-teal-800 dark:bg-teal-900/30 dark:text-teal-300 rounded-full hover:bg-teal-100 dark:hover:bg-teal-800/40 transition-all duration-300 hover:scale-105"
-              >
-                #{tag}
-              </a>
-            ))}
+        (hasTechnologies || hasTags) && (
+          <div class="space-y-2 mb-4">
+            {hasTechnologies && (
+              <div class="flex flex-wrap gap-2">
+                {project.data.technologies?.map((tech) => (
+                  <a href={`/tags/${tech}`} class={technologyClasses}>
+                    #{tech}
+                  </a>
+                ))}
+              </div>
+            )}
+
+            {hasTags && (
+              <div class="flex flex-wrap gap-2">
+                {project.data.tags?.map((tag) => (
+                  <a href={`/tags/${tag}`} class={tagClasses}>
+                    #{tag}
+                  </a>
+                ))}
+              </div>
+            )}
           </div>
         )
       }

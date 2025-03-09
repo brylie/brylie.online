@@ -2,6 +2,11 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 import { Icon } from "astro-icon/components";
+import {
+  getTagClasses,
+  getTechnologyClasses,
+  getCommonTagClasses,
+} from "../../lib/tagColors";
 
 // Get all blog posts
 const allPosts = await getCollection("blog");
@@ -68,13 +73,13 @@ function getTagSize(tag: string) {
   return "text-sm";
 }
 
+// Get base classes for all tags
+const commonClasses = getCommonTagClasses();
+
 // Function to determine tag color based on type
 function getTagColor(tag: string) {
   const isTech = projectTechnologies.includes(tag);
-  if (isTech) {
-    return "bg-blue-100 text-blue-800 hover:bg-blue-200 dark:bg-blue-900/30 dark:text-blue-300 dark:hover:bg-blue-800/40";
-  }
-  return "bg-teal-100 text-teal-800 hover:bg-teal-200 dark:bg-teal-900/30 dark:text-teal-300 dark:hover:bg-teal-800/40";
+  return isTech ? getTechnologyClasses() : getTagClasses();
 }
 ---
 
@@ -157,13 +162,12 @@ function getTagColor(tag: string) {
       <div class="flex gap-4 mb-6">
         <div class="flex items-center gap-2">
           <span
-            class="inline-block w-4 h-4 bg-blue-100 dark:bg-blue-900/30 rounded-full"
+            class={`inline-block w-4 h-4 ${getTechnologyClasses()} rounded-full`}
           ></span>
           <span class="text-gray-700 dark:text-gray-300">Technology</span>
         </div>
         <div class="flex items-center gap-2">
-          <span
-            class="inline-block w-4 h-4 bg-teal-100 dark:bg-teal-900/30 rounded-full"
+          <span class={`inline-block w-4 h-4 ${getTagClasses()} rounded-full`}
           ></span>
           <span class="text-gray-700 dark:text-gray-300">Tag</span>
         </div>
@@ -174,7 +178,7 @@ function getTagColor(tag: string) {
           sortedTags.map((tag) => (
             <a
               href={`/tags/${tag}`}
-              class={`${getTagSize(tag)} ${getTagColor(tag)} px-3 py-1.5 rounded-full transition-colors`}
+              class={`${commonClasses} ${getTagColor(tag)} ${getTagSize(tag)}`}
             >
               #{tag}
               <span class="ml-1 text-sm opacity-70">({tagFrequency[tag]})</span>
