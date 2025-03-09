@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/MarkdownPostLayout.astro
-title: "Parallel Major Chords: A Journey Through Music Theory"
+title: "Parallel Major Chords: A powerful technique for composing rich, emotional music"
 slug: "2025-parallel-major-chords"
 datePublished: 2025-03-04
 description: "Explore how parallel majors can add emotional depth to your music."
