@@ -5,7 +5,7 @@ url: "https://westernfriend.org/"
 category: "software"
 featured: true
 status: "active"
-datePublished: "2023-11-13"
+datePublished: "2025-01-01"
 dateStarted: "2014-01-01"
 tags:
   - "Quaker"
