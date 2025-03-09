@@ -17,6 +17,11 @@ export async function getStaticPaths() {
     ...new Set(allProjects.flatMap((project) => project.data.tags || [])),
   ];
 
+  // Get all technologies from blog posts
+  const postTechnologies = [
+    ...new Set(allPosts.flatMap((post) => post.data.technologies || [])),
+  ];
+
   // Get all technologies from projects
   const projectTechnologies = [
     ...new Set(
@@ -26,13 +31,22 @@ export async function getStaticPaths() {
 
   // Combine all unique tags and technologies
   const uniqueTags = [
-    ...new Set([...postTags, ...projectTags, ...projectTechnologies]),
+    ...new Set([
+      ...postTags,
+      ...postTechnologies,
+      ...projectTags,
+      ...projectTechnologies,
+    ]),
   ].sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
 
   return uniqueTags.map((tag) => {
     // Filter posts that contain this tag
     const filteredPosts = allPosts
-      .filter((post) => post.data.tags.includes(tag))
+      .filter(
+        (post) =>
+          post.data.tags?.includes(tag) ||
+          post.data.technologies?.includes(tag),
+      )
       .sort(
         (a, b) =>
           new Date(b.data.datePublished).valueOf() -
