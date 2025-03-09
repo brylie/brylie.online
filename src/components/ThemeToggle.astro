@@ -10,71 +10,74 @@ import { Icon } from "astro-icon/components";
     transition-all duration-300 transform hover:scale-105 backdrop-blur-sm"
   aria-live="polite"
 >
+  <!-- Sun icon -->
   <Icon
     name="mdi:weather-sunny"
     class="w-full h-full text-amber-500 hidden dark:block transition-all duration-500 rotate-0 dark:rotate-180 scale-0 dark:scale-100"
     aria-hidden="true"
   />
-
+  <!-- Moon icon -->
   <Icon
     name="mdi:weather-night"
     class="w-full h-full text-blue-600 block dark:hidden transition-all duration-500 rotate-0 dark:-rotate-180 scale-100 dark:scale-0"
     aria-hidden="true"
   />
-  <span class="sr-only" id="theme-toggle-label"></span>
+  <span class="sr-only" id="theme-toggle-label">Switch to dark mode</span>
 </button>
+
 <script>
-  // Check for saved theme preference, otherwise use system preference
-  const getThemePreference = () => {
-    if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
-      return localStorage.getItem("theme");
-    }
-    return window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light";
-  };
-
-  // Function to set theme
-  const setTheme = (theme: "light" | "dark") => {
-    document.documentElement.classList.remove("light", "dark");
-    document.documentElement.classList.add(theme);
-    localStorage.setItem("theme", theme);
-
-    // Update ARIA label
+  // This script handles only the toggle button interaction
+  function setupThemeToggle() {
+    const button = document.getElementById("theme-toggle");
     const label = document.getElementById("theme-toggle-label");
-    if (label) {
-      label.textContent = `Switch to ${theme === "light" ? "dark" : "light"} mode`;
-    }
-  };
 
-  // Set initial theme
-  setTheme(getThemePreference() as "light" | "dark");
+    if (!button || !label) return;
 
-  // Wait for DOM to be ready
-  document.addEventListener("DOMContentLoaded", () => {
-    const themeToggle = document.getElementById("theme-toggle");
-
-    if (themeToggle) {
-      // Set initial ARIA label
+    // Update label based on current theme
+    function updateLabel() {
       const isDark = document.documentElement.classList.contains("dark");
-      const label = document.getElementById("theme-toggle-label");
-      if (label) {
+      if (label !== null) {
         label.textContent = `Switch to ${isDark ? "light" : "dark"} mode`;
       }
-
-      themeToggle.addEventListener("click", () => {
-        const isDark = document.documentElement.classList.contains("dark");
-        setTheme(isDark ? "light" : "dark");
-      });
     }
 
-    // Listen for system theme changes
-    window
-      .matchMedia("(prefers-color-scheme: dark)")
-      .addEventListener("change", (e) => {
-        if (!localStorage.getItem("theme")) {
-          setTheme(e.matches ? "dark" : "light");
-        }
-      });
-  });
+    // Toggle theme
+    function toggleTheme() {
+      const isDark = document.documentElement.classList.contains("dark");
+
+      // Switch theme
+      if (isDark) {
+        document.documentElement.classList.remove("dark");
+        document.documentElement.classList.add("light");
+        localStorage.setItem("theme", "light");
+      } else {
+        document.documentElement.classList.add("dark");
+        document.documentElement.classList.remove("light");
+        localStorage.setItem("theme", "dark");
+      }
+
+      // Update meta theme-color for browser UI
+      const themeColor = isDark ? "#ffffff" : "#111827";
+      const metaTheme = document.querySelector('meta[name="theme-color"]');
+      if (metaTheme) {
+        metaTheme.setAttribute("content", themeColor);
+      }
+
+      // Update label
+      updateLabel();
+    }
+
+    // Update label on initial load
+    updateLabel();
+
+    // Handle click events
+    button.addEventListener("click", toggleTheme);
+  }
+
+  // Set up the toggle when the component loads
+  setupThemeToggle();
+
+  // Re-initialize after page transitions
+  document.addEventListener("astro:page-load", setupThemeToggle);
+  document.addEventListener("astro:after-swap", setupThemeToggle);
 </script>

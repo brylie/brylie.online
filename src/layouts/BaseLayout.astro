@@ -45,50 +45,50 @@ const { pageTitle } = Astro.props;
 
     <!-- Theme initialization script -->
     <script is:inline>
-      const getThemePreference = () => {
-        if (
-          typeof localStorage !== "undefined" &&
-          localStorage.getItem("theme")
-        ) {
-          return localStorage.getItem("theme");
-        }
-        return window.matchMedia("(prefers-color-scheme: dark)").matches
-          ? "dark"
-          : "light";
-      };
-
-      const theme = getThemePreference();
-
-      // Add class to html element before render to prevent flash
-      document.documentElement.classList.add(theme);
-
-      // Update theme-color meta tag
-      const themeColor = theme === "dark" ? "#111827" : "#ffffff";
-      document
-        .querySelector('meta[name="theme-color"]')
-        .setAttribute("content", themeColor);
-
-      // Remove opposite theme class
-      document.documentElement.classList.remove(
-        theme === "dark" ? "light" : "dark",
-      );
-
-      // Watch for system theme changes
-      window
-        .matchMedia("(prefers-color-scheme: dark)")
-        .addEventListener("change", (e) => {
-          if (!localStorage.getItem("theme")) {
-            const newTheme = e.matches ? "dark" : "light";
-            document.documentElement.classList.remove("light", "dark");
-            document.documentElement.classList.add(newTheme);
-            document
-              .querySelector('meta[name="theme-color"]')
-              .setAttribute(
-                "content",
-                newTheme === "dark" ? "#111827" : "#ffffff",
-              );
+      // This script runs immediately during page load to prevent flash of incorrect theme
+      function initializeTheme() {
+        const theme = (() => {
+          if (
+            typeof localStorage !== "undefined" &&
+            localStorage.getItem("theme")
+          ) {
+            return localStorage.getItem("theme");
           }
-        });
+          if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+            return "dark";
+          }
+          return "light";
+        })();
+
+        // Set theme class on html element
+        if (theme === "dark") {
+          document.documentElement.classList.add("dark");
+          document.documentElement.classList.remove("light");
+        } else {
+          document.documentElement.classList.remove("dark");
+          document.documentElement.classList.add("light");
+        }
+
+        // Update theme-color meta tag for browser UI
+        const themeColor = theme === "dark" ? "#111827" : "#ffffff";
+        const metaTheme = document.querySelector('meta[name="theme-color"]');
+        if (metaTheme) {
+          metaTheme.setAttribute("content", themeColor);
+        }
+      }
+
+      // Execute immediately
+      initializeTheme();
+
+      // Re-run after view transitions
+      document.addEventListener("astro:page-load", () => {
+        initializeTheme();
+      });
+
+      // Re-run after view transitions (for backwards compatibility)
+      document.addEventListener("astro:after-swap", () => {
+        initializeTheme();
+      });
     </script>
   </head>
   <body
