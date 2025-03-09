@@ -11,7 +11,7 @@ tags:
   - "electronic"
   - "orchestral"
 technologies:
-  - "Bitwig Studio"
+  - "Bitwig"
   - "Kontakt"
 slug: "murmurations"
 ---

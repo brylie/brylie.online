@@ -11,6 +11,8 @@ tags:
   - "ambient"
   - "electronic"
   - "orchestral"
+technologies:
+  - "Bitwig"
 slug: "tides-of-change"
 ---
 

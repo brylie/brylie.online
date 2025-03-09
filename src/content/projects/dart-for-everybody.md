@@ -8,7 +8,6 @@ featured: true
 status: "completed"
 datePublished: "2023-11-13"
 tags:
-  - "Dart"
   - "textbook"
   - "education"
 technologies:
@@ -16,6 +15,7 @@ technologies:
   - "Markdown"
   - "Quarto"
   - "GitHub Pages"
+  - "Dart"
 slug: "dart-for-everybody"
 ---
 
