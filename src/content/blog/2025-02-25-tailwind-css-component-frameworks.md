@@ -8,8 +8,10 @@ author: "Brylie Christopher Oxley"
 image:
   url: "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fmvnn8bkeli9b4jwcambs.jpg"
   alt: "Tailwind CSS component frameworks"
-tags: ["tailwind css", "component frameworks", "open source", "web development"]
+tags: ["component frameworks", "open source", "web development"]
+technologies: ["Tailwind CSS", "JavaScript", "React"]
 ---
+
 As [Tailwind CSS](https://tailwindcss.com/) continues to reshape the frontend development landscape, we're seeing a flourishing ecosystem of component frameworks emerge. This 'State of Open-Source Tailwind CSS Component Frameworks' is a comprehensive overview of the current landscape, highlighting the most notable frameworks that embrace open-source principles and avoid freemium models favoring community-driven development. While commercial options like Tailwind UI offer polished solutions, many developers are turning to open-source alternatives that provide greater flexibility and transparency. Let's explore the most notable frameworks that embrace open-source principles, avoiding freemium models favoring community-driven development.
 
 ## FlyonUI: Bridging Semantic Classes and JavaScript Functionality

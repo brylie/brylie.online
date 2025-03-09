@@ -56,6 +56,7 @@ const blog = defineCollection({
         .optional(),
       tags: z.array(z.string()),
       headline: z.string().optional(),
+      technologies: z.array(z.string()).optional(),
     })
     .transform((post) => ({
       ...post,

@@ -1,11 +1,11 @@
 ---
 layout: ../../layouts/MarkdownPostLayout.astro
-title: "Unlocking Musical Color: Understanding and Using Parallel Majors"
+title: "Parallel Major Chords: A Journey Through Music Theory"
 slug: "2025-parallel-major-chords"
 datePublished: 2025-03-04
-description: "Explore the concept of parallel majors and how they can add new colors to your musical compositions."
+description: "Dive into the world of parallel major chords and their unique role in music theory."
 author: "Brylie Christopher Oxley"
-tags: ["music theory", "composition", "parallel majors", "chord progressions"]
+tags: ["music theory", "chords", "composition", "harmony"]
 ---
 
 Have you ever wondered how some of your favorite songs create such emotionally rich and unexpected chord progressions? Many composers and songwriters use a powerful technique that involves borrowing chords from different scales or modes. Today, we'll explore a specific approach called "parallel majors" that can immediately add new colors to your compositions.
@@ -19,6 +19,7 @@ Before diving into parallel majors, let's establish some foundational concepts.
 A mode is essentially a scale that starts on a different note of a parent major scale. For example, if we take the C major scale (C, D, E, F, G, A, B) but start on D instead, we get D Dorian mode (D, E, F, G, A, B, C).
 
 The seven modes of the major scale are:
+
 1. Ionian (major)
 2. Dorian
 3. Phrygian
@@ -43,15 +44,15 @@ This gives us access to a whole new palette of chords to work with in our compos
 
 Here's a chart showing each C mode, its parallel major scale, and the chords that appear in those parallel major keys:
 
-| C Mode | Parallel Major | I | II | III | IV | V | VI | VII |
-|--------|----------------|---|----|----|----|----|----|----|
-| **C Ionian** | C Major | C | Dm | Em | F | G | Am | Bdim |
-| **C Dorian** | B♭ Major | B♭ | Cm | Dm | E♭ | F | Gm | Adim |
-| **C Phrygian** | A♭ Major | A♭ | B♭m | Cm | D♭ | E♭ | Fm | Gdim |
-| **C Lydian** | G Major | G | Am | Bm | C | D | Em | F♯dim |
-| **C Mixolydian** | F Major | F | Gm | Am | B♭ | C | Dm | Edim |
-| **C Aeolian** | E♭ Major | E♭ | Fm | Gm | A♭ | B♭ | Cm | Ddim |
-| **C Locrian** | D♭ Major | D♭ | E♭m | Fm | G♭ | A♭ | B♭m | Cdim |
+| C Mode           | Parallel Major | I   | II  | III | IV  | V   | VI  | VII   |
+| ---------------- | -------------- | --- | --- | --- | --- | --- | --- | ----- |
+| **C Ionian**     | C Major        | C   | Dm  | Em  | F   | G   | Am  | Bdim  |
+| **C Dorian**     | B♭ Major       | B♭  | Cm  | Dm  | E♭  | F   | Gm  | Adim  |
+| **C Phrygian**   | A♭ Major       | A♭  | B♭m | Cm  | D♭  | E♭  | Fm  | Gdim  |
+| **C Lydian**     | G Major        | G   | Am  | Bm  | C   | D   | Em  | F♯dim |
+| **C Mixolydian** | F Major        | F   | Gm  | Am  | B♭  | C   | Dm  | Edim  |
+| **C Aeolian**    | E♭ Major       | E♭  | Fm  | Gm  | A♭  | B♭  | Cm  | Ddim  |
+| **C Locrian**    | D♭ Major       | D♭  | E♭m | Fm  | G♭  | A♭  | B♭m | Cdim  |
 
 ## How to Use Parallel Majors in Your Compositions
 
@@ -60,9 +61,11 @@ Now for the fun part—putting this knowledge to practical use! Here's a step-by
 ### 1. Start with a Simple Progression in a Major Key
 
 Let's begin with a common chord progression in C major:
+
 ```
 C - Am - F - G
 ```
+
 This is a I - vi - IV - V progression, one of the most used progressions in pop music.
 
 ### 2. Identify Opportunities for Chord Borrowing
@@ -74,6 +77,7 @@ Each chord in your progression is a potential candidate for "borrowing" from a p
 Let's try replacing some chords in our progression by borrowing from parallel majors:
 
 **Example 1:** Replace the vi chord (Am) with the parallel major version from C Aeolian
+
 - Original: C - Am - F - G
 - Parallel major of C Aeolian is E♭ major
 - The vi chord in E♭ major is Cm
@@ -82,6 +86,7 @@ Let's try replacing some chords in our progression by borrowing from parallel ma
 This small change adds a beautiful, melancholic twist to an otherwise standard progression.
 
 **Example 2:** Replace the IV chord (F) with the parallel major version from C Phrygian
+
 - Original: C - Am - F - G
 - Parallel major of C Phrygian is A♭ major
 - The IV chord in A♭ major is D♭
@@ -94,6 +99,7 @@ This creates a more dramatic, unexpected shift that can work wonderfully for son
 Don't stop at just one borrowed chord! Try various combinations:
 
 **Example 3:** Borrow multiple chords
+
 - Original: C - Am - F - G
 - Replace Am with Cm (from C Aeolian's parallel major)
 - Replace G with C (from C Mixolydian's parallel major)
@@ -137,4 +143,4 @@ Take a simple chord progression in a key you're comfortable with and try replaci
 
 ---
 
-*Want to learn more about music theory concepts that can enhance your compositions? Check out our other articles on [brylie.online](https://brylie.online).*
+_Want to learn more about music theory concepts that can enhance your compositions? Check out our other articles on [brylie.online](https://brylie.online)._
