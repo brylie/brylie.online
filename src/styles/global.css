@@ -292,9 +292,3 @@ a:hover {
     display: none;
   }
 }
-
-/* Utility Classes */
-.blur-backdrop {
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-}
