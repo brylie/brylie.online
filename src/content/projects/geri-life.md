@@ -26,7 +26,7 @@ slug: "geri-life"
 
 ## Background and Motivation
 
-The story of GeriLife began in 2015 when I identified a critical gap in elder care systems. Care facilities struggled with inconsistent quality of care and limited visibility into residents' wellbeing. Family members often felt disconnected from their loved ones' daily experiences, and facility managers lacked tools to systematically track and improve quality of life for residents.
+The story of GeriLife began in 2015 when I identified a critical gap in elder care systems alongside my co-founder Marjo, an experienced administrator at a large elder-care campus. Marjo's extensive industry experience and deep understanding of elder care practices provided the domain expertise that was essential to the project's success. Together, we recognized that care facilities struggled with inconsistent quality of care and limited visibility into residents' wellbeing. Family members often felt disconnected from their loved ones' daily experiences, and facility managers lacked tools to systematically track and improve quality of life for residents.
 
 Traditional approaches to resident wellbeing relied heavily on anecdotal information and guesswork. There was no cohesive system to track engagement, preferences, or emotional states across time. Care staff, already overburdened with responsibilities, found it challenging to facilitate wellbeing activities for all residents equally.
 
@@ -34,7 +34,11 @@ This reality inspired the creation of GeriLife—a comprehensive wellbeing platf
 
 ## Development Process
 
-As co-founder and technical lead, I approached the development of GeriLife with a commitment to creating technology that would be both powerful and accessible to users with varying levels of technical proficiency. The process began with extensive stakeholder interviews, shadowing care providers, and collaborating with elder care experts to understand the nuances of wellbeing in residential care settings.
+As co-founder and technical lead, I approached the development of GeriLife in close partnership with Marjo, whose community connections and healthcare administration expertise complemented my technical background. This interdisciplinary collaboration was crucial to the project's success and allowed us to develop the tool directly with the nurses and care staff who would ultimately use it.
+
+The development process was significantly enhanced through our trial project with the City of Tampere, Finland. This partnership provided us with invaluable access to real-world care environments and created a collaborative ecosystem where technology development was guided by practitioners' needs and experiences.
+
+We began with extensive stakeholder interviews, shadowing care providers, and collaborating with elder care experts to understand the nuances of wellbeing in residential care settings. Marjo's leadership was instrumental in facilitating these relationships and ensuring that the technical solutions we developed were grounded in the practical realities of elder care.
 
 The technical architecture was built on JavaScript, using Meteor as the full-stack framework to enable real-time data synchronization across devices. This was critical for a care environment where multiple staff members needed to access and update information simultaneously. For the frontend, we developed a mobile-first interface that accommodated remote use during activities. This design choice was purposeful—enabling care providers to document engagement in the moment rather than trying to recall details hours later.
 
@@ -66,6 +70,8 @@ On a management level, GeriLife provided unprecedented visibility into wellbeing
 
 Perhaps most significantly, the data collected through GeriLife enabled organizations to identify and share best practices across facilities. Activities that consistently generated positive emotional responses could be replicated, while those with limited impact could be revised or replaced. This data-driven approach to programming led to more effective use of limited resources and better outcomes for residents.
 
+Our partnership with the City of Tampere, Finland, proved particularly valuable, as it allowed us to implement and refine GeriLife across multiple facilities within a coordinated municipal framework. This city-wide implementation provided rich comparative data and demonstrated the system's scalability in a real-world healthcare context.
+
 ## Personal Reflections
 
 Leading the development of GeriLife from concept to implementation over a decade was both technically challenging and profoundly rewarding. The project confirmed my belief that thoughtfully designed technology can address complex human challenges, particularly when developed in close collaboration with the people who will use it.
@@ -76,4 +82,8 @@ From a technical perspective, the project reinforced the importance of designing
 
 Throughout the decade of development, I learned that the most meaningful technology often exists at the intersection of complex technical challenges and fundamental human needs. GeriLife required sophisticated data engineering and analytics, but its value came from addressing the very human desire to ensure our elders live with dignity, engagement, and joy.
 
-The journey of creating GeriLife has shaped my approach to all subsequent projects, instilling a commitment to building technology that makes complex information accessible, actionable, and ultimately transformative for the communities it serves.
+The partnership with Marjo exemplified the power of combining technical expertise with domain knowledge. Her understanding of elder care administration and her connections within the community were essential complements to my technology background. This collaboration allowed us to develop GeriLife in direct partnership with the nurses and staff who would ultimately use it, ensuring the system addressed real needs rather than assumed ones.
+
+Our city-wide trial with the City of Tampere further demonstrated the importance of institutional partnerships in healthcare innovation. Having municipal support created opportunities for implementation and feedback that would have been impossible to achieve independently.
+
+The experience of creating GeriLife has shaped my approach to all subsequent projects, instilling a commitment to building technology that makes complex information accessible, actionable, and ultimately transformative for the communities it serves—and reinforcing my belief in the necessity of interdisciplinary collaboration when developing solutions for complex human systems.
