@@ -5,16 +5,9 @@ slug: "2025-demystifying-orm"
 datePublished: 2025-03-09
 description: "Learn how Object-Relational Mapping (ORM) connects object-oriented programming with relational databases, and why it matters for modern web development."
 author: "Brylie Christopher Oxley"
-tags:
-  [
-    "web development",
-    "databases",
-    "ORM",
-    "Prisma",
-    "TypeORM",
-    "JavaScript",
-    "TypeScript",
-  ]
+tags: ["web development", "databases", "ORM"]
+technologies:
+  ["Prisma", "TypeORM", "Sequelize", "Drizzle ORM", "JavaScript", "TypeScript"]
 ---
 
 # Demystifying ORM: A Developer's Bridge Between Code and Databases
