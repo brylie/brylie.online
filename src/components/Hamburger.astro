@@ -3,34 +3,206 @@
 ---
 
 <button
-  id="menu-button"
-  class="md:hidden flex flex-col justify-center items-center w-10 h-10 space-y-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-500 rounded-lg transition-colors"
-  aria-label="Toggle menu"
+  class="hamburger"
+  aria-label="Toggle navigation menu"
   aria-expanded="false"
   aria-controls="nav-links"
+  tabindex="0"
 >
-  <span
-    class="block w-5 h-0.5 bg-gray-600 dark:bg-gray-300 transition-all duration-300 transform origin-center"
-  ></span>
-  <span
-    class="block w-5 h-0.5 bg-gray-600 dark:bg-gray-300 transition-all duration-300"
-  ></span>
-  <span
-    class="block w-5 h-0.5 bg-gray-600 dark:bg-gray-300 transition-all duration-300 transform origin-center"
-  ></span>
+  <span class="line" aria-hidden="true"></span>
+  <span class="line" aria-hidden="true"></span>
+  <span class="line" aria-hidden="true"></span>
 </button>
 
 <style>
-  #menu-button[aria-expanded="true"] span:first-child {
-    transform: translateY(8px) rotate(45deg);
+  .hamburger {
+    cursor: pointer;
+    padding: 0.5rem;
+    background-color: transparent;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s ease;
+    border: none;
   }
 
-  #menu-button[aria-expanded="true"] span:nth-child(2) {
+  .hamburger:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  .hamburger:focus {
+    outline: 2px solid #14b8a6; /* teal-500 */
+    outline-offset: 2px;
+  }
+
+  .hamburger:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  .dark .hamburger:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .hamburger .line {
+    display: block;
+    width: 1.25rem;
+    height: 2px;
+    margin-bottom: 5px;
+    background-color: #4b5563; /* gray-600 */
+    transition: all 0.3s ease-in-out;
+  }
+
+  .dark .hamburger .line {
+    background-color: #d1d5db; /* gray-300 */
+  }
+
+  .hamburger .line:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Animation for the hamburger to X transformation */
+  .expanded .hamburger .line:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .expanded .hamburger .line:nth-child(2) {
     opacity: 0;
-    transform: translateX(-8px);
   }
 
-  #menu-button[aria-expanded="true"] span:last-child {
-    transform: translateY(-8px) rotate(-45deg);
+  .expanded .hamburger .line:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* Hide on larger screens */
+  @media (min-width: 768px) {
+    .hamburger {
+      display: none;
+    }
   }
 </style>
+
+<script>
+  // Enhanced toggle for hamburger menu with accessibility improvements
+  document.addEventListener("astro:page-load", () => {
+    const hamburger = document.querySelector(".hamburger");
+    const navLinks = document.querySelector(".nav-links");
+    const navWrapper = document.querySelector(".nav-wrapper");
+
+    if (hamburger && navLinks && navWrapper) {
+      // Toggle menu function with accessibility updates
+      const toggleMenu = (show: boolean) => {
+        hamburger.setAttribute("aria-expanded", show.toString());
+        if (show) {
+          setTimeout(() => {
+            navLinks.classList.toggle("expanded", show);
+            navWrapper.classList.toggle("expanded", show);
+            navLinks.classList.remove("was-expanded");
+            const menuItems = navLinks.querySelectorAll('[role="menuitem"]');
+            menuItems.forEach((item) => {
+              item.setAttribute("tabindex", "0");
+              (item as HTMLElement).blur();
+            });
+            navLinks.setAttribute("aria-hidden", "false");
+          }, 50); // Small delay to ensure proper hover state registration
+        } else {
+          navLinks.classList.toggle("expanded", show);
+          navWrapper.classList.toggle("expanded", show);
+          navLinks.classList.add("was-expanded");
+          navLinks.setAttribute("aria-hidden", "true");
+          const menuItems = navLinks.querySelectorAll('[role="menuitem"]');
+          menuItems.forEach((item) => {
+            item.setAttribute("tabindex", "-1");
+          });
+          (hamburger as HTMLElement).focus();
+        }
+      };
+
+      // Handle hamburger button click
+      hamburger.addEventListener("click", () => {
+        const isExpanded = hamburger.getAttribute("aria-expanded") === "true";
+        toggleMenu(!isExpanded);
+      });
+
+      // Handle click outside of menu to close it
+      document.addEventListener("click", (e: MouseEvent) => {
+        const target = e.target as HTMLElement;
+        const isMenuOpen = hamburger.getAttribute("aria-expanded") === "true";
+
+        // Check if menu is open and the click was outside both the menu and hamburger button
+        if (
+          isMenuOpen &&
+          !navLinks.contains(target) &&
+          !hamburger.contains(target)
+        ) {
+          toggleMenu(false);
+        }
+      });
+
+      // Handle keyboard accessibility
+      document.addEventListener("keydown", (e) => {
+        // Close menu with Escape key
+        if (
+          e.key === "Escape" &&
+          hamburger.getAttribute("aria-expanded") === "true"
+        ) {
+          toggleMenu(false);
+        }
+
+        // Handle arrow key navigation within menu
+        if (hamburger.getAttribute("aria-expanded") === "true") {
+          const menuItems = Array.from(
+            navLinks.querySelectorAll('[role="menuitem"]'),
+          );
+          const focusedElementIndex = menuItems.findIndex(
+            (item) => document.activeElement === item,
+          );
+
+          // Arrow down/right: move to next item
+          if (
+            (e.key === "ArrowDown" || e.key === "ArrowRight") &&
+            focusedElementIndex < menuItems.length - 1
+          ) {
+            e.preventDefault();
+            (menuItems[focusedElementIndex + 1] as HTMLElement).focus();
+          }
+
+          // Arrow up/left: move to previous item
+          if (
+            (e.key === "ArrowUp" || e.key === "ArrowLeft") &&
+            focusedElementIndex > 0
+          ) {
+            e.preventDefault();
+            (menuItems[focusedElementIndex - 1] as HTMLElement).focus();
+          }
+
+          // Home: move to first item
+          if (e.key === "Home") {
+            e.preventDefault();
+            (menuItems[0] as HTMLElement).focus();
+          }
+
+          // End: move to last item
+          if (e.key === "End") {
+            e.preventDefault();
+            (menuItems[menuItems.length - 1] as HTMLElement).focus();
+          }
+        }
+      });
+
+      // Close menu on resize to desktop view
+      let resizeTimer: ReturnType<typeof setTimeout> | undefined;
+      window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          if (
+            window.innerWidth >= 768 &&
+            hamburger.getAttribute("aria-expanded") === "true"
+          ) {
+            toggleMenu(false);
+          }
+        }, 100);
+      });
+
+      // Initialize menu state
+      navLinks.setAttribute("aria-hidden", "true");
+    }
+  });
+</script>
