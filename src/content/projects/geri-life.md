@@ -26,7 +26,7 @@ slug: "geri-life"
 
 ## Background and Motivation
 
-The story of GeriLife began in 2015 when I identified a critical gap in elder care systems. Care facilities were struggling with inconsistent quality of care and limited visibility into residents' wellbeing. Family members often felt disconnected from their loved ones' daily experiences, and facility managers lacked tools to systematically track and improve quality of life for residents.
+The story of GeriLife began in 2015 when I identified a critical gap in elder care systems. Care facilities struggled with inconsistent quality of care and limited visibility into residents' wellbeing. Family members often felt disconnected from their loved ones' daily experiences, and facility managers lacked tools to systematically track and improve quality of life for residents.
 
 Traditional approaches to resident wellbeing relied heavily on anecdotal information and guesswork. There was no cohesive system to track engagement, preferences, or emotional states across time. Care staff, already overburdened with responsibilities, found it challenging to facilitate wellbeing activities for all residents equally.
 
@@ -40,23 +40,23 @@ The technical architecture was built on JavaScript, using Meteor as the full-sta
 
 The data model required careful consideration to balance comprehensiveness with usability. The final design captured both qualitative emotional metrics (how residents were feeling) and quantitative engagement measurements (minutes spent in various wellness activities such as nature experiences, art, music, and cultural events). The system also tracked contextual factors such as activity facilitator roles (volunteer, staff, or family member), providing valuable insights into residents' social connections.
 
-The development process followed an iterative approach, with regular feedback cycles incorporating input from care providers, administrators, and even residents when possible. Each cycle refined both the user interface and the analytics capabilities, gradually building a system that could transform raw activity data into meaningful wellbeing insights.
+The development process followed an iterative approach, with regular feedback cycles incorporating input from care providers, administrators, and when possible, residents themselves. Each cycle refined both the user interface and the analytics capabilities, gradually building a system that could transform raw activity data into meaningful wellbeing insights.
 
 ## Challenges and Solutions
 
 Creating an effective wellbeing analytics platform for elder care presented several significant challenges:
 
-**Balancing data capture with ease of use** was perhaps the most fundamental challenge. Care staff had limited time for documentation, yet comprehensive data was essential for meaningful analytics. The solution involved designing an interface that minimized input time while maximizing data quality. I implemented a streamlined workflow that allowed staff to document activities in under a minute, even while actively engaging with residents.
+**Balancing data capture with ease of use** was perhaps the most fundamental challenge. Care staff had limited time for documentation, yet comprehensive data was essential for meaningful analytics. The solution involved designing an interface that minimized input time while maximizing data quality. I implemented a streamlined workflow that allowed staff to document activities in under one minute, even while actively engaging with residents.
 
 **Designing meaningful visualizations for diverse stakeholders** required careful consideration of different information needs. A care provider needed resident-specific details, while a facility director needed aggregate trends. I developed a multi-layered reporting system using D3.js that could automatically generate appropriate visualizations based on user role. For direct care providers, the system highlighted individual resident preferences and patterns. For management, it presented facility-wide engagement metrics and identified residents at risk of social isolation.
 
 **Ensuring data privacy while enabling meaningful sharing** presented another complex challenge. Resident wellbeing data contained sensitive information but needed to be accessible to authorized parties including family members. The solution involved implementing granular access controls and comprehensive audit logging, ensuring information was accessible only to authorized individuals while maintaining complete accountability for all system interactions. We also used the GDPR principle of data minimization by only collecting necessary data in a semi-anonymous manner.
 
-**Creating a system that supported equity in care delivery** was a priority from the beginning. Early prototypes revealed that certain residents received disproportionate attention based on factors like social activity or location within the facility. To address this, I developed visualization tools that highlighted participation gaps, ensuring no resident was inadvertently excluded from activities. The system also tracked which residents were consistently declining participation, prompting staff to investigate potential barriers or preferences.
+**Creating a system that supported equity in care delivery** was a priority from the beginning. Early prototypes revealed that certain residents received disproportionate attention based on factors like sociability or location within the facility. To address this, I developed visualization tools that highlighted participation gaps, ensuring no resident was inadvertently excluded from activities. The system also tracked which residents were consistently declining participation, prompting staff to investigate potential barriers or preferences.
 
 ## Impact and Outcomes
 
-Over its decade of development and implementation, GeriLife transformed wellbeing assessment and care planning across multiple elder care communities. The impact extended to several key dimensions.
+Over its decade of development and implementation, GeriLife transformed wellbeing assessment and care planning across multiple elder care communities. The impact extended to several key dimensions:
 
 The platform enabled evidence-based care planning by providing objective data on resident preferences and engagement patterns. Care homes reported enhanced communication between staff shifts and more personalized activity programming tailored to individual interests and needs. This systematic approach to wellbeing assessment led to measurable improvements in resident satisfaction and engagement levels.
 
@@ -64,7 +64,7 @@ Family connection improved significantly as the platform provided transparency i
 
 On a management level, GeriLife provided unprecedented visibility into wellbeing metrics across facilities. Administrators could identify homes with consistently lower engagement levels and direct resources accordingly. This system-wide perspective enabled more equitable resource allocation and targeted quality improvement initiatives.
 
-Perhaps most significantly, the data collected through GeriLife enabled organizations to identify and share best practices across facilities. Activities that consistently generated positive emotional responses could be replicated, while those with limited impact could be revised or replaced. This data-driven approach to programming can lead to more effective use of limited resources and better outcomes for residents.
+Perhaps most significantly, the data collected through GeriLife enabled organizations to identify and share best practices across facilities. Activities that consistently generated positive emotional responses could be replicated, while those with limited impact could be revised or replaced. This data-driven approach to programming led to more effective use of limited resources and better outcomes for residents.
 
 ## Personal Reflections
 
