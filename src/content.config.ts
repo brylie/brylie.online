@@ -5,7 +5,7 @@ import { glob } from "astro/loaders";
 const ProjectCategory = z.enum(["software", "music", "education"]);
 
 // Define the ProjectStatus enum as a Zod enum
-const ProjectStatus = z.enum(["in-progress", "completed", "planned"]);
+const ProjectStatus = z.enum(["in-progress", "completed", "planned", "active"]);
 
 // Define the Project schema using Zod
 const projects = defineCollection({
@@ -24,6 +24,8 @@ const projects = defineCollection({
     status: ProjectStatus,
     datePublished: z.coerce.date(), // Changed to date type for better date handling
     lastUpdated: z.coerce.date().optional(),
+    dateStarted: z.coerce.date().optional(),
+    dateLaunched: z.coerce.date().optional(),
 
     // Optional detailed information
     tags: z.array(z.string()).optional(),
