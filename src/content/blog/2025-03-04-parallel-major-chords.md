@@ -3,7 +3,7 @@ layout: ../../layouts/MarkdownPostLayout.astro
 title: "Parallel Major Chords: A Journey Through Music Theory"
 slug: "2025-parallel-major-chords"
 datePublished: 2025-03-04
-description: "Dive into the world of parallel major chords and their unique role in music theory."
+description: "Explore how parallel majors can add emotional depth to your music."
 author: "Brylie Christopher Oxley"
 tags: ["music theory", "chords", "composition", "harmony"]
 ---
