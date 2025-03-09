@@ -35,8 +35,8 @@ export async function getStaticPaths() {
       .filter((post) => post.data.tags.includes(tag))
       .sort(
         (a, b) =>
-          new Date(b.data.pubDate).valueOf() -
-          new Date(a.data.pubDate).valueOf(),
+          new Date(b.data.datePublished).valueOf() -
+          new Date(a.data.datePublished).valueOf(),
       );
 
     // Filter projects that contain this tag in either tags or technologies
@@ -183,10 +183,10 @@ const pageTitle = `${tag} - Tagged Content`;
               {posts.map((post) => (
                 <div class="p-4">
                   <BlogPostListItem
-                    url={`/posts/${post.slug}`}
+                    url={`/posts/${post.data.slug}`}
                     title={post.data.title}
                     datePublished={new Date(
-                      post.data.pubDate,
+                      post.data.datePublished,
                     ).toLocaleDateString("en-US", {
                       year: "numeric",
                       month: "long",
