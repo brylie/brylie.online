@@ -21,19 +21,70 @@ const { Content } = await render(post);
 ---
 
 <BaseLayout pageTitle={post.data.title}>
-  <article>
-    <p><strong>Published on:</strong> {post.data.formattedDate}</p>
-    <p><strong>Author:</strong> {post.data.author}</p>
-    <p>{post.data.description}</p>
-    {
-      post.data.image && (
-        <div>
-          <img src={post.data.image.url} alt={post.data.image.alt} />
+  <article class="max-w-4xl mx-auto">
+    <header class="mb-8">
+      <div
+        class="flex flex-wrap gap-6 text-sm text-gray-600 dark:text-gray-400"
+      >
+        <div class="flex items-center gap-2">
+          <time datetime={post.data.datePublished.toISOString()}>
+            {post.data.formattedDate}
+          </time>
         </div>
+        {
+          post.data.author && (
+            <div class="flex items-center gap-2">
+              <span>By {post.data.author}</span>
+            </div>
+          )
+        }
+      </div>
+
+      {
+        post.data.description && (
+          <p class="text-lg text-gray-700 dark:text-gray-300 mt-4">
+            {post.data.description}
+          </p>
+        )
+      }
+
+      {
+        post.data.image && (
+          <div class="mt-6">
+            <img
+              src={post.data.image.url}
+              alt={post.data.image.alt}
+              class="w-full rounded-lg"
+            />
+          </div>
+        )
+      }
+    </header>
+
+    <!-- Post Content -->
+    <div class="prose dark:prose-invert max-w-none">
+      <Content />
+    </div>
+
+    <!-- Tags Section -->
+    {
+      post.data.tags && post.data.tags.length > 0 && (
+        <section class="mt-8">
+          <h2 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">
+            Tags
+          </h2>
+          <div class="flex flex-wrap gap-2">
+            {post.data.tags.map((tag) => (
+              <a
+                href={`/tags/${tag}`}
+                class="px-3 py-1 text-sm bg-teal-100 text-teal-800 dark:bg-teal-900/30 dark:text-teal-300 rounded-full hover:bg-teal-200 dark:hover:bg-teal-800/40 transition-colors"
+              >
+                #{tag}
+              </a>
+            ))}
+          </div>
+        </section>
       )
     }
-    <Prose>
-      <Content />
-    </Prose>
   </article>
 </BaseLayout>
