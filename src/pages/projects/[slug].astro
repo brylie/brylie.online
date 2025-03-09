@@ -42,7 +42,9 @@ const formattedDate = new Date(project.data.datePublished).toLocaleDateString(
       >
         <div class="flex items-center gap-2">
           <Icon name="mdi:calendar" class="w-4 h-4" />
-          <time datetime={project.data.datePublished}>{formattedDate}</time>
+          <time datetime={project.data.datePublished.toISOString()}
+            >{formattedDate}</time
+          >
         </div>
 
         <div class="flex items-center gap-2">
