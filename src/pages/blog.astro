@@ -7,7 +7,8 @@ import { getCollection } from "astro:content";
 const allPosts = await getCollection("blog");
 const sortedPosts = allPosts.sort(
   (a, b) =>
-    new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf(),
+    new Date(b.data.datePublished).valueOf() -
+    new Date(a.data.datePublished).valueOf(),
 );
 
 const pageTitle = "Blog Posts";
@@ -42,16 +43,15 @@ const pageTitle = "Blog Posts";
             class={`${index !== 0 ? "border-t border-gray-100 dark:border-gray-700" : ""}`}
           >
             <BlogPostListItem
-              url={`/posts/${post.slug}`}
+              url={`/posts/${post.data.slug}`}
               title={post.data.title}
-              datePublished={new Date(post.data.pubDate).toLocaleDateString(
-                "en-US",
-                {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                },
-              )}
+              datePublished={new Date(
+                post.data.datePublished,
+              ).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
               description={post.data.description}
             />
           </div>
