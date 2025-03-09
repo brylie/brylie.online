@@ -36,7 +36,6 @@ const navItems = [
 
 <!-- Mobile Navigation -->
 <div
-  id="nav-links"
   class="nav-links md:hidden fixed w-full top-[70px] left-0 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm shadow-lg border-t border-gray-200 dark:border-gray-800"
 >
   {
@@ -55,3 +54,57 @@ const navItems = [
     ))
   }
 </div>
+
+<style>
+  /* Mobile menu styling */
+  .nav-links {
+    display: none;
+    transform: translateY(0);
+    transition: all 0.3s ease-in-out;
+  }
+
+  .nav-links.expanded {
+    display: block;
+    animation: slideDown 0.3s ease-in-out forwards;
+  }
+
+  @keyframes slideDown {
+    from {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  /* When the menu is not expanded but was previously expanded, animate it closing */
+  .nav-links:not(.expanded).was-expanded {
+    display: block;
+    animation: slideUp 0.3s ease-in-out forwards;
+  }
+
+  @keyframes slideUp {
+    from {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateY(-100%);
+      opacity: 0;
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  // This script handles menu state synchronization during page transitions
+  document.addEventListener("astro:page-load", () => {
+    // Make sure the mobile menu is closed when navigating to a new page
+    const navLinks = document.querySelector(".nav-links");
+    if (navLinks && navLinks.classList.contains("expanded")) {
+      navLinks.classList.remove("expanded");
+    }
+  });
+</script>

@@ -21,7 +21,7 @@ import { Icon } from "astro-icon/components";
       </span>
     </a>
 
-    <div class="flex items-center gap-3">
+    <div class="flex items-center gap-3 nav-wrapper">
       <Navigation />
       <div class="flex items-center gap-2">
         <Hamburger />
@@ -29,3 +29,36 @@ import { Icon } from "astro-icon/components";
     </div>
   </div>
 </header>
+
+<script>
+  // Simple toggle for hamburger menu
+  document.addEventListener("astro:page-load", () => {
+    const hamburger = document.querySelector(".hamburger");
+    const navLinks = document.querySelector(".nav-links");
+    const navWrapper = document.querySelector(".nav-wrapper");
+
+    if (hamburger && navLinks && navWrapper) {
+      hamburger.addEventListener("click", () => {
+        // Toggle the expanded class on the navigation container
+        navLinks.classList.toggle("expanded");
+        navWrapper.classList.toggle("expanded");
+
+        // Add a class to track if it was expanded (for animations)
+        if (navLinks.classList.contains("expanded")) {
+          navLinks.classList.remove("was-expanded");
+        } else {
+          navLinks.classList.add("was-expanded");
+        }
+      });
+
+      // Close menu when a link is clicked
+      navLinks.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          navLinks.classList.remove("expanded");
+          navWrapper.classList.remove("expanded");
+          navLinks.classList.add("was-expanded");
+        });
+      });
+    }
+  });
+</script>
