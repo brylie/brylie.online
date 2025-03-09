@@ -1,11 +1,57 @@
 ---
+const pathname = new URL(Astro.request.url).pathname;
+const currentPath = pathname.slice(1); // Remove the leading slash
 
+const navItems = [
+  { path: "", label: "Home" },
+  { path: "about/", label: "About" },
+  { path: "blog/", label: "Blog" },
+  { path: "projects/", label: "Projects" },
+  { path: "tags/", label: "Tags" },
+];
 ---
 
-<div class="nav-links">
-  <a href={`/`}>Home</a>
-  <a href={`/about/`}>About</a>
-  <a href={`/blog/`}>Blog</a>
-  <a href={`/tags/`}>Tags</a>
-  <a href={`/projects/`}>Projects</a>
+<!-- Desktop Navigation -->
+<nav class="hidden md:block">
+  <ul class="flex space-x-1">
+    {
+      navItems.map(({ path, label }) => (
+        <li>
+          <a
+            href={`/${path}`}
+            class={`px-4 py-2 rounded-lg font-medium transition-all duration-200 hover:scale-105 ${
+              currentPath === path
+                ? "bg-teal-100 dark:bg-teal-900/50 text-teal-900 dark:text-teal-100 shadow-sm"
+                : "text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800/80"
+            }`}
+            aria-current={currentPath === path ? "page" : undefined}
+          >
+            {label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<!-- Mobile Navigation -->
+<div
+  id="nav-links"
+  class="nav-links md:hidden fixed w-full top-[70px] left-0 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm shadow-lg border-t border-gray-200 dark:border-gray-800"
+>
+  {
+    navItems.map(({ path, label }) => (
+      <a
+        href={`/${path}`}
+        class={`block px-5 py-3.5 text-base transition-colors border-b border-gray-100 dark:border-gray-800 ${
+          currentPath === path
+            ? "bg-gradient-to-r from-teal-50 to-transparent dark:from-teal-900/30 dark:to-transparent text-teal-900 dark:text-teal-100 font-medium"
+            : "text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800/50"
+        }`}
+        aria-current={currentPath === path ? "page" : undefined}
+      >
+        {label}
+      </a>
+    ))
+  }
 </div>

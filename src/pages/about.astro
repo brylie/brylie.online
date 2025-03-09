@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { Icon } from "astro-icon/components";
 
 const pageTitle = "About Brylie";
 
@@ -33,117 +34,181 @@ const identity = {
   ],
   languages: ["English", "Finnish"],
 };
-
-// Styling variables
-const skillColor = "navy";
-const fontWeight = "bold";
-const textCase = "uppercase";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-  <article class="about-content">
-    <section class="introduction">
-      <p>
-        As a software developer, musician, and educator, I work at the
-        intersection of technology and creativity. Through brylie.online, I
-        explore how these fields can enrich each other and create opportunities
-        for learning and innovation.
-      </p>
+  <article class="max-w-4xl mx-auto">
+    <!-- Hero Section -->
+    <div
+      class="bg-gradient-to-br from-teal-50 to-blue-50 dark:from-gray-800 dark:to-gray-900 rounded-xl p-8 mb-12 shadow-sm"
+    >
+      <h1
+        class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6"
+      >
+        About Me
+      </h1>
+      <div class="prose dark:prose-invert">
+        <p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+          As a software developer, musician, and educator, I work at the
+          intersection of technology and creativity. Through brylie.online, I
+          explore how these fields can enrich each other and create
+          opportunities for learning and innovation.
+        </p>
+        <p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+          Based in {identity.country}, I bring together my passion for
+          open-source software development, music production, and education to
+          build tools and resources that help others learn and create. My work
+          focuses on making technical concepts accessible while encouraging
+          creative exploration.
+        </p>
+      </div>
+    </div>
 
-      <p>
-        Based in {identity.country}, I bring together my passion for open-source
-        software development, music production, and education to build tools and
-        resources that help others learn and create. My work focuses on making
-        technical concepts accessible while encouraging creative exploration.
-      </p>
-    </section>
+    <!-- Main Content -->
+    <div class="space-y-12">
+      <!-- Technical Expertise -->
+      <section
+        class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700"
+      >
+        <div class="flex items-center gap-3 mb-4">
+          <Icon
+            name="mdi:laptop"
+            class="w-6 h-6 text-teal-600 dark:text-teal-400"
+          />
+          <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
+            Technical Expertise
+          </h2>
+        </div>
 
-    <section class="expertise">
-      <h2>Technical Expertise</h2>
-      <p>
-        My software development journey spans multiple technologies and domains.
-        I specialize in creating robust, user-friendly applications with a focus
-        on clean code and thorough documentation.
-      </p>
-      <ul>
-        {
-          identity.technicalSkills.map((skill) => (
-            <li class="skill">{skill}</li>
-          ))
-        }
-      </ul>
+        <p class="text-gray-700 dark:text-gray-300 mb-4">
+          My software development journey spans multiple technologies and
+          domains. I specialize in creating robust, user-friendly applications
+          with a focus on clean code and thorough documentation.
+        </p>
 
-      <h2>Musical Background</h2>
-      <p>
-        Music production and sound design are integral parts of my creative
-        practice. I explore how technology can enhance musical expression and
-        create new possibilities for sonic exploration.
-      </p>
-      <ul>
-        {identity.musicSkills.map((skill) => <li class="skill">{skill}</li>)}
-      </ul>
-    </section>
+        <div class="flex flex-wrap gap-2">
+          {
+            identity.technicalSkills.map((skill) => (
+              <span class="px-3 py-1 bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300 rounded-full text-sm font-medium">
+                {skill}
+              </span>
+            ))
+          }
+        </div>
+      </section>
 
-    <section class="vision">
-      <h2>Vision & Approach</h2>
-      <p>
-        I believe in the power of open knowledge and collaborative learning.
-        Through brylie.online, I aim to:
-      </p>
-      <ul>
-        <li>Share practical insights from real-world projects</li>
-        <li>Bridge the gap between technical and creative disciplines</li>
-        <li>Build a community of learners and creators</li>
-        <li>Contribute to open-source education and tools</li>
-      </ul>
-    </section>
+      <!-- Musical Background -->
+      <section
+        class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700"
+      >
+        <div class="flex items-center gap-3 mb-4">
+          <Icon
+            name="mdi:music"
+            class="w-6 h-6 text-teal-600 dark:text-teal-400"
+          />
+          <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
+            Musical Background
+          </h2>
+        </div>
 
-    <section class="connect">
-      <h2>Let's Connect</h2>
-      <p>
-        I'm always interested in collaborating on projects that combine
-        technology, music, and education. Whether you're interested in
-        contributing to existing projects or starting something new, I'd love to
-        hear from you.
-      </p>
-      <p>
-        You can explore my work through the various sections of this site,
-        including software projects, music productions, and educational
-        resources.
-      </p>
-    </section>
+        <p class="text-gray-700 dark:text-gray-300 mb-4">
+          Music production and sound design are integral parts of my creative
+          practice. I explore how technology can enhance musical expression and
+          create new possibilities for sonic exploration.
+        </p>
+
+        <div class="flex flex-wrap gap-2">
+          {
+            identity.musicSkills.map((skill) => (
+              <span class="px-3 py-1 bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300 rounded-full text-sm font-medium">
+                {skill}
+              </span>
+            ))
+          }
+        </div>
+      </section>
+
+      <!-- Vision & Approach -->
+      <section
+        class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700"
+      >
+        <div class="flex items-center gap-3 mb-4">
+          <Icon
+            name="mdi:lightbulb"
+            class="w-6 h-6 text-teal-600 dark:text-teal-400"
+          />
+          <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
+            Vision & Approach
+          </h2>
+        </div>
+
+        <p class="text-gray-700 dark:text-gray-300 mb-4">
+          I believe in the power of open knowledge and collaborative learning.
+          Through brylie.online, I aim to:
+        </p>
+
+        <ul class="space-y-3 text-gray-700 dark:text-gray-300">
+          <li class="flex items-start gap-2">
+            <Icon
+              name="mdi:check-circle"
+              class="w-5 h-5 mt-0.5 text-teal-600 dark:text-teal-400"
+            />
+            <span>Share practical insights from real-world projects</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <Icon
+              name="mdi:check-circle"
+              class="w-5 h-5 mt-0.5 text-teal-600 dark:text-teal-400"
+            />
+            <span
+              >Bridge the gap between technical and creative disciplines</span
+            >
+          </li>
+          <li class="flex items-start gap-2">
+            <Icon
+              name="mdi:check-circle"
+              class="w-5 h-5 mt-0.5 text-teal-600 dark:text-teal-400"
+            />
+            <span>Build a community of learners and creators</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <Icon
+              name="mdi:check-circle"
+              class="w-5 h-5 mt-0.5 text-teal-600 dark:text-teal-400"
+            />
+            <span>Contribute to open-source education and tools</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Let's Connect -->
+      <section
+        class="bg-gradient-to-br from-teal-50 to-blue-50 dark:from-gray-800 dark:to-gray-900 rounded-xl p-6"
+      >
+        <div class="flex items-center gap-3 mb-4">
+          <Icon
+            name="mdi:handshake"
+            class="w-6 h-6 text-teal-600 dark:text-teal-400"
+          />
+          <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
+            Let's Connect
+          </h2>
+        </div>
+
+        <div class="space-y-4 text-gray-700 dark:text-gray-300">
+          <p>
+            I'm always interested in collaborating on projects that combine
+            technology, music, and education. Whether you're interested in
+            contributing to existing projects or starting something new, I'd
+            love to hear from you.
+          </p>
+          <p>
+            You can explore my work through the various sections of this site,
+            including software projects, music productions, and educational
+            resources.
+          </p>
+        </div>
+      </section>
+    </div>
   </article>
-
-  <style define:vars={{ skillColor, fontWeight, textCase }}>
-    .about-content {
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    section {
-      margin-bottom: 2rem;
-    }
-
-    h2 {
-      margin: 1.5rem 0 1rem;
-      color: var(--skillColor);
-    }
-
-    .skill {
-      color: var(--skillColor);
-      font-weight: var(--fontWeight);
-      text-transform: var(--textCase);
-      margin: 0.5rem 0;
-    }
-
-    ul {
-      margin: 1rem 0;
-      padding-left: 1.5rem;
-    }
-
-    p {
-      margin: 1rem 0;
-      line-height: 1.6;
-    }
-  </style>
 </BaseLayout>

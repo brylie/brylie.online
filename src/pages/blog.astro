@@ -3,21 +3,60 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import BlogPostListItem from "../components/BlogPostListItem.astro";
 import { getCollection } from "astro:content";
 
+// Get all blog posts and sort them by date
 const allPosts = await getCollection("blog");
-// Sort posts reverse chronologically
-allPosts.sort((a, b) => new Date(b.data.datePublished).getTime() - new Date(a.data.datePublished).getTime());
+const sortedPosts = allPosts.sort(
+  (a, b) =>
+    new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf(),
+);
+
+const pageTitle = "Blog Posts";
 ---
 
-<BaseLayout pageTitle="Blog">
-  <ul>
-    {
-      allPosts.map((post) => (
-        <BlogPostListItem
-          url={`/posts/${post.data.slug}`}
-          title={post.data.title}
-          datePublished={post.data.formattedDate}
-        />
-      ))
-    }
-  </ul>
+<BaseLayout pageTitle={pageTitle}>
+  <div class="max-w-4xl mx-auto">
+    <!-- Introduction -->
+    <section class="mb-12">
+      <div
+        class="bg-gradient-to-br from-teal-50 to-blue-50 dark:from-gray-800 dark:to-gray-900 rounded-xl p-6 shadow-sm"
+      >
+        <h1
+          class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4"
+        >
+          Blog
+        </h1>
+        <p class="text-lg text-gray-700 dark:text-gray-300">
+          Thoughts, tutorials, and insights about software development, music,
+          and education.
+        </p>
+      </div>
+    </section>
+
+    <!-- Blog Posts -->
+    <div
+      class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm overflow-hidden"
+    >
+      {
+        sortedPosts.map((post, index) => (
+          <div
+            class={`${index !== 0 ? "border-t border-gray-100 dark:border-gray-700" : ""}`}
+          >
+            <BlogPostListItem
+              url={`/posts/${post.slug}`}
+              title={post.data.title}
+              datePublished={new Date(post.data.pubDate).toLocaleDateString(
+                "en-US",
+                {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                },
+              )}
+              description={post.data.description}
+            />
+          </div>
+        ))
+      }
+    </div>
+  </div>
 </BaseLayout>

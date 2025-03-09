@@ -5,26 +5,48 @@ import { SocialPlatform } from "../data/socialPlatforms";
 import { Icon } from "astro-icon/components";
 ---
 
-<footer class="text-center mt-8">
-  <div class="p-4 bg-teal-900 text-white rounded-lg">
-    <h2 class="text-2xl font-bold mb-4">Let's connect on:</h2>
-    <div class="flex justify-center gap-4 flex-wrap">
-      <Social platform={SocialPlatform.Bluesky} username="brylie.bsky.social" />
-      <Social platform={SocialPlatform.Dev} username="brylie" />
-      <Social platform={SocialPlatform.GitHub} username="brylie" />
-      <Social platform={SocialPlatform.LinkedIn} username="brylie" />
-      <Social platform={SocialPlatform.YouTube} username="brylie" />
+<footer
+  class="mt-auto py-8 bg-gradient-to-b from-transparent to-gray-50/50 dark:to-gray-900/50 border-t border-gray-200 dark:border-gray-800"
+>
+  <div class="max-w-4xl mx-auto px-4">
+    <!-- Social links section -->
+    <div
+      class="bg-gradient-to-br from-teal-500 to-blue-600 dark:from-teal-600 dark:to-blue-700 text-white rounded-xl shadow-lg overflow-hidden transform transition-transform hover:scale-[1.02] duration-300"
+    >
+      <div class="p-6 backdrop-blur-sm bg-black/5 dark:bg-black/20">
+        <h2 class="text-xl font-bold mb-4 text-center">Let's connect</h2>
+        <div class="flex flex-wrap justify-center gap-3">
+          <Social
+            platform={SocialPlatform.Bluesky}
+            username="brylie.bsky.social"
+          />
+          <Social platform={SocialPlatform.Dev} username="brylie" />
+          <Social platform={SocialPlatform.GitHub} username="brylie" />
+          <Social platform={SocialPlatform.LinkedIn} username="brylie" />
+          <Social platform={SocialPlatform.YouTube} username="brylie" />
+        </div>
+      </div>
+    </div>
+
+    <!-- RSS Feed button -->
+    <div class="mt-6 text-center">
+      <a
+        href="/rss.xml"
+        target="_blank"
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 hover:scale-105 transition-all duration-300 shadow-sm"
+        aria-label="RSS Feed"
+      >
+        <Icon name="mdi:rss" class="w-5 h-5" />
+        <span>Subscribe via RSS</span>
+      </a>
+    </div>
+
+    <!-- Copyright and license info -->
+    <div class="mt-8 text-center space-y-4">
+      <License />
+      <p class="text-sm text-gray-600 dark:text-gray-400">
+        © {new Date().getFullYear()} Brylie. All rights reserved.
+      </p>
     </div>
   </div>
-  <div class="p-4 bg-teal-800 text-white rounded-lg mt-4">
-    <a
-      href="/rss.xml"
-      target="_blank"
-      class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium border bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors"
-    >
-      <Icon name="ic:round-rss-feed" />
-      RSS Feed
-    </a>
-  </div>
-  <License />
 </footer>

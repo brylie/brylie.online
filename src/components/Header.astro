@@ -1,9 +1,31 @@
 ---
 import Hamburger from "./Hamburger.astro";
 import Navigation from "./Navigation.astro";
+import { Icon } from "astro-icon/components";
 ---
 
-<header>
-  <Hamburger />
-  <Navigation />
+<header
+  class="sticky top-0 z-50 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800 py-3 px-4 mb-8 transition-colors"
+>
+  <div class="max-w-6xl mx-auto flex items-center justify-between">
+    <a href="/" class="group flex items-center gap-2 hover:no-underline">
+      <div
+        class="w-8 h-8 bg-gradient-to-br from-teal-400 to-blue-500 dark:from-teal-500 dark:to-blue-600 rounded-lg flex items-center justify-center shadow-sm transition-transform group-hover:scale-110"
+      >
+        <Icon name="mdi:code-braces" class="w-5 h-5 text-white" />
+      </div>
+      <span
+        class="text-xl font-bold bg-gradient-to-r from-teal-600 to-blue-600 dark:from-teal-400 dark:to-blue-400 bg-clip-text text-transparent transition-all group-hover:tracking-wide"
+      >
+        Brylie
+      </span>
+    </a>
+
+    <div class="flex items-center gap-3">
+      <Navigation />
+      <div class="flex items-center gap-2">
+        <Hamburger />
+      </div>
+    </div>
+  </div>
 </header>

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
+import { Icon } from "astro-icon/components";
 
 // Get all blog posts
 const allPosts = await getCollection("blog");
@@ -19,42 +20,161 @@ const projectTechnologies = [
   ),
 ];
 
-// Combine all tags and technologies, removing duplicates, then sort case-insensitive
+// Combine all tags and technologies, removing duplicates
 const allTags = [
   ...new Set([...postTags, ...projectTags, ...projectTechnologies]),
-].sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
+];
+
+// Calculate tag frequency for variable size display
+const tagFrequency: { [key: string]: number } = {};
+allTags.forEach((tag) => {
+  tagFrequency[tag] = 0;
+
+  // Count in blog posts
+  allPosts.forEach((post) => {
+    if (post.data.tags.includes(tag)) tagFrequency[tag]++;
+  });
+
+  // Count in projects (both as tag and technology)
+  allProjects.forEach((project) => {
+    if (project.data.tags?.includes(tag)) tagFrequency[tag]++;
+    if (project.data.technologies?.includes(tag)) tagFrequency[tag]++;
+  });
+});
+
+// Sort tags by frequency (descending) and then alphabetically
+const sortedTags = allTags.sort((a, b) => {
+  // If frequencies are the same, sort alphabetically
+  if (tagFrequency[b] === tagFrequency[a]) {
+    return a.toLowerCase().localeCompare(b.toLowerCase());
+  }
+  // Otherwise sort by frequency
+  return tagFrequency[b] - tagFrequency[a];
+});
 
 const pageTitle = "Tags & Technologies";
+
+// Get tag count by category
+const postTagCount = postTags.length;
+const projectTagCount = projectTags.length;
+const techCount = projectTechnologies.length;
+
+// Function to determine tag size based on frequency
+function getTagSize(tag: string) {
+  const frequency = tagFrequency[tag];
+  if (frequency >= 5) return "text-xl font-bold";
+  if (frequency >= 3) return "text-lg font-semibold";
+  if (frequency >= 2) return "text-base font-medium";
+  return "text-sm";
+}
+
+// Function to determine tag color based on type
+function getTagColor(tag: string) {
+  const isTech = projectTechnologies.includes(tag);
+  const isProjectTag = projectTags.includes(tag);
+  const isPostTag = postTags.includes(tag);
+
+  if (isTech && (isProjectTag || isPostTag)) {
+    return "bg-purple-100 text-purple-800 hover:bg-purple-200 dark:bg-purple-900/30 dark:text-purple-300 dark:hover:bg-purple-800/40";
+  } else if (isTech) {
+    return "bg-blue-100 text-blue-800 hover:bg-blue-200 dark:bg-blue-900/30 dark:text-blue-300 dark:hover:bg-blue-800/40";
+  } else if (isProjectTag && isPostTag) {
+    return "bg-teal-100 text-teal-800 hover:bg-teal-200 dark:bg-teal-900/30 dark:text-teal-300 dark:hover:bg-teal-800/40";
+  } else if (isProjectTag) {
+    return "bg-green-100 text-green-800 hover:bg-green-200 dark:bg-green-900/30 dark:text-green-300 dark:hover:bg-green-800/40";
+  }
+  return "bg-amber-100 text-amber-800 hover:bg-amber-200 dark:bg-amber-900/30 dark:text-amber-300 dark:hover:bg-amber-800/40";
+}
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-  <div class="max-w-4xl mx-auto px-4 py-8">
-    <h1 class="text-3xl font-bold mb-6">
-      Browse Content by Tags & Technologies
-    </h1>
+  <div class="max-w-4xl mx-auto">
+    <!-- Introduction -->
+    <section class="mb-12">
+      <div
+        class="bg-gradient-to-br from-teal-50 to-blue-50 dark:from-gray-800 dark:to-gray-900 rounded-xl p-6 shadow-sm"
+      >
+        <h1
+          class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6"
+        >
+          Explore Content by Tags
+        </h1>
+        <div class="grid gap-6 md:grid-cols-3">
+          <div class="bg-white/50 dark:bg-white/5 rounded-lg p-4">
+            <div class="flex items-center gap-2 mb-2">
+              <Icon
+                name="mdi:file-document-outline"
+                class="w-5 h-5 text-gray-600 dark:text-gray-400"
+              />
+              <h2 class="font-semibold text-gray-900 dark:text-white">
+                Blog Posts
+              </h2>
+            </div>
+            <p class="text-sm text-gray-600 dark:text-gray-400">
+              {postTagCount} unique tags
+            </p>
+          </div>
 
-    <p class="mb-6 text-lg text-gray-700">
-      Click on a tag to see all blog posts and projects related to that topic or
-      technology.
-    </p>
+          <div class="bg-white/50 dark:bg-white/5 rounded-lg p-4">
+            <div class="flex items-center gap-2 mb-2">
+              <Icon
+                name="mdi:briefcase-outline"
+                class="w-5 h-5 text-gray-600 dark:text-gray-400"
+              />
+              <h2 class="font-semibold text-gray-900 dark:text-white">
+                Projects
+              </h2>
+            </div>
+            <p class="text-sm text-gray-600 dark:text-gray-400">
+              {projectTagCount} unique tags
+            </p>
+          </div>
 
-    <div class="tags flex flex-wrap gap-2 justify-center text-center">
-      {
-        allTags.map((tag) => (
-          <a
-            href={`/tags/${tag}`}
-            class="tag px-4 py-2 bg-blue-200 hover:bg-blue-500 hover:text-gray-100 rounded-full transition-colors"
-          >
-            {tag}
-          </a>
-        ))
-      }
-    </div>
+          <div class="bg-white/50 dark:bg-white/5 rounded-lg p-4">
+            <div class="flex items-center gap-2 mb-2">
+              <Icon
+                name="mdi:code-tags"
+                class="w-5 h-5 text-gray-600 dark:text-gray-400"
+              />
+              <h2 class="font-semibold text-gray-900 dark:text-white">
+                Technologies
+              </h2>
+            </div>
+            <p class="text-sm text-gray-600 dark:text-gray-400">
+              {techCount} technologies
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tag Cloud -->
+    <section
+      class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6 shadow-sm"
+    >
+      <div class="flex items-center gap-3 mb-6">
+        <Icon
+          name="mdi:tag-multiple"
+          class="w-6 h-6 text-teal-600 dark:text-teal-400"
+        />
+        <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
+          All Tags
+        </h2>
+      </div>
+
+      <div class="flex flex-wrap gap-3">
+        {
+          sortedTags.map((tag) => (
+            <a
+              href={`/tags/${tag}`}
+              class={`${getTagSize(tag)} ${getTagColor(tag)} px-3 py-1.5 rounded-full transition-colors`}
+            >
+              #{tag}
+              <span class="ml-1 text-sm opacity-70">({tagFrequency[tag]})</span>
+            </a>
+          ))
+        }
+      </div>
+    </section>
   </div>
-
-  <style>
-    .tags {
-      margin: 2rem 0;
-    }
-  </style>
 </BaseLayout>
