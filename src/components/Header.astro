@@ -6,11 +6,17 @@ import { Icon } from "astro-icon/components";
 
 <header
   class="sticky top-0 z-50 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800 py-3 px-4 mb-8 transition-colors"
+  role="banner"
 >
   <div class="max-w-6xl mx-auto flex items-center justify-between">
-    <a href="/" class="group flex items-center gap-2 hover:no-underline">
+    <a
+      href="/"
+      class="group flex items-center gap-2 hover:no-underline"
+      aria-label="Brylie - Homepage"
+    >
       <div
         class="w-8 h-8 bg-gradient-to-br from-teal-400 to-blue-500 dark:from-teal-500 dark:to-blue-600 rounded-lg flex items-center justify-center shadow-sm transition-transform group-hover:scale-110"
+        aria-hidden="true"
       >
         <Icon name="mdi:code-braces" class="w-5 h-5 text-white" />
       </div>
@@ -21,7 +27,7 @@ import { Icon } from "astro-icon/components";
       </span>
     </a>
 
-    <div class="flex items-center gap-3 nav-wrapper">
+    <div class="flex items-center gap-3 nav-wrapper" id="nav-container">
       <Navigation />
       <div class="flex items-center gap-2">
         <Hamburger />
@@ -31,34 +37,128 @@ import { Icon } from "astro-icon/components";
 </header>
 
 <script>
-  // Simple toggle for hamburger menu
+  // Enhanced toggle for hamburger menu with accessibility improvements
   document.addEventListener("astro:page-load", () => {
     const hamburger = document.querySelector(".hamburger");
     const navLinks = document.querySelector(".nav-links");
     const navWrapper = document.querySelector(".nav-wrapper");
 
     if (hamburger && navLinks && navWrapper) {
-      hamburger.addEventListener("click", () => {
-        // Toggle the expanded class on the navigation container
-        navLinks.classList.toggle("expanded");
-        navWrapper.classList.toggle("expanded");
+      // Toggle menu function with accessibility updates
+      const toggleMenu = (show: boolean) => {
+        hamburger.setAttribute("aria-expanded", show.toString());
+        navLinks.classList.toggle("expanded", show);
+        navWrapper.classList.toggle("expanded", show);
 
-        // Add a class to track if it was expanded (for animations)
-        if (navLinks.classList.contains("expanded")) {
+        if (show) {
+          // When opening, remove transition class and focus the first menu item
           navLinks.classList.remove("was-expanded");
+
+          // Make all menu items focusable when menu is open
+          const menuItems = navLinks.querySelectorAll('[role="menuitem"]');
+          menuItems.forEach((item) => {
+            item.setAttribute("tabindex", "0");
+          });
+
+          // Focus on first menu item for keyboard users
+          setTimeout(() => {
+            const firstItem = menuItems[0];
+            if (firstItem) (firstItem as HTMLElement).focus();
+          }, 100);
         } else {
           navLinks.classList.add("was-expanded");
+
+          // Make menu items not focusable when menu is closed
+          const menuItems = navLinks.querySelectorAll('[role="menuitem"]');
+          menuItems.forEach((item) => {
+            item.setAttribute("tabindex", "-1");
+          });
+
+          // Return focus to hamburger button
+          (hamburger as HTMLElement).focus();
         }
+      };
+
+      // Handle hamburger button click
+      hamburger.addEventListener("click", () => {
+        const isExpanded = hamburger.getAttribute("aria-expanded") === "true";
+        toggleMenu(!isExpanded);
       });
 
       // Close menu when a link is clicked
       navLinks.querySelectorAll("a").forEach((link) => {
         link.addEventListener("click", () => {
-          navLinks.classList.remove("expanded");
-          navWrapper.classList.remove("expanded");
-          navLinks.classList.add("was-expanded");
+          toggleMenu(false);
         });
       });
+
+      // Handle keyboard accessibility
+      document.addEventListener("keydown", (e) => {
+        // Close menu with Escape key
+        if (
+          e.key === "Escape" &&
+          hamburger.getAttribute("aria-expanded") === "true"
+        ) {
+          toggleMenu(false);
+        }
+
+        // Handle arrow key navigation within menu
+        if (hamburger.getAttribute("aria-expanded") === "true") {
+          const menuItems = Array.from(
+            navLinks.querySelectorAll('[role="menuitem"]'),
+          );
+          const focusedElementIndex = menuItems.findIndex(
+            (item) => document.activeElement === item,
+          );
+
+          // Arrow down/right: move to next item
+          if (
+            (e.key === "ArrowDown" || e.key === "ArrowRight") &&
+            focusedElementIndex < menuItems.length - 1
+          ) {
+            e.preventDefault();
+            (menuItems[focusedElementIndex + 1] as HTMLElement).focus();
+          }
+
+          // Arrow up/left: move to previous item
+          if (
+            (e.key === "ArrowUp" || e.key === "ArrowLeft") &&
+            focusedElementIndex > 0
+          ) {
+            e.preventDefault();
+            (menuItems[focusedElementIndex - 1] as HTMLElement).focus();
+          }
+
+          // Home: move to first item
+          if (e.key === "Home") {
+            e.preventDefault();
+            (menuItems[0] as HTMLElement).focus();
+          }
+
+          // End: move to last item
+          if (e.key === "End") {
+            e.preventDefault();
+            (menuItems[menuItems.length - 1] as HTMLElement).focus();
+          }
+        }
+      });
+
+      // Close menu on resize to desktop view
+      let resizeTimer: ReturnType<typeof setTimeout> | undefined;
+      window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          if (
+            window.innerWidth >= 768 &&
+            hamburger.getAttribute("aria-expanded") === "true"
+          ) {
+            toggleMenu(false);
+          }
+        }, 100);
+      });
+
+      // Initialize menu state
+      navLinks.setAttribute("aria-hidden", "true");
     }
   });
 </script>

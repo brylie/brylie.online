@@ -2,11 +2,17 @@
 
 ---
 
-<div class="hamburger">
-  <span class="line"></span>
-  <span class="line"></span>
-  <span class="line"></span>
-</div>
+<button
+  class="hamburger"
+  aria-label="Toggle navigation menu"
+  aria-expanded="false"
+  aria-controls="nav-links"
+  tabindex="0"
+>
+  <span class="line" aria-hidden="true"></span>
+  <span class="line" aria-hidden="true"></span>
+  <span class="line" aria-hidden="true"></span>
+</button>
 
 <style>
   .hamburger {
@@ -15,10 +21,20 @@
     background-color: transparent;
     border-radius: 0.5rem;
     transition: background-color 0.3s ease;
+    border: none;
   }
 
   .hamburger:hover {
     background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  .hamburger:focus {
+    outline: 2px solid #14b8a6; /* teal-500 */
+    outline-offset: 2px;
+  }
+
+  .hamburger:focus:not(:focus-visible) {
+    outline: none;
   }
 
   .dark .hamburger:hover {

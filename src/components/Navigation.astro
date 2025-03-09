@@ -12,11 +12,11 @@ const navItems = [
 ---
 
 <!-- Desktop Navigation -->
-<nav class="hidden md:block">
-  <ul class="flex space-x-1">
+<nav class="hidden md:block" aria-label="Main navigation">
+  <ul class="flex space-x-1" role="menubar">
     {
       navItems.map(({ path, label }) => (
-        <li>
+        <li role="none">
           <a
             href={`/${path}`}
             class={`px-4 py-2 rounded-lg font-medium transition-all duration-200 hover:scale-105 ${
@@ -25,6 +25,7 @@ const navItems = [
                 : "text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800/80"
             }`}
             aria-current={currentPath === path ? "page" : undefined}
+            role="menuitem"
           >
             {label}
           </a>
@@ -36,7 +37,10 @@ const navItems = [
 
 <!-- Mobile Navigation -->
 <div
+  id="nav-links"
   class="nav-links md:hidden fixed w-full top-[70px] left-0 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm shadow-lg border-t border-gray-200 dark:border-gray-800"
+  role="menu"
+  aria-label="Mobile navigation"
 >
   {
     navItems.map(({ path, label }) => (
@@ -48,6 +52,8 @@ const navItems = [
             : "text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800/50"
         }`}
         aria-current={currentPath === path ? "page" : undefined}
+        role="menuitem"
+        tabindex={currentPath === path ? 0 : -1}
       >
         {label}
       </a>
