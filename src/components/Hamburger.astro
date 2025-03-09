@@ -90,34 +90,27 @@
       // Toggle menu function with accessibility updates
       const toggleMenu = (show: boolean) => {
         hamburger.setAttribute("aria-expanded", show.toString());
-        navLinks.classList.toggle("expanded", show);
-        navWrapper.classList.toggle("expanded", show);
-
         if (show) {
-          // When opening, remove transition class and focus the first menu item
-          navLinks.classList.remove("was-expanded");
-
-          // Make all menu items focusable when menu is open
-          const menuItems = navLinks.querySelectorAll('[role="menuitem"]');
-          menuItems.forEach((item) => {
-            item.setAttribute("tabindex", "0");
-          });
-
-          // Focus on first menu item for keyboard users
           setTimeout(() => {
-            const firstItem = menuItems[0];
-            if (firstItem) (firstItem as HTMLElement).focus();
-          }, 100);
+            navLinks.classList.toggle("expanded", show);
+            navWrapper.classList.toggle("expanded", show);
+            navLinks.classList.remove("was-expanded");
+            const menuItems = navLinks.querySelectorAll('[role="menuitem"]');
+            menuItems.forEach((item) => {
+              item.setAttribute("tabindex", "0");
+              (item as HTMLElement).blur();
+            });
+            navLinks.setAttribute("aria-hidden", "false");
+          }, 50); // Small delay to ensure proper hover state registration
         } else {
+          navLinks.classList.toggle("expanded", show);
+          navWrapper.classList.toggle("expanded", show);
           navLinks.classList.add("was-expanded");
-
-          // Make menu items not focusable when menu is closed
+          navLinks.setAttribute("aria-hidden", "true");
           const menuItems = navLinks.querySelectorAll('[role="menuitem"]');
           menuItems.forEach((item) => {
             item.setAttribute("tabindex", "-1");
           });
-
-          // Return focus to hamburger button
           (hamburger as HTMLElement).focus();
         }
       };
