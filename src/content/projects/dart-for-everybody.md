@@ -1,6 +1,6 @@
 ---
 title: "Dart for Everybody"
-description: "A textbook for learning the Dart programming language."
+description: "An engaging, metaphor-rich textbook for learning Dart programming that transforms abstract concepts into concrete, relatable analogies. Co-authored using AI assistance and inspired by classic programming guides like Why's Poignant Guide to Ruby."
 url: "https://flutterfriends.github.io/Dart-for-Everybody/"
 githubUrl: "https://github.com/FlutterFriends/Dart-for-Everybody"
 category: "education"
