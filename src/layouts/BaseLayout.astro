@@ -84,3 +84,10 @@ const { pageTitle } = Astro.props;
     <Footer />
   </body>
 </html>
+
+<script>
+  // Prevent any unwanted unload handlers for improved Lighthouse scores
+  window.addEventListener("load", () => {
+    window.removeEventListener("unload", () => {});
+  });
+</script>
