@@ -9,7 +9,9 @@ featured: true
 status: "completed"
 datePublished: "2024-08-15"
 tags:
-  - "AI/ML"
+  - "AI"
+  - "ML"
+  - "LLM"
   - "immigration"
   - "information access"
   - "open source"
