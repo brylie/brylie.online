@@ -7,7 +7,7 @@ category: "software"
 featured: true
 status: "in-progress"
 datePublished: "2024-02-20"
-lastUpdated: "2024-02-20"
+lastUpdated: "2026-01-20"
 tags:
   - "music theory"
   - "piano"
