@@ -24,7 +24,10 @@ const groupedProjects = allProjects.reduce<Record<ProjectCategory, Project[]>>(
 );
 ---
 
-<BaseLayout pageTitle={pageTitle}>
+<BaseLayout
+  pageTitle={pageTitle}
+  description="Explore Brylie Christopher Oxley's portfolio of software projects, music compositions, and educational initiatives. From elder care platforms to music technology and data-driven applications."
+>
   <div class="max-w-4xl mx-auto">
     <!-- Introduction -->
     <section class="mb-16">

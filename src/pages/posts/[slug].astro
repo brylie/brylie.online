@@ -18,9 +18,63 @@ if (!post) {
 }
 
 const { Content } = await render(post);
+
+// Prepare structured data for BlogPosting
+const blogPostingSchema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "@id": `${Astro.site}posts/${post.data.slug}/#article`,
+  headline: post.data.headline || post.data.title,
+  name: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.datePublished.toISOString(),
+  dateModified: (
+    post.data.dateModified || post.data.datePublished
+  ).toISOString(),
+  author: {
+    "@type": "Person",
+    "@id": "https://brylie.online/#person",
+    name: post.data.author || "Brylie Christopher Oxley",
+  },
+  publisher: {
+    "@type": "Person",
+    "@id": "https://brylie.online/#person",
+  },
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": `${Astro.site}posts/${post.data.slug}/`,
+  },
+  url: `${Astro.site}posts/${post.data.slug}/`,
+  keywords: post.data.tags?.join(", ") || "",
+  ...(post.data.image && {
+    image: {
+      "@type": "ImageObject",
+      url: post.data.image.url,
+      caption: post.data.image.alt,
+    },
+  }),
+};
 ---
 
-<BaseLayout pageTitle={post.data.title}>
+<BaseLayout
+  pageTitle={post.data.title}
+  description={post.data.description}
+  type="article"
+  publishedTime={post.data.datePublished.toISOString()}
+  modifiedTime={(
+    post.data.dateModified || post.data.datePublished
+  ).toISOString()}
+  author={post.data.author || "Brylie Christopher Oxley"}
+  tags={post.data.tags}
+  image={post.data.image?.url}
+  imageAlt={post.data.image?.alt}
+>
+  <!-- BlogPosting Structured Data -->
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify(blogPostingSchema)}
+    slot="head"
+  />
   <article class="max-w-4xl mx-auto">
     <header class="mb-8">
       <div

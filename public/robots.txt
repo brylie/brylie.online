@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://brylie.online/sitemap-index.xml

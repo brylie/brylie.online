@@ -4,14 +4,20 @@ import { getCollection } from 'astro:content';
 export async function GET(context) {
   const blog = await getCollection('blog');
   return rss({
-    title: "Astro Learner | Blog",
-    description: "My journey learning Astro",
+    title: "Brylie | Blog",
+    description: "Thoughts, tutorials, and insights about software development, music, data engineering, and technology from Brylie Christopher Oxley.",
     site: context.site,
     items: blog.map((post) => ({
       title: post.data.title,
-      pubDate: post.data.publishDate,
+      pubDate: post.data.datePublished,
       description: post.data.description,
       link: `/posts/${post.data.slug}/`,
+      ...(post.data.tags && {
+        categories: post.data.tags
+      }),
+      ...(post.data.author && {
+        author: post.data.author
+      }),
     })),
     customData: `<language>en-us</language>`,
     stylesheet: '/rss/styles.xsl',

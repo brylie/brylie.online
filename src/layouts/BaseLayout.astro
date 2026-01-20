@@ -2,8 +2,34 @@
 import { ClientRouter } from "astro:transitions";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import SEO from "../components/SEO.astro";
 import "../styles/global.css";
-const { pageTitle } = Astro.props;
+
+interface Props {
+  pageTitle?: string;
+  description?: string;
+  image?: string;
+  imageAlt?: string;
+  type?: "website" | "article" | "profile";
+  canonical?: string;
+  publishedTime?: string;
+  modifiedTime?: string;
+  author?: string;
+  tags?: string[];
+}
+
+const {
+  pageTitle,
+  description = "Personal website of Brylie Christopher Oxley, Data Platform Architect, featuring software projects, blog posts, and professional information.",
+  image,
+  imageAlt,
+  type = "website",
+  canonical,
+  publishedTime,
+  modifiedTime,
+  author,
+  tags,
+} = Astro.props;
 ---
 
 <html lang="en" class="dark">
@@ -12,12 +38,22 @@ const { pageTitle } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <meta
-      name="description"
-      content="Brylie's personal website featuring projects, blog posts, and professional information"
-    />
     <meta name="theme-color" content="#111827" />
     <title>{pageTitle ? `${pageTitle} | Brylie` : "Brylie"}</title>
+
+    <!-- SEO Meta Tags -->
+    <SEO
+      title={pageTitle || ""}
+      description={description}
+      image={image}
+      imageAlt={imageAlt}
+      type={type}
+      canonical={canonical}
+      publishedTime={publishedTime}
+      modifiedTime={modifiedTime}
+      author={author}
+      tags={tags}
+    />
     <!-- Structured Data -->
     <script type="application/ld+json">
       {
@@ -31,6 +67,37 @@ const { pageTitle } = Astro.props;
             "familyName": "Oxley",
             "additionalName": "Christopher",
             "url": "https://brylie.online",
+            "jobTitle": "Data Platform Architect",
+            "email": "brylie@brylie.online",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Tampere",
+              "addressCountry": "Finland"
+            },
+            "knowsAbout": [
+              "Data Architecture",
+              "Python",
+              "SQL",
+              "ETL/ELT",
+              "Data Warehousing",
+              "Analytics Engineering",
+              "Software Development",
+              "Open Source",
+              "Music Technology",
+              "Accessibility"
+            ],
+            "knowsLanguage": [
+              {
+                "@type": "Language",
+                "name": "English",
+                "alternateName": "en"
+              },
+              {
+                "@type": "Language",
+                "name": "Finnish",
+                "alternateName": "fi"
+              }
+            ],
             "sameAs": [
               "https://github.com/brylie",
               "https://www.linkedin.com/in/brylie",
@@ -65,6 +132,8 @@ const { pageTitle } = Astro.props;
       title="Brylie.online RSS Feed"
       href={new URL("rss.xml", Astro.site)}
     />
+    <!-- Allow page-specific head content -->
+    <slot name="head" />
     <ClientRouter />
   </head>
   <body

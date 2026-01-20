@@ -27,9 +27,79 @@ const formattedDate = new Date(project.data.datePublished).toLocaleDateString(
     year: "numeric",
   },
 );
+
+// Determine schema type based on project category
+const getSchemaType = (category: string) => {
+  if (category === "software") return "SoftwareApplication";
+  if (category === "music") return "MusicComposition";
+  if (category === "education") return "LearningResource";
+  return "CreativeWork";
+};
+
+// Prepare structured data for project
+const projectSchema = {
+  "@context": "https://schema.org",
+  "@type": getSchemaType(project.data.category),
+  "@id": `${Astro.site}projects/${project.data.slug}/#project`,
+  name: project.data.title,
+  description: project.data.description,
+  url: project.data.url,
+  datePublished: project.data.datePublished.toISOString(),
+  ...(project.data.lastUpdated && {
+    dateModified: project.data.lastUpdated.toISOString(),
+  }),
+  ...(project.data.dateStarted && {
+    dateCreated: project.data.dateStarted.toISOString(),
+  }),
+  author: {
+    "@type": "Person",
+    "@id": "https://brylie.online/#person",
+  },
+  creator: {
+    "@type": "Person",
+    "@id": "https://brylie.online/#person",
+  },
+  ...(project.data.githubUrl && {
+    codeRepository: project.data.githubUrl,
+  }),
+  ...(project.data.technologies && {
+    keywords: project.data.technologies.join(", "),
+  }),
+  ...(project.data.technologies &&
+    project.data.category === "software" && {
+      programmingLanguage: project.data.technologies.map((tech: string) => ({
+        "@type": "ComputerLanguage",
+        name: tech,
+      })),
+    }),
+  ...(project.data.image && {
+    image: {
+      "@type": "ImageObject",
+      url: project.data.image.url,
+      caption: project.data.image.alt,
+    },
+  }),
+};
 ---
 
-<BaseLayout pageTitle={pageTitle}>
+<BaseLayout
+  pageTitle={pageTitle}
+  description={project.data.description}
+  type="article"
+  publishedTime={project.data.datePublished.toISOString()}
+  modifiedTime={(
+    project.data.lastUpdated || project.data.datePublished
+  ).toISOString()}
+  image={project.data.image?.url}
+  imageAlt={project.data.image?.alt}
+  tags={project.data.technologies}
+>
+  <!-- Project Structured Data -->
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify(projectSchema)}
+    slot="head"
+  />
   <article class="max-w-4xl mx-auto">
     <!-- Project Header -->
     <header class="mb-8">
