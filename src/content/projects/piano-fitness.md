@@ -150,6 +150,6 @@ Developing Piano Fitness demonstrates the value of "scratch your own itch" softw
 
 The project reinforces the complementary nature of different learning approaches. By focusing specifically on systematic technical development rather than trying to create a comprehensive "do everything" application, Piano Fitness can integrate seamlessly with existing repertoire apps and traditional instruction.
 
-From a technical perspective, selecting Godot based on specific needs (real-time MIDI, cross-platform support) rather than general popularity has significantly streamlined development. This allowed focus on educational content rather than infrastructure, proving the importance of matching tools to requirements.
+From a technical perspective, selecting Flutter based on specific needs (real-time MIDI, cross-platform support) rather than general popularity has significantly streamlined development. This allowed focus on educational content rather than infrastructure, proving the importance of matching tools to requirements.
 
 As Piano Fitness evolves, I aim to contribute to the broader piano education ecosystem by addressing the specific aspect that enables musical freedom: comprehensive technical foundations across all keys. This complements rather than competes with existing approaches, helping students develop keyboard fluency necessary for creative expression across musical styles.
