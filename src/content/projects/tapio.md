@@ -33,7 +33,7 @@ This struggle is shared by my immigrant friends across different situations: stu
 
 The Finnish Immigration Service (Migri) website contains comprehensive information, but its structure assumes familiarity with Finnish administrative systems and terminology. Simple questions like "Can my spouse work while we wait for their residence permit?" or "What documents do I need for family reunification?" often require reading multiple pages and cross-referencing complex regulations.
 
-I built Tapio to address this information access gap. Rather than replacing official sources, Taipo makes existing information more accessible by allowing natural language queries that retrieve relevant content and provide conversational guidance. The name Tapio comes from Finnish mythology, the forest god who guides travelers through unknown territory—an apt metaphor for helping immigrants find their way through bureaucratic complexity.
+I built Tapio to address this information access gap. Rather than replacing official sources, Tapio makes existing information more accessible by allowing natural language queries that retrieve relevant content and provide conversational guidance. The name Tapio comes from Finnish mythology, the forest god who guides travelers through unknown territory—an apt metaphor for helping immigrants find their way through bureaucratic complexity.
 
 ## The Solution
 
