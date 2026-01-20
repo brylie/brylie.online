@@ -73,217 +73,167 @@ const latestPosts = allPosts
       </div>
     </div>
   </section>
-</BaseLayout>
 
-<!-- Main Content -->
-<div class="max-w-4xl mx-auto px-4">
-  <!-- What I Do Section -->
-  <section
-    class="mb-16 px-4 py-8 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700"
-  >
-    <h2
-      class="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center"
+  <!-- Main Content -->
+  <div class="max-w-4xl mx-auto px-4">
+    <!-- What I Do Section -->
+    <section
+      class="mb-16 px-4 py-8 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700"
     >
-      What I Do
-    </h2>
-
-    <div class="grid md:grid-cols-3 gap-6">
-      <div class="text-center">
-        <div
-          class="w-12 h-12 mx-auto mb-3 bg-teal-100 dark:bg-teal-900/30 rounded-lg flex items-center justify-center"
-        >
-          <Icon
-            name="mdi:database"
-            class="w-6 h-6 text-teal-600 dark:text-teal-400"
-          />
-        </div>
-        <h3 class="font-semibold text-gray-900 dark:text-white mb-2">
-          Data Architecture
-        </h3>
-        <p class="text-sm text-gray-600 dark:text-gray-400">
-          Lakehouse platforms with medallion patterns, semantic dimensional
-          models, and self-service analytics using Apache Airflow and dbt
-        </p>
-      </div>
-
-      <div class="text-center">
-        <div
-          class="w-12 h-12 mx-auto mb-3 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center"
-        >
-          <Icon
-            name="mdi:robot"
-            class="w-6 h-6 text-purple-600 dark:text-purple-400"
-          />
-        </div>
-        <h3 class="font-semibold text-gray-900 dark:text-white mb-2">
-          AI Applications
-        </h3>
-        <p class="text-sm text-gray-600 dark:text-gray-400">
-          Production RAG systems with LangChain, vector databases, and local LLM
-          integration for information access
-        </p>
-      </div>
-
-      <div class="text-center">
-        <div
-          class="w-12 h-12 mx-auto mb-3 bg-orange-100 dark:bg-orange-900/30 rounded-lg flex items-center justify-center"
-        >
-          <Icon
-            name="mdi:account-group"
-            class="w-6 h-6 text-orange-600 dark:text-orange-400"
-          />
-        </div>
-        <h3 class="font-semibold text-gray-900 dark:text-white mb-2">
-          Community Impact
-        </h3>
-        <p class="text-sm text-gray-600 dark:text-gray-400">
-          Building tools for elder care, nonprofit publishing, music education,
-          and immigrant information access
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Featured Projects Section -->
-  <section class="mb-16" aria-labelledby="featured-projects-heading">
-    <div class="flex items-center justify-between mb-8">
       <h2
-        id="featured-projects-heading"
-        class="text-2xl font-bold text-gray-900 dark:text-white"
+        class="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center"
       >
-        Featured Projects
+        What I Do
       </h2>
-      <a
-        href="/projects/"
-        class="text-teal-600 hover:text-teal-800 dark:text-teal-400 dark:hover:text-teal-300 flex items-center gap-1
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="text-center">
+          <div
+            class="w-12 h-12 mx-auto mb-3 bg-teal-100 dark:bg-teal-900/30 rounded-lg flex items-center justify-center"
+          >
+            <Icon
+              name="mdi:database"
+              class="w-6 h-6 text-teal-600 dark:text-teal-400"
+            />
+          </div>
+          <h3 class="font-semibold text-gray-900 dark:text-white mb-2">
+            Data Architecture
+          </h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400">
+            Lakehouse platforms with medallion patterns, semantic dimensional
+            models, and self-service analytics using Apache Airflow and dbt
+          </p>
+        </div>
+
+        <div class="text-center">
+          <div
+            class="w-12 h-12 mx-auto mb-3 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center"
+          >
+            <Icon
+              name="mdi:robot"
+              class="w-6 h-6 text-purple-600 dark:text-purple-400"
+            />
+          </div>
+          <h3 class="font-semibold text-gray-900 dark:text-white mb-2">
+            AI Applications
+          </h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400">
+            Production RAG systems with LangChain, vector databases, and local
+            LLM integration for information access
+          </p>
+        </div>
+
+        <div class="text-center">
+          <div
+            class="w-12 h-12 mx-auto mb-3 bg-orange-100 dark:bg-orange-900/30 rounded-lg flex items-center justify-center"
+          >
+            <Icon
+              name="mdi:account-group"
+              class="w-6 h-6 text-orange-600 dark:text-orange-400"
+            />
+          </div>
+          <h3 class="font-semibold text-gray-900 dark:text-white mb-2">
+            Community Impact
+          </h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400">
+            Building tools for elder care, nonprofit publishing, music
+            education, and immigrant information access
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Projects Section -->
+    <section class="mb-16" aria-labelledby="featured-projects-heading">
+      <div class="flex items-center justify-between mb-8">
+        <h2
+          id="featured-projects-heading"
+          class="text-2xl font-bold text-gray-900 dark:text-white"
+        >
+          Featured Projects
+        </h2>
+        <a
+          href="/projects/"
+          class="text-teal-600 hover:text-teal-800 dark:text-teal-400 dark:hover:text-teal-300 flex items-center gap-1
       font-medium"
-      >
-        All Projects <Icon name="mdi:arrow-right" class="w-4 h-4" />
-      </a>
-    </div>
-
-    <div class="grid gap-8 md:grid-cols-2">
-      {featuredProjects.map((project) => <ProjectSummary project={project} />)}
-    </div>
-  </section>
-
-  <!-- Latest Blog Posts Section -->
-  {
-    latestPosts.length > 0 && (
-      <section class="mb-16" aria-labelledby="latest-posts-heading">
-        <div class="flex items-center justify-between mb-8">
-          <h2
-            id="latest-posts-heading"
-            class="text-2xl font-bold text-gray-900 dark:text-white"
-          >
-            Latest Articles
-          </h2>
-          <a
-            href="/blog/"
-            class="text-teal-600 hover:text-teal-800 dark:text-teal-400 dark:hover:text-teal-300 flex items-center gap-1 font-medium"
-          >
-            All Articles <Icon name="mdi:arrow-right" class="w-4 h-4" />
-          </a>
-        </div>
-
-        <div class="space-y-8">
-          {latestPosts.map((post) => (
-            <article class="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden hover:shadow-md transition-shadow border border-gray-100 dark:border-gray-700">
-              <a href={`/posts/${post.data.slug}/`} class="block p-6">
-                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-                  {post.data.title}
-                </h3>
-                <div class="text-sm text-gray-500 dark:text-gray-400 mb-3">
-                  <time datetime={post.data.formattedDate}>
-                    {post.data.formattedDate}
-                  </time>
-                </div>
-                <p class="text-gray-600 dark:text-gray-300 line-clamp-2">
-                  {post.data.description}
-                </p>
-              </a>
-            </article>
-          ))}
-        </div>
-      </section>
-    )
-  }
-
-  <!-- Connect Section -->
-  <section
-    class="mb-16 px-6 py-8 bg-gradient-to-br from-teal-50 to-blue-50 dark:from-gray-800 dark:to-gray-900 rounded-xl"
-  >
-    <div class="max-w-2xl mx-auto text-center">
-      <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-        Let's Connect
-      </h2>
-      <p class="text-gray-700 dark:text-gray-300 mb-6">
-        I'm interested in building data platforms and AI applications that
-        create meaningful impact. If you're working on problems in healthcare,
-        education, sustainability, or other areas with real social value, I'd be
-        glad to connect.
-      </p>
-      <div class="flex flex-wrap justify-center gap-4">
-        <a
-          href="mailto:brylie@protonmail.com"
-          class="px-4 py-2 bg-white dark:bg-gray-800 text-teal-700 dark:text-teal-300 border border-teal-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors flex items-center gap-2 text-sm font-medium shadow-sm"
         >
-          <Icon name="mdi:email" class="w-4 h-4" />
-          Email
-        </a>
-        <a
-          href="https://linkedin.com/in/brylie"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="px-4 py-2 bg-white dark:bg-gray-800 text-teal-700 dark:text-teal-300 border border-teal-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors flex items-center gap-2 text-sm font-medium shadow-sm"
-        >
-          <Icon name="mdi:linkedin" class="w-4 h-4" />
-          LinkedIn
-        </a>
-        <a
-          href="https://github.com/brylie"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="px-4 py-2 bg-white dark:bg-gray-800 text-teal-700 dark:text-teal-300 border border-teal-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors flex items-center gap-2 text-sm font-medium shadow-sm"
-        >
-          <Icon name="mdi:github" class="w-4 h-4" />
-          GitHub
-        </a>
-
-        <a
-          href="https://brylie.music"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="px-4 py-2 bg-white dark:bg-gray-800 text-teal-700 dark:text-teal-300 border border-teal-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors flex items-center gap-2 text-sm font-medium shadow-sm"
-        >
-          <Icon name="mdi:music" class="w-4 h-4" />
-          Music
+          All Projects <Icon name="mdi:arrow-right" class="w-4 h-4" />
         </a>
       </div>
-    </div>
-  </section>
 
-  <style>
-    /* Enhance focus styles for keyboard navigation */
-    a:focus-visible {
-      outline: 2px solid currentColor;
-      outline-offset: 2px;
+      <div class="grid gap-8 md:grid-cols-2">
+        {
+          featuredProjects.map((project) => (
+            <ProjectSummary project={project} />
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Latest Blog Posts Section -->
+    {
+      latestPosts.length > 0 && (
+        <section class="mb-16" aria-labelledby="latest-posts-heading">
+          <div class="flex items-center justify-between mb-8">
+            <h2
+              id="latest-posts-heading"
+              class="text-2xl font-bold text-gray-900 dark:text-white"
+            >
+              Latest Articles
+            </h2>
+            <a
+              href="/blog/"
+              class="text-teal-600 hover:text-teal-800 dark:text-teal-400 dark:hover:text-teal-300 flex items-center gap-1 font-medium"
+            >
+              All Articles <Icon name="mdi:arrow-right" class="w-4 h-4" />
+            </a>
+          </div>
+
+          <div class="space-y-8">
+            {latestPosts.map((post) => (
+              <article class="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden hover:shadow-md transition-shadow border border-gray-100 dark:border-gray-700">
+                <a href={`/posts/${post.data.slug}/`} class="block p-6">
+                  <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                    {post.data.title}
+                  </h3>
+                  <div class="text-sm text-gray-500 dark:text-gray-400 mb-3">
+                    <time datetime={post.data.formattedDate}>
+                      {post.data.formattedDate}
+                    </time>
+                  </div>
+                  <p class="text-gray-600 dark:text-gray-300 line-clamp-2">
+                    {post.data.description}
+                  </p>
+                </a>
+              </article>
+            ))}
+          </div>
+        </section>
+      )
     }
 
-    /* Add subtle animations */
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
+    <style>
+      /* Enhance focus styles for keyboard navigation */
+      a:focus-visible {
+        outline: 2px solid currentColor;
+        outline-offset: 2px;
       }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
 
-    section {
-      animation: fadeIn 0.5s ease-out forwards;
-    }
-  </style>
-</div>
+      /* Add subtle animations */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      section {
+        animation: fadeIn 0.5s ease-out forwards;
+      }
+    </style>
+  </div>
+</BaseLayout>
