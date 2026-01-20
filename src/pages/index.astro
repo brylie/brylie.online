@@ -28,29 +28,44 @@ const latestPosts = allPosts
       <h1
         class="text-4xl md:text-5xl font-extrabold mb-6 text-gray-900 dark:text-white leading-tight"
       >
-        Brylie Christopher Oxley
+        Brylie Christopher
       </h1>
       <p
-        class="text-xl md:text-2xl font-medium text-teal-800 dark:text-teal-300 mb-8"
+        class="text-xl md:text-2xl font-medium text-teal-800 dark:text-teal-300 mb-4"
       >
-        Software Developer • Writer • Musician
+        Data Platform Architect
       </p>
-      <p
-        class="text-lg md:text-xl leading-relaxed text-gray-700 dark:text-gray-300 mb-8"
-      >
-        Crafting elegant solutions through code, words, and harmonies.
+      <p class="text-base text-gray-600 dark:text-gray-400 mb-8">
+        Tampere, Finland • Musician • Community Volunteer
       </p>
+      <div class="max-w-2xl mx-auto mb-8 space-y-4">
+        <p
+          class="text-lg md:text-xl leading-relaxed text-gray-700 dark:text-gray-300"
+        >
+          I build lakehouse architectures, semantic dimensional models, and AI
+          applications that solve real problems. With 8 years of experience,
+          I've led platform modernizations that reduced development cycles from
+          weeks to days and contributed to 99.9% SLA reliability at scale.
+        </p>
+        <p class="text-base leading-relaxed text-gray-600 dark:text-gray-400">
+          My work is guided by a simple principle: technology should improve
+          people's lives. Beyond professional projects, I volunteer as a pianist
+          and English teacher at elder care facilities and serve my local Quaker
+          community.
+        </p>
+      </div>
       <div class="flex flex-wrap justify-center gap-4">
         <a
           href="/projects/"
-          class="px-6 py-3 bg-teal-300 hover:bg-teal-700 !text-gray-900 font-medium rounded-lg transition-colors flex items-center gap-2"
+          class="px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white font-medium rounded-lg transition-colors flex items-center gap-2 shadow-sm"
         >
           <Icon name="mdi:briefcase" class="w-5 h-5" />
           View Projects
         </a>
+
         <a
           href="/about/"
-          class="px-6 py-3 bg-white hover:bg-gray-50 text-teal-700 border border-teal-200 font-medium rounded-lg transition-colors flex items-center gap-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-teal-300 dark:border-gray-700"
+          class="px-6 py-3 bg-white hover:bg-gray-50 text-teal-700 border border-teal-200 font-medium rounded-lg transition-colors flex items-center gap-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-teal-300 dark:border-gray-700 shadow-sm"
         >
           <Icon name="mdi:account" class="w-5 h-5" />
           About Me
@@ -61,6 +76,73 @@ const latestPosts = allPosts
 
   <!-- Main Content -->
   <div class="max-w-4xl mx-auto px-4">
+    <!-- What I Do Section -->
+    <section
+      class="mb-16 px-4 py-8 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700"
+    >
+      <h2
+        class="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center"
+      >
+        What I Do
+      </h2>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="text-center">
+          <div
+            class="w-12 h-12 mx-auto mb-3 bg-teal-100 dark:bg-teal-900/30 rounded-lg flex items-center justify-center"
+          >
+            <Icon
+              name="mdi:database"
+              class="w-6 h-6 text-teal-600 dark:text-teal-400"
+            />
+          </div>
+          <h3 class="font-semibold text-gray-900 dark:text-white mb-2">
+            Data Architecture
+          </h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400">
+            Lakehouse platforms with medallion patterns, semantic dimensional
+            models, and self-service analytics using Apache Airflow and dbt
+          </p>
+        </div>
+
+        <div class="text-center">
+          <div
+            class="w-12 h-12 mx-auto mb-3 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center"
+          >
+            <Icon
+              name="mdi:robot"
+              class="w-6 h-6 text-purple-600 dark:text-purple-400"
+            />
+          </div>
+          <h3 class="font-semibold text-gray-900 dark:text-white mb-2">
+            AI Applications
+          </h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400">
+            Production RAG systems with LangChain, vector databases, and local
+            LLM integration for information access
+          </p>
+        </div>
+
+        <div class="text-center">
+          <div
+            class="w-12 h-12 mx-auto mb-3 bg-orange-100 dark:bg-orange-900/30 rounded-lg flex items-center justify-center"
+          >
+            <Icon
+              name="mdi:account-group"
+              class="w-6 h-6 text-orange-600 dark:text-orange-400"
+            />
+          </div>
+          <h3 class="font-semibold text-gray-900 dark:text-white mb-2">
+            Community Impact
+          </h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400">
+            Building tools for elder care, nonprofit publishing, music
+            education, and immigrant information access
+          </p>
+        </div>
+      </div>
+    </section>
+
     <!-- Featured Projects Section -->
     <section class="mb-16" aria-labelledby="featured-projects-heading">
       <div class="flex items-center justify-between mb-8">
@@ -72,7 +154,8 @@ const latestPosts = allPosts
         </h2>
         <a
           href="/projects/"
-          class="text-teal-600 hover:text-teal-800 dark:text-teal-400 dark:hover:text-teal-300 flex items-center gap-1 font-medium"
+          class="text-teal-600 hover:text-teal-800 dark:text-teal-400 dark:hover:text-teal-300 flex items-center gap-1
+      font-medium"
         >
           All Projects <Icon name="mdi:arrow-right" class="w-4 h-4" />
         </a>
@@ -128,29 +211,29 @@ const latestPosts = allPosts
         </section>
       )
     }
+
+    <style>
+      /* Enhance focus styles for keyboard navigation */
+      a:focus-visible {
+        outline: 2px solid currentColor;
+        outline-offset: 2px;
+      }
+
+      /* Add subtle animations */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      section {
+        animation: fadeIn 0.5s ease-out forwards;
+      }
+    </style>
   </div>
 </BaseLayout>
-
-<style>
-  /* Enhance focus styles for keyboard navigation */
-  a:focus-visible {
-    outline: 2px solid currentColor;
-    outline-offset: 2px;
-  }
-
-  /* Add subtle animations */
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  section {
-    animation: fadeIn 0.5s ease-out forwards;
-  }
-</style>
