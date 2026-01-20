@@ -6,33 +6,58 @@ const pageTitle = "About Brylie";
 
 // Professional identity information
 const identity = {
-  firstName: "Brylie Christopher",
+  firstName: "Brylie",
   lastName: "Oxley",
-  country: "Finland",
-  occupation: "Software Developer",
+  location: "Tampere, Finland",
+  title: "Data Platform Architect",
+  yearsExperience: "8+",
   interests: [
-    "software development",
-    "music production",
-    "writing",
-    "education",
+    "data architecture",
+    "AI/ML applications",
+    "music composition",
+    "community service",
   ],
-  technicalSkills: [
-    "JavaScript",
+  dataEngineeringSkills: [
     "Python",
-    "Astro",
-    "Vue.js",
-    "Node.js",
-    "HTML/CSS",
-    "Git",
+    "SQL",
+    "Apache Airflow",
+    "dbt",
+    "Dimensional Modeling",
+    "Semantic Layers",
+    "LangChain",
+    "RAG Architecture",
+  ],
+  cloudPlatforms: [
+    "GCP",
+    "AWS",
+    "Azure (developing)",
+    "Terraform",
     "Docker",
+    "Kubernetes",
+  ],
+  webDevelopment: [
+    "Django",
+    "FastAPI",
+    "Wagtail CMS",
+    "Vue.js",
+    "Svelte",
+    "Astro",
+  ],
+  aiTools: [
+    "ChromaDB",
+    "Pinecone",
+    "Ollama",
+    "HuggingFace",
+    "Vector Databases",
   ],
   musicSkills: [
-    "Digital Audio Workstations",
-    "Audio Production",
+    "Piano",
+    "Guitar",
+    "Digital Audio Production",
     "Sound Design",
-    "Music Theory",
+    "Ambient/Neoclassical Composition",
   ],
-  languages: ["English", "Finnish"],
+  languages: ["English (Native)", "Finnish (Conversational)"],
 };
 ---
 
@@ -47,26 +72,140 @@ const identity = {
       >
         About Me
       </h1>
-      <div class="prose dark:prose-invert">
+      <div class="prose dark:prose-invert max-w-none">
         <p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-          As a software developer, musician, and educator, I work at the
-          intersection of technology and creativity. Through brylie.online, I
-          explore how these fields can enrich each other and create
-          opportunities for learning and innovation.
+          I'm a Data Platform Architect with {identity.yearsExperience} years of
+          experience building lakehouse architectures, semantic dimensional models,
+          and AI applications that solve real problems. I've led platform modernizations
+          that reduced development cycles from weeks to days, contributed to 99.9%
+          SLA reliability at scale, and built production RAG systems with LangChain.
         </p>
         <p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-          Based in {identity.country}, I bring together my passion for
-          open-source software development, music production, and education to
-          build tools and resources that help others learn and create. My work
-          focuses on making technical concepts accessible while encouraging
-          creative exploration.
+          Based in {identity.location}, I combine technical expertise with
+          community service. Beyond professional work, I volunteer as an English
+          teacher and pianist at Mummon Kammari elder care facility, serve as a
+          steward for Tampere Friends (Quakers), and create Creative
+          Commons-licensed music. My work focuses on practical solutions that
+          create measurable value for the communities they serve.
         </p>
       </div>
     </div>
 
     <!-- Main Content -->
     <div class="space-y-12">
-      <!-- Technical Expertise -->
+      <!-- Data Platform Engineering -->
+      <section
+        class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700"
+      >
+        <div class="flex items-center gap-3 mb-4">
+          <Icon
+            name="mdi:database"
+            class="w-6 h-6 text-teal-600 dark:text-teal-400"
+          />
+          <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
+            Data Platform Engineering
+          </h2>
+        </div>
+
+        <p class="text-gray-700 dark:text-gray-300 mb-4">
+          I specialize in building lakehouse architectures with medallion
+          patterns, semantic dimensional models for self-service analytics, and
+          modern orchestration pipelines. Recent work includes comprehensive
+          platform modernizations using Apache Airflow and dbt, reducing
+          dashboard development time through reusable dimensional models and
+          automated data quality frameworks.
+        </p>
+
+        <div class="flex flex-wrap gap-2 mb-4">
+          {
+            identity.dataEngineeringSkills.map((skill) => (
+              <span class="px-3 py-1 bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300 rounded-full text-sm font-medium">
+                {skill}
+              </span>
+            ))
+          }
+        </div>
+
+        <p class="text-sm text-gray-600 dark:text-gray-400 italic">
+          Professional highlights: Designed medallion lakehouse architectures,
+          built reusable semantic layers, led infrastructure modernization from
+          manual operations to IaC, contributed to 99.9% SLA reliability for
+          platforms serving millions of users.
+        </p>
+      </section>
+
+      <!-- AI & ML Applications -->
+      <section
+        class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700"
+      >
+        <div class="flex items-center gap-3 mb-4">
+          <Icon
+            name="mdi:robot"
+            class="w-6 h-6 text-teal-600 dark:text-teal-400"
+          />
+          <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
+            AI & ML Applications
+          </h2>
+        </div>
+
+        <p class="text-gray-700 dark:text-gray-300 mb-4">
+          I build production-grade AI applications with RAG (Retrieval Augmented
+          Generation) architecture. Projects include complete pipelines from web
+          crawling through semantic search to interactive chatbot interfaces,
+          with emphasis on privacy-focused local inference and production
+          engineering practices.
+        </p>
+
+        <div class="flex flex-wrap gap-2 mb-4">
+          {
+            identity.aiTools.map((skill) => (
+              <span class="px-3 py-1 bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300 rounded-full text-sm font-medium">
+                {skill}
+              </span>
+            ))
+          }
+        </div>
+
+        <p class="text-sm text-gray-600 dark:text-gray-400 italic">
+          Featured project: Tapio, a complete RAG system for Finnish immigration
+          information with LangChain framework, multi-database support, and
+          local LLM integration using Ollama.
+        </p>
+      </section>
+
+      <!-- Cloud & Infrastructure -->
+      <section
+        class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700"
+      >
+        <div class="flex items-center gap-3 mb-4">
+          <Icon
+            name="mdi:cloud"
+            class="w-6 h-6 text-teal-600 dark:text-teal-400"
+          />
+          <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
+            Cloud Platforms & Infrastructure
+          </h2>
+        </div>
+
+        <p class="text-gray-700 dark:text-gray-300 mb-4">
+          Experience with GCP and AWS cloud platforms, infrastructure-as-code
+          with Terraform, and container orchestration. Currently developing
+          Azure expertise with focus on cloud-native lakehouse platforms like
+          Databricks and Microsoft Fabric.
+        </p>
+
+        <div class="flex flex-wrap gap-2">
+          {
+            identity.cloudPlatforms.map((skill) => (
+              <span class="px-3 py-1 bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300 rounded-full text-sm font-medium">
+                {skill}
+              </span>
+            ))
+          }
+        </div>
+      </section>
+
+      <!-- Web Development -->
       <section
         class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700"
       >
@@ -76,28 +215,35 @@ const identity = {
             class="w-6 h-6 text-teal-600 dark:text-teal-400"
           />
           <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
-            Technical Expertise
+            Web Development
           </h2>
         </div>
 
         <p class="text-gray-700 dark:text-gray-300 mb-4">
-          My software development journey spans multiple technologies and
-          domains. I specialize in creating robust, user-friendly applications
-          with a focus on clean code and thorough documentation.
+          Full-stack development with Python frameworks and modern JavaScript
+          libraries. Experience building content management systems, API
+          platforms, and interactive web applications for nonprofits and
+          community organizations.
         </p>
 
-        <div class="flex flex-wrap gap-2">
+        <div class="flex flex-wrap gap-2 mb-4">
           {
-            identity.technicalSkills.map((skill) => (
-              <span class="px-3 py-1 bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300 rounded-full text-sm font-medium">
+            identity.webDevelopment.map((skill) => (
+              <span class="px-3 py-1 bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-300 rounded-full text-sm font-medium">
                 {skill}
               </span>
             ))
           }
         </div>
+
+        <p class="text-sm text-gray-600 dark:text-gray-400 italic">
+          Featured projects: Western Friend (Wagtail CMS for Quaker
+          publication), GeriLife (elder care wellbeing platform), Piano Fitness
+          (MIDI-connected practice app).
+        </p>
       </section>
 
-      <!-- Musical Background -->
+      <!-- Musical Practice -->
       <section
         class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700"
       >
@@ -107,17 +253,20 @@ const identity = {
             class="w-6 h-6 text-teal-600 dark:text-teal-400"
           />
           <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
-            Musical Background
+            Musical Practice
           </h2>
         </div>
 
         <p class="text-gray-700 dark:text-gray-300 mb-4">
-          Music production and sound design are integral parts of my creative
-          practice. I explore how technology can enhance musical expression and
-          create new possibilities for sonic exploration.
+          I create ambient and neoclassical piano music under Creative Commons
+          licensing, with around seven albums released to date. My music focuses
+          on healing and community connection, performed at elder care
+          facilities and available across multiple platforms. I'm transitioning
+          professionally from "Brylie Christopher Oxley" to "Brylie Christopher"
+          for better discoverability.
         </p>
 
-        <div class="flex flex-wrap gap-2">
+        <div class="flex flex-wrap gap-2 mb-4">
           {
             identity.musicSkills.map((skill) => (
               <span class="px-3 py-1 bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300 rounded-full text-sm font-medium">
@@ -126,57 +275,126 @@ const identity = {
             ))
           }
         </div>
+
+        <p class="text-sm text-gray-600 dark:text-gray-400 italic">
+          Weekly performances at Mummon Kammari elder care facility, leading
+          English friendship groups and providing musical accompaniment for
+          singing sessions.
+        </p>
       </section>
 
-      <!-- Vision & Approach -->
+      <!-- Community Service -->
       <section
         class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700"
       >
         <div class="flex items-center gap-3 mb-4">
           <Icon
-            name="mdi:lightbulb"
+            name="mdi:account-group"
             class="w-6 h-6 text-teal-600 dark:text-teal-400"
           />
           <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
-            Vision & Approach
+            Community Service
+          </h2>
+        </div>
+
+        <div class="space-y-4 text-gray-700 dark:text-gray-300">
+          <div>
+            <h3 class="font-semibold mb-2">
+              Mummon Kammari (Grandmother's Chamber)
+            </h3>
+            <p>
+              Volunteer English teacher and musician at Tampere elder care
+              facility. Lead English-language friendship groups and provide
+              piano/guitar accompaniment for weekly singing sessions, creating
+              community connections through music and language.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="font-semibold mb-2">Tampere Friends (Quakers)</h3>
+            <p>
+              Steward for Tampere Friends worship group with 20 years of faith
+              community experience. Coordinate community activities and facility
+              management, supporting Quaker values of simplicity, integrity,
+              community, and equality.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="font-semibold mb-2">GeriLife (2015-2025)</h3>
+            <p>
+              Co-founded and developed wellbeing visualization platform for
+              elder care communities in Tampere, contributing to improved
+              quality of service through data-driven insights from individual
+              resident tracking to system-wide analytics.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Approach & Values -->
+      <section
+        class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700"
+      >
+        <div class="flex items-center gap-3 mb-4">
+          <Icon
+            name="mdi:compass"
+            class="w-6 h-6 text-teal-600 dark:text-teal-400"
+          />
+          <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
+            Approach & Values
           </h2>
         </div>
 
         <p class="text-gray-700 dark:text-gray-300 mb-4">
-          I believe in the power of open knowledge and collaborative learning.
-          Through brylie.online, I aim to:
+          My work is guided by a simple principle: technology should improve
+          people's lives. I focus on practical solutions that create measurable
+          value, whether designing data platforms for self-service analytics,
+          building RAG systems for information access, or creating tools for
+          elder care and music education.
         </p>
 
         <ul class="space-y-3 text-gray-700 dark:text-gray-300">
           <li class="flex items-start gap-2">
             <Icon
               name="mdi:check-circle"
-              class="w-5 h-5 mt-0.5 text-teal-600 dark:text-teal-400"
+              class="w-5 h-5 mt-0.5 text-teal-600 dark:text-teal-400 flex-shrink-0"
             />
-            <span>Share practical insights from real-world projects</span>
+            <span>
+              <strong>Architectural Thinking:</strong> Focus on patterns and principles
+              that transfer across platforms rather than vendor-specific implementations
+            </span>
           </li>
           <li class="flex items-start gap-2">
             <Icon
               name="mdi:check-circle"
-              class="w-5 h-5 mt-0.5 text-teal-600 dark:text-teal-400"
+              class="w-5 h-5 mt-0.5 text-teal-600 dark:text-teal-400 flex-shrink-0"
             />
-            <span
-              >Bridge the gap between technical and creative disciplines</span
-            >
+            <span>
+              <strong>Technical Excellence:</strong> Production-grade engineering
+              with testing, type checking, and maintainable code
+            </span>
           </li>
           <li class="flex items-start gap-2">
             <Icon
               name="mdi:check-circle"
-              class="w-5 h-5 mt-0.5 text-teal-600 dark:text-teal-400"
+              class="w-5 h-5 mt-0.5 text-teal-600 dark:text-teal-400 flex-shrink-0"
             />
-            <span>Build a community of learners and creators</span>
+            <span>
+              <strong>Knowledge Sharing:</strong> Strong documentation, mentoring,
+              and building systems that help others succeed
+            </span>
           </li>
           <li class="flex items-start gap-2">
             <Icon
               name="mdi:check-circle"
-              class="w-5 h-5 mt-0.5 text-teal-600 dark:text-teal-400"
+              class="w-5 h-5 mt-0.5 text-teal-600 dark:text-teal-400 flex-shrink-0"
             />
-            <span>Contribute to open-source education and tools</span>
+            <span>
+              <strong>Community Focus:</strong> Drawn to work that creates tangible
+              impact in healthcare, education, sustainability, or other areas with
+              real social value
+            </span>
           </li>
         </ul>
       </section>
@@ -187,7 +405,7 @@ const identity = {
       >
         <div class="flex items-center gap-3 mb-4">
           <Icon
-            name="mdi:handshake"
+            name="mdi:email"
             class="w-6 h-6 text-teal-600 dark:text-teal-400"
           />
           <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
@@ -197,16 +415,56 @@ const identity = {
 
         <div class="space-y-4 text-gray-700 dark:text-gray-300">
           <p>
-            I'm always interested in collaborating on projects that combine
-            technology, music, and education. Whether you're interested in
-            contributing to existing projects or starting something new, I'd
-            love to hear from you.
+            I'm interested in roles where I can build data platforms and AI
+            applications that create meaningful impact. If you're working on
+            problems in healthcare, education, sustainability, or other areas
+            with real social value, I'd be glad to connect.
           </p>
-          <p>
-            You can explore my work through the various sections of this site,
-            including software projects, music productions, and educational
-            resources.
-          </p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
+            <a
+              href="mailto:brylie@protonmail.com"
+              class="flex items-center gap-2
+            text-teal-600 dark:text-teal-400 hover:underline"
+            >
+              <Icon name="mdi:email" class="w-5 h-5" />
+              <span>brylie@protonmail.com</span>
+            </a>
+
+            <a
+              href="https://linkedin.com/in/brylie"
+              target="_blank"
+              rel="noopener
+          noreferrer"
+              class="flex items-center gap-2 text-teal-600
+          dark:text-teal-400 hover:underline"
+            >
+              <Icon name="mdi:linkedin" class="w-5 h-5" />
+              <span>LinkedIn</span>
+            </a>
+
+            <a
+              href="https://github.com/brylie"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-2 text-teal-600
+          dark:text-teal-400 hover:underline"
+            >
+              <Icon name="mdi:github" class="w-5 h-5" />
+              <span>GitHub</span>
+            </a>
+
+            <a
+              href="https://brylie.music"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-2 text-teal-600 dark:text-teal-400
+          hover:underline"
+            >
+              <Icon name="mdi:music" class="w-5 h-5" />
+              <span>Music Portfolio</span>
+            </a>
+          </div>
         </div>
       </section>
     </div>
