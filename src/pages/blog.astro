@@ -12,12 +12,45 @@ const sortedPosts = allPosts.sort(
 );
 
 const pageTitle = "Blog Posts";
+
+// Prepare Blog structured data
+const blogSchema = {
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "@id": `${Astro.site}blog/#blog`,
+  url: `${Astro.site}blog/`,
+  name: "Brylie's Blog",
+  description:
+    "Thoughts, tutorials, and insights about software development, music, data engineering, and technology",
+  author: {
+    "@type": "Person",
+    "@id": "https://brylie.online/#person",
+  },
+  publisher: {
+    "@type": "Person",
+    "@id": "https://brylie.online/#person",
+  },
+  inLanguage: "en-US",
+  blogPost: sortedPosts.map((post) => ({
+    "@type": "BlogPosting",
+    "@id": `${Astro.site}posts/${post.data.slug}/#article`,
+    url: `${Astro.site}posts/${post.data.slug}/`,
+    headline: post.data.title,
+    datePublished: post.data.datePublished.toISOString(),
+  })),
+};
 ---
 
 <BaseLayout
   pageTitle={pageTitle}
   description="Thoughts, tutorials, and insights about software development, music, data engineering, and technology from Brylie Christopher Oxley. Explore articles on Python, SQL, AI/ML, web development, and more."
 >
+  <!-- Blog Structured Data -->
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify(blogSchema)}
+    slot="head"
+  />
   <div class="max-w-4xl mx-auto">
     <!-- Introduction -->
     <section class="mb-12">

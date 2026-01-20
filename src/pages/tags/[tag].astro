@@ -108,6 +108,40 @@ if (hasPosts && hasProjects) {
 }
 
 const pageTitle = `${tag} - Tagged Content`;
+
+// Prepare CollectionPage structured data
+const collectionSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "@id": `${Astro.site}tags/${tag}/#collection`,
+  url: `${Astro.site}tags/${tag}/`,
+  name: `${tag} - Tagged Content`,
+  description: tagDescription,
+  isPartOf: {
+    "@type": "WebSite",
+    "@id": "https://brylie.online/#website",
+  },
+  about: {
+    "@type": "Thing",
+    name: tag,
+  },
+  ...(hasPosts && {
+    mainEntity: {
+      "@type": "ItemList",
+      numberOfItems: posts.length,
+      itemListElement: posts.map((post, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        item: {
+          "@type": "BlogPosting",
+          "@id": `${Astro.site}posts/${post.data.slug}/#article`,
+          url: `${Astro.site}posts/${post.data.slug}/`,
+          headline: post.data.title,
+        },
+      })),
+    },
+  }),
+};
 ---
 
 <BaseLayout
@@ -115,6 +149,12 @@ const pageTitle = `${tag} - Tagged Content`;
   description={tagDescription ||
     `Browse all blog posts and projects tagged with "${tag}" on Brylie Christopher Oxley's website. ${hasPosts ? `${posts.length} blog post${posts.length !== 1 ? "s" : ""}` : ""} ${hasPosts && hasProjects ? "and " : ""} ${hasProjects ? `${projects.length} project${projects.length !== 1 ? "s" : ""}` : ""}.`}
 >
+  <!-- CollectionPage Structured Data -->
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify(collectionSchema)}
+    slot="head"
+  />
   <div class="max-w-4xl mx-auto">
     <!-- Tag Header -->
     <section class="mb-12">

@@ -22,12 +22,50 @@ const groupedProjects = allProjects.reduce<Record<ProjectCategory, Project[]>>(
   },
   {} as Record<ProjectCategory, Project[]>,
 );
+
+// Prepare ItemList structured data
+const portfolioSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "@id": `${Astro.site}projects/#portfolio`,
+  url: `${Astro.site}projects/`,
+  name: "Brylie's Portfolio",
+  description:
+    "Portfolio of software projects, music compositions, and educational initiatives",
+  numberOfItems: allProjects.length,
+  itemListElement: allProjects.map((project, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    item: {
+      "@type":
+        project.data.category === "software"
+          ? "SoftwareApplication"
+          : project.data.category === "music"
+            ? "MusicComposition"
+            : "CreativeWork",
+      "@id": `${Astro.site}projects/${project.data.slug}/#project`,
+      name: project.data.title,
+      url: `${Astro.site}projects/${project.data.slug}/`,
+      description: project.data.description,
+      author: {
+        "@type": "Person",
+        "@id": "https://brylie.online/#person",
+      },
+    },
+  })),
+};
 ---
 
 <BaseLayout
   pageTitle={pageTitle}
   description="Explore Brylie Christopher Oxley's portfolio of software projects, music compositions, and educational initiatives. From elder care platforms to music technology and data-driven applications."
 >
+  <!-- Portfolio Structured Data -->
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify(portfolioSchema)}
+    slot="head"
+  />
   <div class="max-w-4xl mx-auto">
     <!-- Introduction -->
     <section class="mb-16">
